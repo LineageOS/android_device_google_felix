@@ -42,3 +42,6 @@ include device/google/gs201/BoardConfig-common.mk
 -include vendor/google_devices/felix/proprietary/BoardConfigVendor.mk
 include device/google/felix/sepolicy/felix-sepolicy.mk
 include device/google/felix/wifi/BoardConfig-wifi.mk
+
+DEVICE_PATH := device/google/felix
+include $(DEVICE_PATH)/$(TARGET_BOOTLOADER_BOARD_NAME)/BoardConfigLineage.mk
