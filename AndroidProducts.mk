@@ -16,8 +16,8 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_felix.mk \
-    $(LOCAL_DIR)/factory_felix.mk
-
+    $(LOCAL_DIR)/factory_felix.mk \
+    $(LOCAL_DIR)/lineage_felix.mk
 
 COMMON_LUNCH_CHOICES := \
     aosp_felix-userdebug
