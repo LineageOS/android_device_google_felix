@@ -44,4 +44,5 @@ include device/google/felix/sepolicy/felix-sepolicy.mk
 include device/google/felix/wifi/BoardConfig-wifi.mk
 
 DEVICE_PATH := device/google/felix
+VENDOR_PATH := vendor/google/felix
 include $(DEVICE_PATH)/$(TARGET_BOOTLOADER_BOARD_NAME)/BoardConfigLineage.mk
