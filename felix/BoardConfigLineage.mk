@@ -5,3 +5,5 @@
 #
 
 include device/google/felix/BoardConfigLineage.mk
+
+include vendor/google/felix/BoardConfigVendor.mk

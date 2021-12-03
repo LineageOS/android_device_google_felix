@@ -26,3 +26,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="felix-user 13 TQ3C.230605.010.C1 10167124 release-keys"
 
 BUILD_FINGERPRINT := google/felix/felix:13/TQ3C.230605.010.C1/10167124:user/release-keys
+
+$(call inherit-product, vendor/google/felix/felix-vendor.mk)
