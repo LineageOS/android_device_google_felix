@@ -11,6 +11,7 @@ $(call inherit-product, vendor/lineage/config/common_full_foldable_book_telephon
 # Inherit device configuration
 DEVICE_CODENAME := felix
 DEVICE_PATH := device/google/felix
+VENDOR_PATH := vendor/google/felix
 $(call inherit-product, $(DEVICE_PATH)/aosp_$(DEVICE_CODENAME).mk)
 $(call inherit-product, device/google/gs201/lineage_common.mk)
 $(call inherit-product, $(DEVICE_PATH)/$(DEVICE_CODENAME)/device-lineage.mk)
@@ -31,3 +32,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="felix-user 14 AP2A.240905.003 12231197 release-keys"
 
 BUILD_FINGERPRINT := google/felix/felix:14/AP2A.240905.003/12231197:user/release-keys
+
+$(call inherit-product, $(VENDOR_PATH)/$(DEVICE_CODENAME)-vendor.mk)
