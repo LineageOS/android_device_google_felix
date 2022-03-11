@@ -8,6 +8,9 @@
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
+PRODUCT_PACKAGES += \
+    EuiccSupportPixelOverlay
+
 # Build necessary packages for vendor
 
 # Audio
