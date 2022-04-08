@@ -1,0 +1,6 @@
+# Devices
+/dev/lwis-act-nessie                                                        u:object_r:lwis_device:s0
+/dev/lwis-eeprom-nessie                                                     u:object_r:lwis_device:s0
+/dev/lwis-ois-nessie                                                        u:object_r:lwis_device:s0
+/dev/lwis-sensor-medusa                                                     u:object_r:lwis_device:s0
+/dev/lwis-sensor-oksoko                                                     u:object_r:lwis_device:s0
