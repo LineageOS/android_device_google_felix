@@ -6,3 +6,8 @@
 /dev/lwis-sensor-dokkaebi-tele                                              u:object_r:lwis_device:s0
 /dev/lwis-sensor-medusa                                                     u:object_r:lwis_device:s0
 /dev/lwis-sensor-oksoko                                                     u:object_r:lwis_device:s0
+
+# Bluetooth
+/dev/ttySAC18                       u:object_r:hci_attach_dev:s0
+/dev/logbuffer_btlpm                u:object_r:logbuffer_device:s0
+/dev/logbuffer_tty18                u:object_r:logbuffer_device:s0
