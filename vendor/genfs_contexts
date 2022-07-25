@@ -12,6 +12,8 @@ genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/osc2_clk_kh
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                                                u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c241000.drmdecon/early_wakeup                                           u:object_r:sysfs_display:s0
 
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/backlight/panel1-backlight/als_table u:object_r:sysfs_write_leds:s0
+
 # Haptics
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-7/i2c-cs40l26a              u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-7/i2c-cs40l26a-dual         u:object_r:sysfs_vibrator:s0
