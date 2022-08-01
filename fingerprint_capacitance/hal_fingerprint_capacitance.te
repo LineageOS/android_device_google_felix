@@ -22,3 +22,7 @@ allow hal_fingerprint_capacitance fwk_stats_service:service_manager find;
 # allow fingerprint to access input_device
 allow hal_fingerprint_capacitance input_device:dir r_dir_perms;
 allow hal_fingerprint_capacitance input_device:chr_file rw_file_perms;
+
+# allow fingerprint to access hwservice
+hwbinder_use(hal_fingerprint_capacitance)
+add_hwservice(hal_fingerprint_capacitance, hal_fingerprint_capacitance_ext_hwservice)
