@@ -1,4 +1,3 @@
-convert-to-ext4-sh convert-to-ext4-sh capability b/241034024
 hal_dumpstate_default device chr_file b/240632721
 hal_dumpstate_default proc file b/240632721
 hal_dumpstate_default sysfs file b/240632721
