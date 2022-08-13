@@ -34,9 +34,6 @@ extra/bigocean.ko
 extra/cl_dsp.ko
 extra/drv2624.ko
 extra/fpc1020_platform_tee.ko
-extra/fst2.ko
-extra/ftm5.ko
-extra/goog_touch_interface.ko
 extra/google_dock.ko
 extra/gxp.ko
 extra/input-cs40l26-i2c.ko
