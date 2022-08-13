@@ -36,9 +36,6 @@ extra/cs40l26-core.ko
 extra/cs40l26-i2c.ko
 extra/drv2624.ko
 extra/fpc1020_platform_tee.ko
-extra/fst2.ko
-extra/ftm5.ko
-extra/goog_touch_interface.ko
 extra/google_dock.ko
 extra/gxp.ko
 extra/lwis.ko
