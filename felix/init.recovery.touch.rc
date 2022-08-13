@@ -1,0 +1,4 @@
+on boot
+   insmod /lib/modules/goog_touch_interface.ko
+   insmod /lib/modules/fst2.ko
+   insmod /lib/modules/ftm5.ko
