@@ -1,0 +1,3 @@
+blocklist fst2.ko
+blocklist ftm5.ko
+blocklist goog_touch_interface.ko
