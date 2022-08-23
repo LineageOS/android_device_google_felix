@@ -1,6 +1,7 @@
 # BMS
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-7/i2c-p9222                 u:object_r:sysfs_wlc:s0
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-7/i2c-p9222/power_supply    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/google,dual_batt_gauge/power_supply            u:object_r:sysfs_batteryinfo:s0
 # maxfg_base
 genfscon sysfs /devices/platform/10d60000.hsi2c/i2c-6/6-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
 # maxfg_flip
