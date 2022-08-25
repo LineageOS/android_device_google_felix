@@ -7,3 +7,4 @@ servicemanager hal_fingerprint_capacitance binder b/240632821
 system_suspend sysfs dir b/240632822
 system_suspend sysfs_batteryinfo dir b/240632822
 system_suspend sysfs_wlc dir b/240632822
+hal_health_default sysfs file b/240632860
