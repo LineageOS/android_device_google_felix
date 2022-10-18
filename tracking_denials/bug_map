@@ -1,7 +1,6 @@
 hal_dumpstate_default device chr_file b/240632721
 hal_dumpstate_default proc file b/240632721
 hal_dumpstate_default sysfs file b/240632721
-hal_fingerprint_capacitance default_android_hwservice hwservice_manager b/240633068
 hal_power_stats_default sysfs file b/240632970
 servicemanager hal_fingerprint_capacitance binder b/240632821
 system_suspend sysfs dir b/240632822
