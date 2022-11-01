@@ -1,0 +1,5 @@
+# Allow vibrator HAL to communicate with another service
+binder_call(hal_vibrator_default, hal_vibrator_stereo);
+
+# Allow vibrator HAL to "add" the hal_vibrator_vndservice service type
+add_service(hal_vibrator_default, hal_vibrator_vndservice);
