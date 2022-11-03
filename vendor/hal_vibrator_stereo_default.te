@@ -1,0 +1,21 @@
+# From system sepilicy
+type hal_vibrator_stereo, domain;
+hal_server_domain(hal_vibrator_stereo, hal_vibrator)
+
+type hal_vibrator_stereo_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_vibrator_stereo)
+
+# From project
+get_prop(hal_vibrator_stereo, vendor_vibrator_prop);
+get_prop(hal_vibrator_stereo, boot_status_prop);
+
+# Allow vibrator HAL's default implementation to use vendor-binder service
+vndbinder_use(hal_vibrator_stereo);
+
+# For gpio dev node
+allow hal_vibrator_stereo vibrator_device:chr_file rw_file_perms;
+
+# For vibrator HAL's communication with other service
+binder_call(hal_vibrator_stereo, hal_vibrator_default);
+
+allow hal_vibrator_stereo hal_vibrator_vndservice:service_manager find;
