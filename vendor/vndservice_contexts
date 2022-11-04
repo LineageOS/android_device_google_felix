@@ -1,0 +1,2 @@
+android.hardware.vibrator.IVibratorSync/default                      u:object_r:hal_vibrator_vndservice:s0
+android.hardware.vibrator.IVibratorSync/dual                         u:object_r:hal_vibrator_vndservice:s0
