@@ -1,5 +1,3 @@
-# Allow vibrator HAL to communicate with another service
-binder_call(hal_vibrator_default, hal_vibrator_stereo);
-
-# Allow vibrator HAL to "add" the hal_vibrator_vndservice service type
-add_service(hal_vibrator_default, hal_vibrator_vndservice);
+# For gpio dev node
+vndbinder_use(hal_vibrator_default);
+allow hal_vibrator_default vibrator_device:chr_file rw_file_perms;
