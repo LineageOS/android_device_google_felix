@@ -19,6 +19,10 @@ hal_client_domain(hal_fingerprint_capacitance, hal_power);
 # allow fingerprint to find fwk service
 allow hal_fingerprint_capacitance fwk_stats_service:service_manager find;
 
+# allow fingerprint to access sysfs_leds
+allow hal_fingerprint_capacitance sysfs_leds:dir search;
+allow hal_fingerprint_capacitance sysfs_leds:file rw_file_perms;
+
 # allow fingerprint to access input_device
 allow hal_fingerprint_capacitance input_device:dir r_dir_perms;
 allow hal_fingerprint_capacitance input_device:chr_file rw_file_perms;
