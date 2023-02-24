@@ -1,4 +1,5 @@
 hal_dumpstate_default proc file b/240632721
 hal_dumpstate_default sysfs file b/240632721
 servicemanager hal_fingerprint_capacitance binder b/240632821
+system_app proc_pagetypeinfo file b/270633150
 vndservicemanager hal_keymint_citadel binder b/270247256
