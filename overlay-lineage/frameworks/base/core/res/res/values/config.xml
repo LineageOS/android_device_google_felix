@@ -225,4 +225,7 @@
 
     <!-- Power press vendor code. -->
     <integer name="config_powerPressCode">19</integer>
+
+    <!-- IWLAN-->
+    <string name="config_qualified_networks_service_package">com.android.qns</string>
 </resources>
