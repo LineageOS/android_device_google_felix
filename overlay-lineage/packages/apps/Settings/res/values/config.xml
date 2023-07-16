@@ -17,4 +17,17 @@
 <resources>
     <!-- Whether to show Smooth Display feature in Settings Options -->
     <bool name="config_show_smooth_display">true</bool>
+
+    <!-- The settings/preference description for each settable device state defined in the array
+         "config_perDeviceStateRotationLockDefaults".
+         The item in position "i" describes the auto-rotation setting for the device state also in
+         position "i" in the array "config_perDeviceStateRotationLockDefaults". -->
+    <string-array name="config_settableAutoRotationDeviceStatesDescriptions">
+        <item>@string/setting_auto_rotate_folded</item>
+        <item>@null</item>
+        <item>@string/setting_auto_rotate_unfolded</item>
+    </string-array>
+
+    <!-- The ratio to use when using the two-pane settings layout -->
+    <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.5</item>
 </resources>
