@@ -27,11 +27,15 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0.vendor \
-    android.hardware.bluetooth@1.1.vendor \
-    hardware.google.bluetooth.bt_channel_avoidance@1.0.vendor \
-    hardware.google.bluetooth.sar@1.0.vendor \
-    hardware.google.bluetooth.sar@1.1.vendor
+    android.hardware.bluetooth@1.0.vendor:64 \
+    android.hardware.bluetooth@1.1.vendor:64 \
+    hardware.google.bluetooth.bt_channel_avoidance@1.0.vendor:64 \
+    hardware.google.bluetooth.ccc@1.0.vendor:64 \
+    hardware.google.bluetooth.ccc@1.1.vendor:64 \
+    hardware.google.bluetooth.ewp@1.0.vendor:64 \
+    hardware.google.bluetooth.ext@1.0.vendor:64 \
+    hardware.google.bluetooth.sar@1.0.vendor:64 \
+    hardware.google.bluetooth.sar@1.1.vendor:64
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -48,10 +52,15 @@ PRODUCT_PACKAGES += \
 # Codec2
 PRODUCT_PACKAGES += \
     android.hardware.media.c2@1.0.vendor \
+    android.hardware.media.c2@1.1.vendor:64 \
+    android.hardware.media.c2@1.2.vendor:64 \
     libacryl \
     libacryl_hdr_plugin \
     libavservices_minijail.vendor \
     libcodec2_hidl@1.0.vendor \
+    libcodec2_hidl@1.1.vendor:64 \
+    libcodec2_hidl@1.2.vendor:64 \
+    libcodec2_soft_common.vendor:64 \
     libcodec2_vndk.vendor \
     libexynosutils \
     libexynosv4l2 \
@@ -103,8 +112,7 @@ PRODUCT_PACKAGES += \
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
-    libwifi-hal:64 \
-    libwifi-hal-qcom
+    libwifi-hal:64
 
 # Misc interfaces
 PRODUCT_PACKAGES += \
@@ -145,8 +153,7 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.4.vendor:64 \
     android.hardware.wifi@1.5.vendor:64 \
     android.hardware.wifi@1.6.vendor:64 \
-    com.google.hardware.pixel.display-V4-ndk.vendor:64 \
-    com.google.hardware.pixel.display-V5-ndk.vendor
+    com.google.hardware.pixel.display-V6-ndk.vendor
 
 # Properties
 TARGET_VENDOR_PROP := $(LOCAL_PATH)/vendor.prop
