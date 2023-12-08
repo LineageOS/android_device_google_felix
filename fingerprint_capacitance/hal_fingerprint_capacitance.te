@@ -32,4 +32,4 @@ hwbinder_use(hal_fingerprint_capacitance)
 add_hwservice(hal_fingerprint_capacitance, hal_fingerprint_capacitance_ext_hwservice)
 
 # allow fingerprint to access fwk sensor hwservice
-allow hal_fingerprint_capacitance fwk_sensor_hwservice:hwservice_manager find;
+allow hal_fingerprint_capacitance fwk_sensor_service:service_manager find;
