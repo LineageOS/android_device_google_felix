@@ -100,9 +100,10 @@ PRODUCT_COPY_FILES += \
 	device/google/felix/nfc/libnfc-nci-felix.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
 
 PRODUCT_PACKAGES += \
-	NfcNci \
+	$(RELEASE_PACKAGE_NFC_STACK) \
 	Tag \
-	android.hardware.nfc-service.st
+	android.hardware.nfc-service.st \
+	NfcOverlayFelix
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -210,7 +211,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=33
+    ro.vendor.build.svn=37
 
 # Vibrator HAL
 PRODUCT_VENDOR_PROPERTIES +=\
@@ -256,6 +257,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts
 ifneq (,$(filter AP1%,$(RELEASE_PLATFORM_VERSION)))
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/24Q1
+else ifneq (,$(filter AP2%,$(RELEASE_PLATFORM_VERSION)))
+PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/24Q2
 else
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/trunk
 endif
@@ -308,7 +311,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 ##Audio Vendor property
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.audio.cca.enabled=true
+	persist.vendor.audio.cca.enabled=false
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
