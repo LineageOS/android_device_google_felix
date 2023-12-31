@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ecd9b8_ce17fc4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6924
+      },
+      "writtenOn": "2023-12-31T04:43:10Z",
+      "side": 1,
+      "message": "Having the touch drivers in vendor_boot instead of vendor_dlkm breaks the internal display touch device on felix.\n\n/dev/touch_offload is unable to be onboarded which inturn is breaking twoshay_pipeline\u0027s ability to load properly.",
+      "revId": "8bcb47e6a77ec26de792dfe99e78dddd074d2089",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
