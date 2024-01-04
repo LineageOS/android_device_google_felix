@@ -21,6 +21,15 @@ TARGET_KERNEL_DIR ?= device/google/felix-kernel
 TARGET_BOARD_KERNEL_HEADERS := device/google/felix-kernel/kernel-headers
 TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
 
+ifdef RELEASE_GOOGLE_FELIX_KERNEL_VERSION
+TARGET_LINUX_KERNEL_VERSION := $(RELEASE_GOOGLE_FELIX_KERNEL_VERSION)
+endif
+
+ifdef RELEASE_GOOGLE_FELIX_KERNEL_DIR
+TARGET_KERNEL_DIR := $(RELEASE_GOOGLE_FELIX_KERNEL_DIR)
+TARGET_BOARD_KERNEL_HEADERS := $(RELEASE_GOOGLE_FELIX_KERNEL_DIR)/kernel-headers
+endif
+
 $(call inherit-product-if-exists, vendor/google_devices/felix/prebuilts/device-vendor-felix.mk)
 $(call inherit-product-if-exists, vendor/google_devices/gs201/prebuilts/device-vendor.mk)
 $(call inherit-product-if-exists, vendor/google_devices/gs201/proprietary/device-vendor.mk)
