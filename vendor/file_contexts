@@ -11,6 +11,7 @@
 /dev/ttySAC18                       u:object_r:hci_attach_dev:s0
 /dev/logbuffer_btlpm                u:object_r:logbuffer_device:s0
 /dev/logbuffer_tty18                u:object_r:logbuffer_device:s0
+/data/vendor/bluetooth(/.*)?        u:object_r:vendor_bt_data_file:s0
 
 # Haptics
 /vendor/bin/hw/android\.hardware\.vibrator-service\.cs40l26-private         u:object_r:hal_vibrator_default_exec:s0
