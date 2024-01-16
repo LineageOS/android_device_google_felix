@@ -20,6 +20,7 @@ genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-8/i2c-p9222                 
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-8/i2c-p9222/power_supply    u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/i2c-p9222                 u:object_r:sysfs_wlc:s0
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/i2c-p9222/power_supply    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-8/8-0061                    u:object_r:sysfs_wlc:s0
 
 genfscon sysfs /devices/platform/google,dual_batt_gauge/power_supply            u:object_r:sysfs_batteryinfo:s0
 # maxfg_base
@@ -173,5 +174,5 @@ genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/9-0036/power_supply/maxfg_
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/9-0036/power_supply/maxfg_secondary/wakeup                          u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/i2c-p9222/power_supply/wireless/wakeup                              u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/i2c-p9222/wakeup                                                    u:object_r:sysfs_wakeup:s0
-
+genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-8/8-0061/wakeup/wakeup                                                u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/google,dual_batt_gauge/power_supply/dualbatt/wakeup                                      u:object_r:sysfs_wakeup:s0
