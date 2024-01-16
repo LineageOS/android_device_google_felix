@@ -18,6 +18,9 @@
     <!-- Whether to show Smooth Display feature in Settings Options -->
     <bool name="config_show_smooth_display">true</bool>
 
+    <!-- Whether the toggle for Auto-rotate with Face Detection should be shown. -->
+    <bool name="config_auto_rotate_face_detection_available">false</bool>
+
     <!-- The settings/preference description for each settable device state defined in the array
          "config_perDeviceStateRotationLockDefaults".
          The item in position "i" describes the auto-rotation setting for the device state also in
