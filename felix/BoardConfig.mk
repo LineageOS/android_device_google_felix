@@ -20,12 +20,22 @@ BOARD_USES_GENERIC_AUDIO := true
 USES_DEVICE_GOOGLE_FELIX := true
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 
+RELEASE_GOOGLE_PRODUCT_RADIO_DIR := $(RELEASE_GOOGLE_FELIX_RADIO_DIR)
+ifneq (,$(filter AP1%,$(RELEASE_PLATFORM_VERSION)))
+RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/24Q1
+else ifneq (,$(filter AP2%,$(RELEASE_PLATFORM_VERSION)))
+RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/24Q2
+else
+RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/trunk
+endif
+
 # Enable load module in parallel
 BOARD_BOOTCONFIG += androidboot.load_modules_parallel=true
 
 # The modules which need to be loaded in sequential
 BOARD_KERNEL_CMDLINE += exynos_drm.load_sequential=1
 BOARD_KERNEL_CMDLINE += panel-samsung-ana6707-f10.load_sequential=1
+BOARD_KERNEL_CMDLINE += s2mpg12-regulator.load_sequential=1
 
 #Display
 USES_IDISPLAY_INTF_SEC := true
