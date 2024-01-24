@@ -110,7 +110,7 @@ class HwApi : public Vibrator::HwApi, private HwApiBase {
         return true;
     }
     bool setFFEffect(int fd, struct ff_effect *effect, uint16_t timeoutMs) override {
-        if (((*effect).replay.length != timeoutMs) || (ioctl(fd, EVIOCSFF, effect) < 0)) {
+        if (ioctl(fd, EVIOCSFF, effect) < 0) {
             ALOGE("setFFEffect fail");
             return false;
         } else {
