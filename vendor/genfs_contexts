@@ -47,12 +47,14 @@ genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-8/8-0036/power_supply       
 genfscon sysfs /devices/platform/10da0000.hsi2c/i2c-9/9-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
 
 # Display
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/available_disp_stats                 u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/gamma                                u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/min_vrefresh                         u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/idle_delay_ms                        u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_idle                           u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_need_handle_idle_exit          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/osc2_clk_khz                         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/time_in_state                        u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                                                u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c241000.drmdecon/early_wakeup                                           u:object_r:sysfs_display:s0
 
