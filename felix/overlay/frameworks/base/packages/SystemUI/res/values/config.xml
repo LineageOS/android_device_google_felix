@@ -78,8 +78,17 @@
       m 589.2,66.53 a 49.5,49.5 0 0 1 -49.5,49.5 49.5,49.5 0 0 1 -49.5,-49.5 49.5,49.5 0 0 1 49.5,-49.5 49.5,49.5 0 0 1 49.5,49.5 z
     </string>
 
-    <!-- Camera 0 is the front camera -->
+    <!-- 1 is the logical id of the front camera -->
     <string translatable="false" name="config_protectedCameraId">1</string>
+    <!-- 5 is the physical id of the outer screen front camera    -->
+    <string translatable="false" name="config_protectedPhysicalCameraId">5</string>
+
+    <!-- The properties of the face auth front camera in pixels -->
+    <integer-array name="config_face_auth_props">
+        <item>540</item> <!-- sensorLocationX -->
+        <item>66</item> <!-- sensorLocationY -->
+        <item>50</item> <!--sensorRadius -->
+    </integer-array>
 
     <!-- Comma-separated list of packages to exclude from camera protection. In our case,
     ignore the gaze detection package -->
