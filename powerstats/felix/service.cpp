@@ -156,15 +156,7 @@ void addGPU(std::shared_ptr<PowerStats> p) {
 }
 
 std::string getNfcPath() {
-    struct stat buffer;
-    int size = 128;
-    char path[size];
-    for (int i = 0; i < 10; i++) {
-        std::snprintf(path, size,
-                "/sys/devices/platform/10970000.hsi2c/i2c-%d/i2c-st21nfc/power_stats", i);
-        if (!stat(path, &buffer)) break;
-    }
-    return std::string(path);
+    return std::string("/sys/devices/platform/10970000.hsi2c/i2c-8/8-0008/power_stats");
 }
 
 int main() {
