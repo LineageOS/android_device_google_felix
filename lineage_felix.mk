@@ -25,8 +25,8 @@ TARGET_SCREEN_WIDTH := 1080
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_PRODUCT=felix \
-    PRIVATE_BUILD_DESC="felix-user 14 UQ1A.240105.004 11206848 release-keys"
+    PRIVATE_BUILD_DESC="felix-user 14 UQ1A.240205.002 11224170 release-keys"
 
-BUILD_FINGERPRINT := google/felix/felix:14/UQ1A.240105.004/11206848:user/release-keys
+BUILD_FINGERPRINT := google/felix/felix:14/UQ1A.240205.002/11224170:user/release-keys
 
 $(call inherit-product, vendor/google/felix/felix-vendor.mk)
