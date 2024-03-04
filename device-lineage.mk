@@ -43,7 +43,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     libGralloc4Wrapper \
-    libcamera2ndk_vendor:64 \
     pixel-power-ext-V1-ndk.vendor:32
 
 # Codec2
@@ -108,8 +107,17 @@ PRODUCT_PACKAGES += \
     nos_app_avb:64 \
     nos_app_identity:64 \
     nos_app_keymaster:64 \
+    nos_app_keymaster_ctdl:64 \
     nos_app_weaver:64 \
     pixelpowerstats_provider_aidl_interface-cpp.vendor:64
+
+# Radio
+PRODUCT_PACKAGES += \
+    modem_android_property_manager.vendor:32 \
+    modem_android_property_manager_impl.vendor:32 \
+    modem_clock_manager.vendor \
+    modem_clock_manager_impl.vendor \
+    modem_log_constants.vendor:32
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -123,7 +131,6 @@ PRODUCT_PACKAGES += \
 # Trusty
 PRODUCT_PACKAGES += \
     android.trusty.stats.nw.setter-cpp.vendor:64 \
-    lib_sensor_listener:64 \
     libbinder_trusty:64 \
     libtrusty_metrics:64
 
@@ -133,8 +140,6 @@ PRODUCT_PACKAGES += \
     android.frameworks.stats-V1-ndk.vendor:32 \
     android.hardware.authsecret-V1-ndk.vendor:64 \
     android.hardware.biometrics.common-V3-ndk.vendor:64 \
-    android.hardware.biometrics.face-V3-ndk.vendor:64 \
-    android.hardware.biometrics.face@1.0.vendor:64 \
     android.hardware.biometrics.fingerprint-V3-ndk.vendor:64 \
     android.hardware.gnss-V3-ndk.vendor:64 \
     android.hardware.health-V1-ndk.vendor \
@@ -150,9 +155,6 @@ PRODUCT_PACKAGES += \
     android.hardware.neuralnetworks@1.2.vendor:64 \
     android.hardware.neuralnetworks@1.3.vendor:64 \
     android.hardware.oemlock-V1-ndk.vendor:64 \
-    android.hardware.power@1.0.vendor:64 \
-    android.hardware.power@1.1.vendor:64 \
-    android.hardware.power@1.2.vendor:64 \
     android.hardware.radio-V1-ndk.vendor \
     android.hardware.radio.config-V1-ndk.vendor \
     android.hardware.radio.config@1.0.vendor \
