@@ -21,3 +21,6 @@
 /dev/logbuffer_dual_batt                                                    u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_secondary                                              u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_secondary_monitor                                      u:object_r:logbuffer_device:s0
+
+# Touch
+/dev/touch_offload_fts_ext                                                  u:object_r:touch_offload_device:s0
