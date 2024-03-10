@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Restrict the visibility of Android.bp files to improve build analysis time
+$(call inherit-product-if-exists, vendor/google/products/sources_pixel.mk)
+
 TARGET_KERNEL_DIR ?= device/google/felix-kernel
 TARGET_BOARD_KERNEL_HEADERS := device/google/felix-kernel/kernel-headers
 TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
@@ -24,6 +27,8 @@ $(call inherit-product-if-exists, vendor/google_devices/gs201/proprietary/device
 $(call inherit-product-if-exists, vendor/google_devices/felix/proprietary/felix/device-vendor-felix.mk)
 $(call inherit-product-if-exists, vendor/google_devices/felix/proprietary/device-vendor.mk)
 $(call inherit-product-if-exists, vendor/google_devices/felix/proprietary/WallpapersFelix.mk)
+
+$(call inherit-product, device/google/felix/uwb/uwb_calibration_country.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/google/felix/felix/overlay
 
@@ -95,9 +100,10 @@ PRODUCT_COPY_FILES += \
 	device/google/felix/nfc/libnfc-nci-felix.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
 
 PRODUCT_PACKAGES += \
-	NfcNci \
+	$(RELEASE_PACKAGE_NFC_STACK) \
 	Tag \
-	android.hardware.nfc-service.st
+	android.hardware.nfc-service.st \
+	NfcOverlayFelix
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -133,10 +139,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth Tx power caps
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bluetooth/bluetooth_power_limits_felix_US.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits.csv \
-    $(LOCAL_PATH)/bluetooth/bluetooth_power_limits_felix_JP.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_JP.csv \
-    $(LOCAL_PATH)/bluetooth/bluetooth_power_limits_felix_EU.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_EU.csv \
-    $(LOCAL_PATH)/bluetooth/bluetooth_power_limits_felix_US.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_US.csv
+    device/google/felix/bluetooth/bluetooth_power_limits_felix_US.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits.csv \
+    device/google/felix/bluetooth/bluetooth_power_limits_felix_JP.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_JP.csv \
+    device/google/felix/bluetooth/bluetooth_power_limits_felix_EU.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_EU.csv \
+    device/google/felix/bluetooth/bluetooth_power_limits_felix_US.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_US.csv
 
 # Spatial Audio
 PRODUCT_PACKAGES += \
@@ -205,13 +211,14 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=36
+    ro.vendor.build.svn=42
 
 # Vibrator HAL
 PRODUCT_VENDOR_PROPERTIES +=\
     ro.vendor.vibrator.hal.long.frequency.shift=0 \
     ro.vendor.vibrator.hal.gpio.num=44 \
-    ro.vendor.vibrator.hal.gpio.shift=2
+    ro.vendor.vibrator.hal.gpio.shift=2 \
+    persist.vendor.vibrator.hal.chirp.enabled=0
 ACTUATOR_MODEL := luxshare_ict_lt_xlra1906d
 
 # Fingerprint
@@ -234,7 +241,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.enable_frame_rate_override=true
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.set_idle_timer_ms_4619827677550801152=80
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.support_kernel_idle_timer_4619827677550801152=true
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.set_idle_timer_ms_4619827677550801153=1500
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.set_idle_timer_ms_4619827677550801153=1000
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.support_kernel_idle_timer_4619827677550801153=false
 
 # Set zram size
@@ -248,6 +255,13 @@ PRODUCT_PACKAGES += \
 
 # Trusty liboemcrypto.so
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts
+ifneq (,$(filter AP1%,$(RELEASE_PLATFORM_VERSION)))
+PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/24Q1
+else ifneq (,$(filter AP2%,$(RELEASE_PLATFORM_VERSION)))
+PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/24Q2
+else
+PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/trunk
+endif
 
 # Set zram size
 PRODUCT_VENDOR_PROPERTIES += \
@@ -297,7 +311,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 ##Audio Vendor property
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.audio.cca.enabled=true
+	persist.vendor.audio.cca.enabled=false
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -364,6 +378,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # LE Audio Offload Capabilities Setting
 PRODUCT_COPY_FILES += \
     device/google/felix/bluetooth/le_audio_codec_capabilities.xml:$(TARGET_COPY_OUT_VENDOR)/etc/le_audio_codec_capabilities.xml
+
+# LE Audio Unicast Allowlist
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.bluetooth.leaudio.allow_list=SM-R510
 
 # Bluetooth EWP test tool
 PRODUCT_PACKAGES_DEBUG += \
