@@ -38,36 +38,50 @@ using aidl::android::hardware::power::stats::PowerStatsEnergyConsumer;
 
 void addDisplay(std::shared_ptr<PowerStats> p) {
     // Add display residency stats for inner display
-    std::vector<std::string> inner_states = {
-        "Off",
-        "LP: 1840x2208@1",
-        "LP: 1840x2208@30",
-        "On: 1840x2208@1",
-        "On: 1840x2208@10",
-        "On: 1840x2208@60",
-        "On: 1840x2208@120",
-        "HBM: 1840x2208@60",
-        "HBM: 1840x2208@120"};
+    struct stat primaryBuffer;
+    if (!stat("/sys/class/drm/card0/device/primary-panel/time_in_state", &primaryBuffer)) {
+        // time_in_state exists
+        addDisplayMrrByEntity(p, "Inner Display", "/sys/class/drm/card0/device/primary-panel/");
+    } else {
+        // time_in_state doesn't exist
+        std::vector<std::string> inner_states = {
+            "Off",
+            "LP: 1840x2208@1",
+            "LP: 1840x2208@30",
+            "On: 1840x2208@1",
+            "On: 1840x2208@10",
+            "On: 1840x2208@60",
+            "On: 1840x2208@120",
+            "HBM: 1840x2208@60",
+            "HBM: 1840x2208@120"};
 
-    p->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
-            "Inner Display",
-            "/sys/class/backlight/panel0-backlight/state",
-            inner_states));
+        p->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
+                "Inner Display",
+                "/sys/class/backlight/panel0-backlight/state",
+                inner_states));
+    }
 
     // Add display residency stats for outer display
-    std::vector<std::string> outer_states = {
-        "Off",
-        "LP: 1080x2092@30",
-        "On: 1080x2092@10",
-        "On: 1080x2092@60",
-        "On: 1080x2092@120",
-        "HBM: 1080x2092@60",
-        "HBM: 1080x2092@120"};
+    struct stat secondaryBuffer;
+    if (!stat("/sys/class/drm/card0/device/secondary-panel/time_in_state", &secondaryBuffer)) {
+        // time_in_state exists
+        addDisplayMrrByEntity(p, "Outer Display", "/sys/class/drm/card0/device/secondary-panel/");
+    } else {
+        // time_in_state doesn't exist
+        std::vector<std::string> outer_states = {
+            "Off",
+            "LP: 1080x2092@30",
+            "On: 1080x2092@10",
+            "On: 1080x2092@60",
+            "On: 1080x2092@120",
+            "HBM: 1080x2092@60",
+            "HBM: 1080x2092@120"};
 
-    p->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
-            "Outer Display",
-            "/sys/class/backlight/panel1-backlight/state",
-            outer_states));
+        p->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>(
+                "Outer Display",
+                "/sys/class/backlight/panel1-backlight/state",
+                outer_states));
+    }
 
     // Add display energy consumer
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(
@@ -142,15 +156,7 @@ void addGPU(std::shared_ptr<PowerStats> p) {
 }
 
 std::string getNfcPath() {
-    struct stat buffer;
-    int size = 128;
-    char path[size];
-    for (int i = 0; i < 10; i++) {
-        std::snprintf(path, size,
-                "/sys/devices/platform/10970000.hsi2c/i2c-%d/i2c-st21nfc/power_stats", i);
-        if (!stat(path, &buffer)) break;
-    }
-    return std::string(path);
+    return std::string("/sys/devices/platform/10970000.hsi2c/i2c-8/8-0008/power_stats");
 }
 
 int main() {

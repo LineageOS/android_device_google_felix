@@ -363,7 +363,8 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
             mFfEffects[effectIndex] = {
                     .type = FF_PERIODIC,
                     .id = -1,
-                    .replay.length = static_cast<uint16_t>(mEffectDurations[effectIndex]),
+                    // Length == 0 to allow firmware control of the duration
+                    .replay.length = 0,
                     .u.periodic.waveform = FF_CUSTOM,
                     .u.periodic.custom_data = new int16_t[2]{RAM_WVFRM_BANK, effectIndex},
                     .u.periodic.custom_len = FF_CUSTOM_DATA_LEN,
@@ -371,9 +372,11 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
             // Bypass the waveform update due to different input name
             if ((strstr(inputEventName, "cs40l26") != nullptr) ||
                 (strstr(inputEventName, "cs40l26_dual_input") != nullptr)) {
+                // Let the firmware control the playback duration to avoid
+                // cutting any effect that is played short
                 if (!mHwApiDef->setFFEffect(
                             mInputFd, &mFfEffects[effectIndex],
-                            static_cast<uint16_t>(mFfEffects[effectIndex].replay.length))) {
+                            mEffectDurations[effectIndex])) {
                     ALOGE("Failed upload effect %d (%d): %s", effectIndex, errno, strerror(errno));
                 }
             }
@@ -403,7 +406,8 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
                 mFfEffectsDual[effectIndex] = {
                         .type = FF_PERIODIC,
                         .id = -1,
-                        .replay.length = static_cast<uint16_t>(mEffectDurations[effectIndex]),
+                        // Length == 0 to allow firmware control of the duration
+                        .replay.length = 0,
                         .u.periodic.waveform = FF_CUSTOM,
                         .u.periodic.custom_data = new int16_t[2]{RAM_WVFRM_BANK, effectIndex},
                         .u.periodic.custom_len = FF_CUSTOM_DATA_LEN,
@@ -411,9 +415,11 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
                 // Bypass the waveform update due to different input name
                 if ((strstr(inputEventName, "cs40l26") != nullptr) ||
                     (strstr(inputEventName, "cs40l26_dual_input") != nullptr)) {
+                    // Let the firmware control the playback duration to avoid
+                    // cutting any effect that is played short
                     if (!mHwApiDual->setFFEffect(
                                 mInputFdDual, &mFfEffectsDual[effectIndex],
-                                static_cast<uint16_t>(mFfEffectsDual[effectIndex].replay.length))) {
+                                mEffectDurations[effectIndex])) {
                         ALOGE("Failed upload flip's effect %d (%d): %s", effectIndex, errno,
                               strerror(errno));
                     }
@@ -795,9 +801,10 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
     if (header_count == dspmem_chunk_bytes(ch)) {
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
     } else {
-        mFfEffects[WAVEFORM_COMPOSE].replay.length = totalDuration;
+        // Composition duration should be 0 to allow firmware to play the whole effect
+        mFfEffects[WAVEFORM_COMPOSE].replay.length = 0;
         if (mIsDual) {
-            mFfEffectsDual[WAVEFORM_COMPOSE].replay.length = totalDuration;
+            mFfEffectsDual[WAVEFORM_COMPOSE].replay.length = 0;
         }
         return performEffect(WAVEFORM_MAX_INDEX /*ignored*/, VOLTAGE_SCALE_MAX /*ignored*/, ch,
                              callback);
@@ -1501,9 +1508,10 @@ ndk::ScopedAStatus Vibrator::getCompoundDetails(Effect effect, EffectStrength st
     }
 
     *outTimeMs = timeMs;
-    mFfEffects[WAVEFORM_COMPOSE].replay.length = static_cast<uint16_t>(timeMs);
+    // Compositions should have 0 duration
+    mFfEffects[WAVEFORM_COMPOSE].replay.length = 0;
     if (mIsDual) {
-        mFfEffectsDual[WAVEFORM_COMPOSE].replay.length = static_cast<uint16_t>(timeMs);
+        mFfEffectsDual[WAVEFORM_COMPOSE].replay.length = 0;
     }
 
     return ndk::ScopedAStatus::ok();
