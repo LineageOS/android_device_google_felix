@@ -21,18 +21,15 @@ USES_DEVICE_GOOGLE_FELIX := true
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 
 RELEASE_GOOGLE_PRODUCT_RADIO_DIR := $(RELEASE_GOOGLE_FELIX_RADIO_DIR)
-ifneq (,$(filter AP1%,$(RELEASE_PLATFORM_VERSION)))
-RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/24Q1
-else ifneq (,$(filter AP2% AP3%,$(RELEASE_PLATFORM_VERSION)))
-RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/24Q2
-else
-RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/trunk
-endif
+RELEASE_GOOGLE_BOOTLOADER_FELIX_DIR ?= pdk# Keep this for pdk TODO: b/327119000
+RELEASE_GOOGLE_PRODUCT_BOOTLOADER_DIR := bootloader/$(RELEASE_GOOGLE_BOOTLOADER_FELIX_DIR)
+$(call soong_config_set,felix_bootloader,prebuilt_dir,$(RELEASE_GOOGLE_BOOTLOADER_FELIX_DIR))
 
 # Enable load module in parallel
 BOARD_BOOTCONFIG += androidboot.load_modules_parallel=true
 
 # The modules which need to be loaded in sequential
+BOARD_KERNEL_CMDLINE += fips140.load_sequential=1
 BOARD_KERNEL_CMDLINE += exynos_drm.load_sequential=1
 BOARD_KERNEL_CMDLINE += panel-samsung-ana6707-f10.load_sequential=1
 BOARD_KERNEL_CMDLINE += s2mpg12-regulator.load_sequential=1
