@@ -21,6 +21,15 @@ TARGET_KERNEL_DIR ?= device/google/felix-kernel
 TARGET_BOARD_KERNEL_HEADERS := device/google/felix-kernel/kernel-headers
 TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
 
+ifdef RELEASE_GOOGLE_FELIX_KERNEL_VERSION
+TARGET_LINUX_KERNEL_VERSION := $(RELEASE_GOOGLE_FELIX_KERNEL_VERSION)
+endif
+
+ifdef RELEASE_GOOGLE_FELIX_KERNEL_DIR
+TARGET_KERNEL_DIR := $(RELEASE_GOOGLE_FELIX_KERNEL_DIR)
+TARGET_BOARD_KERNEL_HEADERS := $(RELEASE_GOOGLE_FELIX_KERNEL_DIR)/kernel-headers
+endif
+
 $(call inherit-product-if-exists, vendor/google_devices/felix/prebuilts/device-vendor-felix.mk)
 $(call inherit-product-if-exists, vendor/google_devices/gs201/prebuilts/device-vendor.mk)
 $(call inherit-product-if-exists, vendor/google_devices/gs201/proprietary/device-vendor.mk)
@@ -211,7 +220,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=48
+    ro.vendor.build.svn=51
 
 # Vibrator HAL
 PRODUCT_VENDOR_PROPERTIES +=\
@@ -257,7 +266,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts
 ifneq (,$(filter AP1%,$(RELEASE_PLATFORM_VERSION)))
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/24Q1
-else ifneq (,$(filter AP2%,$(RELEASE_PLATFORM_VERSION)))
+else ifneq (,$(filter AP2% AP3%,$(RELEASE_PLATFORM_VERSION)))
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/24Q2
 else
 PRODUCT_SOONG_NAMESPACES += vendor/google_devices/felix/prebuilts/trusty/trunk
@@ -395,3 +404,12 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.quick_start.oem_id=00e0 \
     ro.quick_start.device_id=felix
+
+# Set support hide display cutout feature
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.support_hide_display_cutout=true
+
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay \
+    AvoidAppsInCutoutOverlay
+

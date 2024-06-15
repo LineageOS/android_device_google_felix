@@ -104,18 +104,25 @@ class HwApi : public Vibrator::HwApi, private HwApiBase {
                 .code = FF_GAIN,
                 .value = value,
         };
+        if (value > 100) {
+            ALOGE("Invalid gain");
+            return false;
+        }
         if (write(fd, (const void *)&gain, sizeof(gain)) != sizeof(gain)) {
             return false;
         }
         return true;
     }
     bool setFFEffect(int fd, struct ff_effect *effect, uint16_t timeoutMs) override {
-        if (((*effect).replay.length != timeoutMs) || (ioctl(fd, EVIOCSFF, effect) < 0)) {
+        if (effect == nullptr) {
+            ALOGE("Invalid ff_effect");
+            return false;
+        }
+        if (ioctl(fd, EVIOCSFF, effect) < 0) {
             ALOGE("setFFEffect fail");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
     bool setFFPlay(int fd, int8_t index, bool value) override {
         struct input_event play = {
@@ -184,16 +191,19 @@ class HwApi : public Vibrator::HwApi, private HwApiBase {
         *haptic_pcm = NULL;
         return false;
     }
-    bool uploadOwtEffect(int fd, uint8_t *owtData, uint32_t numBytes, struct ff_effect *effect,
+    bool uploadOwtEffect(int fd, const uint8_t *owtData, const uint32_t numBytes, struct ff_effect *effect,
                          uint32_t *outEffectIndex, int *status) override {
-        (*effect).u.periodic.custom_len = numBytes / sizeof(uint16_t);
-        delete[] ((*effect).u.periodic.custom_data);
-        (*effect).u.periodic.custom_data = new int16_t[(*effect).u.periodic.custom_len]{0x0000};
-        if ((*effect).u.periodic.custom_data == nullptr) {
-            ALOGE("Failed to allocate memory for custom data\n");
+        if (owtData == nullptr || effect == nullptr || outEffectIndex == nullptr) {
+            ALOGE("Invalid argument owtData, ff_effect or outEffectIndex");
             *status = EX_NULL_POINTER;
             return false;
         }
+        if (status == nullptr) {
+            ALOGE("Invalid argument status");
+            return false;
+        }
+
+        (*effect).u.periodic.custom_len = numBytes / sizeof(uint16_t);
         memcpy((*effect).u.periodic.custom_data, owtData, numBytes);
 
         if ((*effect).id != -1) {
@@ -204,7 +214,6 @@ class HwApi : public Vibrator::HwApi, private HwApiBase {
         (*effect).id = -1;
         if (ioctl(fd, EVIOCSFF, effect) < 0) {
             ALOGE("Failed to upload effect %d (%d): %s", *outEffectIndex, errno, strerror(errno));
-            delete[] ((*effect).u.periodic.custom_data);
             *status = EX_ILLEGAL_STATE;
             return false;
         }
@@ -223,6 +232,10 @@ class HwApi : public Vibrator::HwApi, private HwApiBase {
 
         if (effectIndex < WAVEFORM_MAX_PHYSICAL_INDEX) {
             ALOGE("Invalid waveform index for OWT erase: %d", effectIndex);
+            return false;
+        }
+        if (effect == nullptr || (*effect).empty()) {
+            ALOGE("Invalid argument effect");
             return false;
         }
         // Turn off the waiting time for SVC init phase to complete since chip
