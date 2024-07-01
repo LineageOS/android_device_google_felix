@@ -218,7 +218,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=52
+    ro.vendor.build.svn=53
 
 # Vibrator HAL
 $(call soong_config_set,haptics,kernel_ver,v$(subst .,_,$(TARGET_LINUX_KERNEL_VERSION)))
@@ -382,7 +382,7 @@ PRODUCT_COPY_FILES += \
 
 # LE Audio Unicast Allowlist
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.allow_list=SM-R510
+    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5
 
 # Bluetooth EWP test tool
 PRODUCT_PACKAGES_DEBUG += \
