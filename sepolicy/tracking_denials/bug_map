@@ -1,0 +1,2 @@
+kernel vendor_votable_debugfs dir b/305600372
+system_server sysfs_batteryinfo file b/306344097
