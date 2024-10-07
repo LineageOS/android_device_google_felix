@@ -60,7 +60,7 @@ cc_library {
     srcs: [
         "Vibrator.cpp",
     ],
-    shared_libs: ["//hardware/google/pixel:PixelVibratorFlagsL26"],
+    shared_libs: ["//device/google/gs-common:PixelVibratorFlagsL26"],
     export_include_dirs: ["."],
     vendor_available: true,
     visibility: [":__subpackages__"],

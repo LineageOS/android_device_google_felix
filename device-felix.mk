@@ -41,8 +41,8 @@ $(call soong_config_set,fp_hal_feature,pixel_product, product_a)
 include device/google/felix/vibrator/cs40l26/device.mk
 include device/google/gs-common/bcmbt/bluetooth.mk
 include device/google/gs-common/display/dump_second_display.mk
-include device/google/gs-common/touch/gti/gti.mk
-include device/google/gs-common/touch/stm/stm6.mk
+include device/google/gs-common/touch/gti/predump_gti_dual.mk
+include device/google/gs-common/touch/stm/predump_stm6.mk
 ifeq ($(filter factory_felix, $(TARGET_PRODUCT)),)
 include device/google/felix/uwb/uwb_calibration.mk
 endif
@@ -447,5 +447,6 @@ PRODUCT_PACKAGES += \
     AvoidAppsInCutoutOverlay
 
 # Bluetooth device id
+# Felix: 0x410C
 PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.device_id.product_id=20494
+    bluetooth.device_id.product_id=16652

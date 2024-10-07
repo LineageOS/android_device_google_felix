@@ -19,6 +19,7 @@
 #include <glob.h>
 #include <hardware/hardware.h>
 #include <hardware/vibrator.h>
+#include <linux/version.h>
 #include <log/log.h>
 #include <stdio.h>
 #include <utils/Trace.h>
@@ -71,6 +72,14 @@ static constexpr int32_t COMPOSE_PWLE_SIZE_MAX_DEFAULT = 127;
 // See the LRA Calibration Support documentation for more details.
 static constexpr int32_t Q14_BIT_SHIFT = 14;
 
+// Measured ReDC. The LRA series resistance (ReDC), expressed as follows
+// redc(ohms) = redc_measured / 2^Q15_BIT_SHIFT.
+// This value represents the unit-specific ReDC input to the click compensation
+// algorithm. It can be overwritten at a later time by writing to the redc_stored
+// sysfs control.
+// See the LRA Calibration Support documentation for more details.
+static constexpr int32_t Q15_BIT_SHIFT = 15;
+
 // Measured Q factor, q_measured, is represented by Q8.16 fixed
 // point format on cs40l26 devices. The expression to calculate q is:
 //   q = q_measured / 2^Q16_BIT_SHIFT
@@ -83,6 +92,30 @@ static constexpr uint32_t WT_LEN_CALCD = 0x00800000;
 static constexpr uint8_t PWLE_CHIRP_BIT = 0x8;  // Dynamic/static frequency and voltage
 static constexpr uint8_t PWLE_BRAKE_BIT = 0x4;
 static constexpr uint8_t PWLE_AMP_REG_BIT = 0x2;
+
+static constexpr uint8_t PWLE_WT_TYPE = 12;
+static constexpr uint8_t PWLE_HEADER_WORD_COUNT = 3;
+static constexpr uint8_t PWLE_HEADER_FTR_SHIFT = 8;
+static constexpr uint8_t PWLE_SVC_METADATA_WORD_COUNT = 3;
+static constexpr uint32_t PWLE_SVC_METADATA_TERMINATOR = 0xFFFFFF;
+static constexpr uint8_t PWLE_SEGMENT_WORD_COUNT = 2;
+static constexpr uint8_t PWLE_HEADER_WCOUNT_WORD_OFFSET = 2;
+static constexpr uint8_t PWLE_WORD_SIZE = sizeof(uint32_t);
+
+static constexpr uint8_t PWLE_SVC_NO_BRAKING = -1;
+static constexpr uint8_t PWLE_SVC_CAT_BRAKING = 0;
+static constexpr uint8_t PWLE_SVC_OPEN_BRAKING = 1;
+static constexpr uint8_t PWLE_SVC_CLOSED_BRAKING = 2;
+static constexpr uint8_t PWLE_SVC_MIXED_BRAKING = 3;
+
+static constexpr uint32_t PWLE_SVC_MAX_BRAKING_TIME_MS = 1000;
+
+static constexpr uint8_t PWLE_FTR_BUZZ_BIT = 0x80;
+static constexpr uint8_t PWLE_FTR_CLICK_BIT = 0x00;
+static constexpr uint8_t PWLE_FTR_DYNAMIC_F0_BIT = 0x10;
+static constexpr uint8_t PWLE_FTR_SVC_METADATA_BIT = 0x04;
+static constexpr uint8_t PWLE_FTR_DVL_BIT = 0x02;
+static constexpr uint8_t PWLE_FTR_LF0T_BIT = 0x01;
 
 static constexpr float PWLE_LEVEL_MIN = 0.0;
 static constexpr float PWLE_LEVEL_MAX = 1.0;
@@ -113,6 +146,10 @@ static uint16_t amplitudeToScale(float amplitude, float maximum) {
         ratio = 100;
 
     return std::round(ratio);
+}
+
+static float redcToFloat(std::string *caldata) {
+    return static_cast<float>(std::stoul(*caldata, nullptr, 16)) / (1 << Q15_BIT_SHIFT);
 }
 
 enum WaveformBankID : uint8_t {
@@ -233,10 +270,18 @@ class DspMemChunk {
             write(8, 0); /* nsections placeholder */
             write(8, 0); /* repeat */
         } else if (waveformType == WAVEFORM_PWLE) {
+            write(16, (PWLE_FTR_BUZZ_BIT | PWLE_FTR_DVL_BIT)
+                              << PWLE_HEADER_FTR_SHIFT); /* Feature flag */
+            write(8, PWLE_WT_TYPE);                      /* type12 */
+            write(24, PWLE_HEADER_WORD_COUNT);           /* Header word count */
+            write(24, 0);                                /* Body word count placeholder */
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
             write(24, 0); /* Waveform length placeholder */
             write(8, 0);  /* Repeat */
             write(12, 0); /* Wait time between repeats */
             write(8, 0);  /* nsections placeholder */
+#endif
         } else {
             ALOGE("%s: Invalid type: %u", __func__, waveformType);
         }
@@ -324,6 +369,9 @@ class DspMemChunk {
             ALOGE("%s: Invalid argument: %u", __func__, totalDuration);
             return -EINVAL;
         }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+        f += PWLE_HEADER_WORD_COUNT * PWLE_WORD_SIZE;
+#endif
         totalDuration *= 8; /* Unit: 0.125 ms (since wlength played @ 8kHz). */
         totalDuration |=
                 WT_LEN_CALCD; /* Bit 23 is for WT_LEN_CALCD; Bit 22 is for WT_INDEFINITE. */
@@ -352,12 +400,43 @@ class DspMemChunk {
                 ALOGE("%s: Invalid argument: %d", __func__, segmentIdx);
                 return -EINVAL;
             }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+            f += PWLE_HEADER_WORD_COUNT * PWLE_WORD_SIZE;
+#endif
             *(f + 7) |= (0xF0 & segmentIdx) >> 4; /* Bit 4 to 7 */
             *(f + 9) |= (0x0F & segmentIdx) << 4; /* Bit 3 to 0 */
         } else {
             ALOGE("%s: Invalid type: %d", __func__, waveformType);
             return -EDOM;
         }
+
+        return 0;
+    }
+
+    int updateWCount(int segmentCount) {
+        uint8_t *f = front();
+
+        if (segmentCount > COMPOSE_SIZE_MAX + 1 /*1st effect may have a delay*/) {
+            ALOGE("%s: Invalid argument: %d", __func__, segmentCount);
+            return -EINVAL;
+        }
+        if (f == nullptr) {
+            ALOGE("%s: head does not exist!", __func__);
+            return -ENOMEM;
+        }
+        if (waveformType != WAVEFORM_PWLE) {
+            ALOGE("%s: Invalid type: %d", __func__, waveformType);
+            return -EDOM;
+        }
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+        f += PWLE_HEADER_WORD_COUNT * PWLE_WORD_SIZE;
+#endif
+        uint32_t dataSize = segmentCount * PWLE_SEGMENT_WORD_COUNT + PWLE_HEADER_WORD_COUNT;
+        *(f + 0) = (dataSize >> 24) & 0xFF;
+        *(f + 1) = (dataSize >> 16) & 0xFF;
+        *(f + 2) = (dataSize >> 8) & 0xFF;
+        *(f + 3) = dataSize & 0xFF;
 
         return 0;
     }
@@ -598,9 +677,12 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
 
     if (mHwCalDef->getF0(&caldata)) {
         mHwApiDef->setF0(caldata);
+        mResonantFrequency =
+                static_cast<float>(std::stoul(caldata, nullptr, 16)) / (1 << Q14_BIT_SHIFT);
     }
     if (mHwCalDef->getRedc(&caldata)) {
         mHwApiDef->setRedc(caldata);
+        mRedc = redcToFloat(&caldata);
     }
     if (mHwCalDef->getQ(&caldata)) {
         mHwApiDef->setQ(caldata);
@@ -1138,12 +1220,7 @@ ndk::ScopedAStatus Vibrator::alwaysOnDisable(int32_t /*id*/) {
 }
 
 ndk::ScopedAStatus Vibrator::getResonantFrequency(float *resonantFreqHz) {
-    std::string caldata{8, '0'};
-    if (!mHwCalDef->getF0(&caldata)) {
-        ALOGE("Failed to get resonant frequency (%d): %s", errno, strerror(errno));
-        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
-    }
-    *resonantFreqHz = static_cast<float>(std::stoul(caldata, nullptr, 16)) / (1 << Q14_BIT_SHIFT);
+    *resonantFreqHz = mResonantFrequency;
 
     return ndk::ScopedAStatus::ok();
 }
@@ -1360,6 +1437,13 @@ ndk::ScopedAStatus Vibrator::composePwle(const std::vector<PrimitivePwle> &compo
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
     }
 
+    /* Update word count */
+    if (ch.updateWCount(segmentIdx) < 0) {
+        ALOGE("%s: Failed to update the waveform word count", __func__);
+        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
+    }
+
+    /* Update waveform length */
     if (ch.updateWLength(totalDuration) < 0) {
         ALOGE("%s: Failed to update the waveform length length", __func__);
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
@@ -1392,7 +1476,10 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
 
     dprintf(fd, "AIDL:\n");
 
+    dprintf(fd, "  Active Effect ID: %" PRId32 "\n", mActiveId);
+    dprintf(fd, "  F0: %.02f\n", mResonantFrequency);
     dprintf(fd, "  F0 Offset: base: %" PRIu32 " flip: %" PRIu32 "\n", mF0Offset, mF0OffsetDual);
+    dprintf(fd, "  Redc: %.02f\n", mRedc);
 
     dprintf(fd, "  Voltage Levels:\n");
     dprintf(fd, "     Tick Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mTickEffectVol[0],
@@ -1464,7 +1551,73 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
         }
     }
     dprintf(fd, "\n");
-    dprintf(fd, "\n");
+
+    dprintf(fd, "Versions:\n");
+    std::ifstream verFile;
+    const auto verBinFileMode = std::ifstream::in | std::ifstream::binary;
+    std::string ver;
+    verFile.open("/sys/module/cs40l26_core/version");
+    if (verFile.is_open()) {
+        getline(verFile, ver);
+        dprintf(fd, "  Haptics Driver: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/sys/module/cl_dsp_core/version");
+    if (verFile.is_open()) {
+        getline(verFile, ver);
+        dprintf(fd, "  DSP Driver: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26.wmfw", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(113);
+        dprintf(fd, "  cs40l26.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(), verFile.get());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-calib.wmfw", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(113);
+        dprintf(fd, "  cs40l26-calib.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(),
+                verFile.get());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        while (getline(verFile, ver)) {
+            auto pos = ver.find("Date: ");
+            if (pos != std::string::npos) {
+                ver = ver.substr(pos + 6, pos + 15);
+                dprintf(fd, "  cs40l26.bin: %s\n", ver.c_str());
+                break;
+            }
+        }
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-svc.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(36);
+        getline(verFile, ver);
+        ver = ver.substr(ver.rfind('\\') + 1);
+        dprintf(fd, "  cs40l26-svc.bin: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-calib.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(36);
+        getline(verFile, ver);
+        ver = ver.substr(ver.rfind('\\') + 1);
+        dprintf(fd, "  cs40l26-calib.bin: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-dvl.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(36);
+        getline(verFile, ver);
+        ver = ver.substr(0, ver.find('\0') + 1);
+        ver = ver.substr(ver.rfind('\\') + 1);
+        dprintf(fd, "  cs40l26-dvl.bin: %s\n", ver.c_str());
+        verFile.close();
+    }
 
     mHwApiDef->debug(fd);
 
