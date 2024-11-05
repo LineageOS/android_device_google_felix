@@ -29,6 +29,13 @@ namespace android {
 namespace hardware {
 namespace vibrator {
 
+void HwApiBase::recordEvent(const char *func, const std::string &value) {
+   std::lock_guard<std::mutex> lock(mRecordsMutex);
+   mRecords.emplace_back(std::make_unique<Record<std::string>>
+                            (HwApiBase::RecordType::EVENT, func, value, nullptr));
+   mRecords.pop_front();
+}
+
 HwApiBase::HwApiBase() {
     mPathPrefix = std::getenv("HWAPI_PATH_PREFIX") ?: "";
     if (mPathPrefix.empty()) {

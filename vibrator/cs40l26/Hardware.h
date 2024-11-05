@@ -287,6 +287,10 @@ class HwApi : public Vibrator::HwApi, private HwApiBase {
         return true;
     }
 
+    void recordEvent(const char *func, const std::string &value) override {
+        HwApiBase::recordEvent(func, value);
+    }
+
     void debug(int fd) override { HwApiBase::debug(fd); }
 
   private:
