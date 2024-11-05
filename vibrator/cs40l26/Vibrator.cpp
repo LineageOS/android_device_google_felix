@@ -195,6 +195,8 @@ enum vibe_state {
     VIBE_STATE_ASP,
 };
 
+std::mutex mActiveId_mutex;  // protects mActiveId
+
 class DspMemChunk {
   private:
     std::unique_ptr<uint8_t[]> head;
@@ -1081,7 +1083,7 @@ ndk::ScopedAStatus Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex, const 
         if (mIsDual) {
             mHwApiDual->getOwtFreeSpace(&freeBytes);
             if (ch-> size() > freeBytes) {
-                ALOGE("Invalid OWT length in flip: Effect %d: %d > %d!", effectIndex,
+                ALOGE("Invalid OWT length in flip: Effect %d: %zu > %d!", effectIndex,
                       ch-> size(), freeBytes);
                 return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
             }
@@ -1482,40 +1484,31 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
     dprintf(fd, "  Redc: %.02f\n", mRedc);
 
     dprintf(fd, "  Voltage Levels:\n");
-    dprintf(fd, "     Tick Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mTickEffectVol[0],
+    dprintf(fd, "    Tick Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mTickEffectVol[0],
             mTickEffectVol[1]);
-    dprintf(fd, "     Click Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mClickEffectVol[0],
+    dprintf(fd, "    Click Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mClickEffectVol[0],
             mClickEffectVol[1]);
-    dprintf(fd, "     Long Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mLongEffectVol[0],
+    dprintf(fd, "    Long Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mLongEffectVol[0],
             mLongEffectVol[1]);
 
-    dprintf(fd, "  FF effect:\n");
-    dprintf(fd, "    Physical waveform:\n");
-    dprintf(fd, "==== Base ====\n\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
     uint8_t effectId;
+    dprintf(fd, "  Scales\n");
+    dprintf(fd, "\tId\tMinScale\tMaxScale\n");
+    for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
+        dprintf(fd, "\t%d\t%d\t\t%d\n", effectId, mPrimitiveMinScale[effectId],
+            mPrimitiveMaxScale[effectId]);
+    }
+
+    dprintf(fd, "  Base FF effect:\n");
+    dprintf(fd, "    Physical waveform:\n");
+    dprintf(fd, "\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
     for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
         dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffects[effectId].id,
                 mFfEffects[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
                 mFfEffects[effectId].replay.length, mEffectBrakingDurations[effectId],
                 mFfEffects[effectId].trigger.button);
     }
-    if (mIsDual) {
-        dprintf(fd, "==== Flip ====\n\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
-        for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
-            dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffectsDual[effectId].id,
-                    mFfEffectsDual[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
-                    mFfEffectsDual[effectId].replay.length, mEffectBrakingDurations[effectId],
-                    mFfEffectsDual[effectId].trigger.button);
-        }
-    }
-
-    dprintf(fd, "==== Scales ====\n\tId\tMinScale\tMaxScale\n");
-    for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
-        dprintf(fd, "\t%d\t%d\t\t%d\n", effectId, mPrimitiveMinScale[effectId],
-            mPrimitiveMaxScale[effectId]);
-    }
-
-    dprintf(fd, "\nBase: OWT waveform:\n");
+    dprintf(fd, "    OWT waveform:\n");
     dprintf(fd, "\tId\tBytes\tData\tt\ttrigger button\n");
     for (effectId = WAVEFORM_MAX_PHYSICAL_INDEX; effectId < WAVEFORM_MAX_INDEX; effectId++) {
         uint32_t numBytes = mFfEffects[effectId].u.periodic.custom_len * 2;
@@ -1531,8 +1524,18 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
         dprintf(fd, "\t%d\t%d\t{%s}\t%u\t%X\n", mFfEffects[effectId].id, numBytes, ss.str().c_str(),
                 mFfEffectsDual[effectId].replay.length, mFfEffects[effectId].trigger.button);
     }
+
     if (mIsDual) {
-        dprintf(fd, "Flip: OWT waveform:\n");
+        dprintf(fd, "  Flip FF effect:\n");
+        dprintf(fd, "    Physical waveform:\n");
+        dprintf(fd, "\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
+        for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
+            dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffectsDual[effectId].id,
+                    mFfEffectsDual[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
+                    mFfEffectsDual[effectId].replay.length, mEffectBrakingDurations[effectId],
+                    mFfEffectsDual[effectId].trigger.button);
+        }
+        dprintf(fd, "    OWT waveform:\n");
         dprintf(fd, "\tId\tBytes\tData\tt\ttrigger button\n");
         for (effectId = WAVEFORM_MAX_PHYSICAL_INDEX; effectId < WAVEFORM_MAX_INDEX; effectId++) {
             uint32_t numBytes = mFfEffectsDual[effectId].u.periodic.custom_len * 2;
@@ -1553,77 +1556,66 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
     dprintf(fd, "\n");
 
     dprintf(fd, "Versions:\n");
+    const std::vector<std::pair<std::string, std::string>> moduleFolderNames = {
+        {"cs40l26_core", "Haptics"}, {"cl_dsp_core", "DSP"}};
+    const std::string firmwareFolder = "/vendor/firmware/";
+    const std::string waveformName = "cs40l26.bin";
+    const std::array<std::string, 2> firmwareFileNames = {"cs40l26.wmfw", "cs40l26-calib.wmfw"};
+    const std::array<std::string, 4> tuningFileNames = {"cs40l26-svc.bin", "cs40l26-calib.bin",
+                                                        "cs40l26-dvl.bin", "cs40l26-dbc.bin"};
     std::ifstream verFile;
     const auto verBinFileMode = std::ifstream::in | std::ifstream::binary;
     std::string ver;
-    verFile.open("/sys/module/cs40l26_core/version");
-    if (verFile.is_open()) {
-        getline(verFile, ver);
-        dprintf(fd, "  Haptics Driver: %s\n", ver.c_str());
-        verFile.close();
+    for (const auto &[folder, logTag] : moduleFolderNames) {
+        verFile.open("/sys/module/" + folder + "/version");
+        if (verFile.is_open()) {
+            getline(verFile, ver);
+            dprintf(fd, "  %s Driver: %s\n", logTag.c_str(), ver.c_str());
+            verFile.close();
+        }
     }
-    verFile.open("/sys/module/cl_dsp_core/version");
-    if (verFile.is_open()) {
-        getline(verFile, ver);
-        dprintf(fd, "  DSP Driver: %s\n", ver.c_str());
-        verFile.close();
+    for (auto &name : firmwareFileNames) {
+        verFile.open(firmwareFolder + name, verBinFileMode);
+        if (verFile.is_open()) {
+            verFile.seekg(113);
+            dprintf(fd, "  %s: %d.%d.%d\n", name.c_str(), verFile.get(), verFile.get(),
+                    verFile.get());
+            verFile.close();
+        }
     }
-    verFile.open("/vendor/firmware/cs40l26.wmfw", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(113);
-        dprintf(fd, "  cs40l26.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(), verFile.get());
-        verFile.close();
-    }
-    verFile.open("/vendor/firmware/cs40l26-calib.wmfw", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(113);
-        dprintf(fd, "  cs40l26-calib.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(),
-                verFile.get());
-        verFile.close();
-    }
-    verFile.open("/vendor/firmware/cs40l26.bin", verBinFileMode);
+    verFile.open(firmwareFolder + waveformName, verBinFileMode);
     if (verFile.is_open()) {
         while (getline(verFile, ver)) {
             auto pos = ver.find("Date: ");
             if (pos != std::string::npos) {
                 ver = ver.substr(pos + 6, pos + 15);
-                dprintf(fd, "  cs40l26.bin: %s\n", ver.c_str());
+                dprintf(fd, "  %s: %s\n", waveformName.c_str(), ver.c_str());
                 break;
             }
         }
         verFile.close();
     }
-    verFile.open("/vendor/firmware/cs40l26-svc.bin", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(36);
-        getline(verFile, ver);
-        ver = ver.substr(ver.rfind('\\') + 1);
-        dprintf(fd, "  cs40l26-svc.bin: %s\n", ver.c_str());
-        verFile.close();
+    for (auto &name : tuningFileNames) {
+        verFile.open(firmwareFolder + name, verBinFileMode);
+        if (verFile.is_open()) {
+            verFile.seekg(36);
+            getline(verFile, ver);
+            ver = ver.substr(0, ver.find(".bin") + 4);
+            ver = ver.substr(ver.rfind('\\') + 1);
+            dprintf(fd, "  %s: %s\n", name.c_str(), ver.c_str());
+            verFile.close();
+        }
     }
-    verFile.open("/vendor/firmware/cs40l26-calib.bin", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(36);
-        getline(verFile, ver);
-        ver = ver.substr(ver.rfind('\\') + 1);
-        dprintf(fd, "  cs40l26-calib.bin: %s\n", ver.c_str());
-        verFile.close();
-    }
-    verFile.open("/vendor/firmware/cs40l26-dvl.bin", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(36);
-        getline(verFile, ver);
-        ver = ver.substr(0, ver.find('\0') + 1);
-        ver = ver.substr(ver.rfind('\\') + 1);
-        dprintf(fd, "  cs40l26-dvl.bin: %s\n", ver.c_str());
-        verFile.close();
-    }
+
+    dprintf(fd, "\n");
 
     mHwApiDef->debug(fd);
 
     dprintf(fd, "\n");
 
     mHwCalDef->debug(fd);
+
+    dprintf(fd, "\n");
 
     if (mIsDual) {
         mHwApiDual->debug(fd);
@@ -1930,7 +1922,6 @@ uint32_t Vibrator::intensityToVolLevel(float intensity, uint32_t effectIndex) {
             volLevel = calc(intensity, mClickEffectVol);
             break;
     }
-
     // The waveform being played must fall within the allowable scale range
     if (effectIndex < WAVEFORM_MAX_INDEX) {
         if (volLevel > mPrimitiveMaxScale[effectIndex]) {

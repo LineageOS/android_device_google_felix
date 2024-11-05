@@ -208,6 +208,7 @@ class HwCalBase {
 
   private:
     std::string mPropertyPrefix;
+    std::string mCalPath;
     std::map<std::string, std::string> mCalData;
 };
 

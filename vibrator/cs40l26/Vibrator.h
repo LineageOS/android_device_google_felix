@@ -250,7 +250,6 @@ class Vibrator : public BnVibrator {
     bool mConfigHapticAlsaDeviceDone{false};
     bool mGPIOStatus;
     bool mIsDual{false};
-    std::mutex mActiveId_mutex;  // protects mActiveId
 };
 
 }  // namespace vibrator
