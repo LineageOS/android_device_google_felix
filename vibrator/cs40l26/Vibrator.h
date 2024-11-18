@@ -153,6 +153,7 @@ class Vibrator : public BnVibrator {
     Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> hwCalDefault,
              std::unique_ptr<HwApi> hwApiDual, std::unique_ptr<HwCal> hwCalDual,
              std::unique_ptr<HwGPIO> hwgpio);
+    virtual ~Vibrator();
 
     // BnVibrator APIs
     ndk::ScopedAStatus getCapabilities(int32_t *_aidl_return) override;

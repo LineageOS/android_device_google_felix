@@ -1335,6 +1335,17 @@ static void incrementIndex(int *index) {
     *index += 1;
 }
 
+Vibrator::~Vibrator() {
+    if (isUnderExternalControl()) {
+        ALOGD("Disabling external control");
+        setExternalControl(false);
+    }
+    ALOGD("Turning off the vibrator");
+    off();
+    ALOGD("Waiting for mAsyncHandle to complete");
+    mAsyncHandle.wait();
+}
+
 ndk::ScopedAStatus Vibrator::composePwle(const std::vector<PrimitivePwle> &composite,
                                          const std::shared_ptr<IVibratorCallback> &callback) {
     ATRACE_NAME("Vibrator::composePwle");
