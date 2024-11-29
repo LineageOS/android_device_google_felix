@@ -63,6 +63,18 @@
       "ResetOnInit": true
     },
     {
+      "Name": "CPULittleClusterDownRateLimitUs",
+      "Path": "/sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_us",
+      "Values": [
+        "5000",
+        "2000",
+        "1000",
+        "500"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
       "Name": "CPUMidClusterMaxFreq",
       "Path": "/sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq",
       "Values": [
@@ -92,6 +104,19 @@
         "1197000",
         "0"
       ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "CPUMidClusterDownRateLimitUs",
+      "Path": "/sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/down_rate_limit_us",
+      "Values": [
+        "20000",
+        "5000",
+        "3000",
+        "2000",
+        "500"
+      ],
+      "DefaultIndex": 0,
       "ResetOnInit": true
     },
     {
@@ -129,6 +154,18 @@
       "ResetOnInit": true
     },
     {
+      "Name": "CPUBigClusterDownRateLimitUs",
+      "Path": "/sys/devices/system/cpu/cpu6/cpufreq/sched_pixel/down_rate_limit_us",
+      "Values": [
+        "20000",
+        "3000",
+        "2000",
+        "500"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
       "Name": "GPUDvfsPeriod",
       "Path": "/sys/devices/platform/28000000.mali/dvfs_period",
       "Values": [
@@ -140,6 +177,15 @@
     {
       "Name": "ReducePreferIdle",
       "Path": "/proc/vendor_sched/reduce_prefer_idle",
+      "Values": [
+        "0",
+        "1"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "AutoPreferIdle",
+      "Path": "/proc/vendor_sched/auto_prefer_idle",
       "Values": [
         "0",
         "1"
@@ -162,6 +208,16 @@
       "Values": [
         "1280",
         "1100 1078 1024"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "CPUTaperedDVFSHeadroomEnable",
+      "Path": "/proc/vendor_sched/tapered_dvfs_headroom_enable",
+      "Values": [
+        "0",
+        "1"
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
@@ -191,6 +247,54 @@
       "Values": [
         "764",
         "1"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAUclampMinOnNiceEnable",
+      "Path": "/proc/vendor_sched/groups/ta/uclamp_min_on_nice_enable",
+      "Values": [
+        "1",
+        "0"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAUclampMinOnNiceHighValue",
+      "Path": "/proc/vendor_sched/groups/ta/uclamp_min_on_nice_high_value",
+      "Values": [
+        "765",
+        "0"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAUclampMinOnNiceMidValue",
+      "Path": "/proc/vendor_sched/groups/ta/uclamp_min_on_nice_mid_value",
+      "Values": [
+        "600",
+        "590",
+        "0"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAUclampMinOnNiceHighPrio",
+      "Path": "/proc/vendor_sched/groups/ta/uclamp_min_on_nice_high_prio",
+      "Values": [
+        "110",
+        "119",
+        "120"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAUclampMinOnNiceMidPrio",
+      "Path": "/proc/vendor_sched/groups/ta/uclamp_min_on_nice_mid_prio",
+      "Values": [
+        "128",
+        "139",
+        "130"
       ],
       "ResetOnInit": true
     },
@@ -283,6 +387,25 @@
       "Values": [
         "0",
         "1"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAAutoPreferFit",
+      "Path": "/proc/vendor_sched/groups/ta/auto_prefer_fit",
+      "Values": [
+        "1",
+        "0"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "TAPreferredIdleMaskHigh",
+      "Path": "/proc/vendor_sched/groups/ta/preferred_idle_mask_high",
+      "Values": [
+        "0xff",
+        "0xf0",
+        "0x7f"
       ],
       "ResetOnInit": true
     },
@@ -688,6 +811,26 @@
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
+    },
+    {
+      "Name": "CPUUClampMaxFilterEnable",
+      "Path": "/proc/vendor_sched/uclamp_max_filter_enable",
+      "Values": [
+        "1",
+        "0"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "BGUClampMaxBoost",
+      "Path": "/proc/vendor_sched/groups/bg/uclamp_max",
+      "Values": [
+        "130",
+        "512"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
     }
   ],
   "Actions": [
@@ -722,16 +865,16 @@
       "Value": "0"
     },
     {
+      "PowerHint": "LAUNCH",
+      "Node": "AutoPreferIdle",
+      "Duration": 5000,
+      "Value": "0"
+    },
+    {
       "PowerHint": "LAUNCH_GPU",
       "Node": "GPUDvfsPeriod",
       "Duration": 1000,
       "Value": "10"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "FGPreferIdle",
-      "Duration": 5000,
-      "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
@@ -758,9 +901,15 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "TAUClampBoost",
+      "Node": "CPUUClampMaxFilterEnable",
       "Duration": 5000,
-      "Value": "764"
+      "Value": "0"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "BGUClampMaxBoost",
+      "Duration": 5000,
+      "Value": "512"
     },
     {
       "PowerHint": "LAUNCH",
@@ -776,8 +925,13 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "NPITaskPacking",
-      "Duration": 5000,
+      "Type": "DoHint",
+      "Value": "LAUNCH_PMU"
+    },
+    {
+      "PowerHint": "LAUNCH_PMU",
+      "Node": "PMU_POLL",
+      "Duration": 3000,
       "Value": "0"
     },
     {
@@ -787,14 +941,87 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Type": "DoHint",
-      "Value": "LAUNCH_PMU"
+      "Node": "CPUDVFSHeadroom",
+      "Duration": 5000,
+      "Value": "1280"
     },
     {
-      "PowerHint": "LAUNCH_PMU",
-      "Node": "PMU_POLL",
-      "Duration": 3000,
+      "PowerHint": "LAUNCH",
+      "Node": "CPUTaperedDVFSHeadroomEnable",
+      "Duration": 5000,
       "Value": "0"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "CPULittleClusterDownRateLimitUs",
+      "Duration": 5000,
+      "Value": "5000"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "CPUMidClusterDownRateLimitUs",
+      "Duration": 5000,
+      "Value": "20000"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "CPUBigClusterDownRateLimitUs",
+      "Duration": 5000,
+      "Value": "20000"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAPreferIdle",
+      "Duration": 5000,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAAutoPreferFit",
+      "Duration": 5000,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAPreferredIdleMaskHigh",
+      "Duration": 5000,
+      "Value": "0xff"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAUclampMinOnNiceEnable",
+      "Duration": 5000,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAUclampMinOnNiceHighValue",
+       "Duration": 5000,
+       "Value": "765"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAUclampMinOnNiceHighPrio",
+      "Duration": 5000,
+      "Value": "110"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAUclampMinOnNiceMidValue",
+       "Duration": 5000,
+       "Value": "590"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAUclampMinOnNiceMidPrio",
+      "Duration": 5000,
+      "Value": "139"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "FGPreferIdle",
+      "Duration": 5000,
+      "Value": "1"
     },
     {
       "PowerHint": "LAUNCH_EXTEND",
