@@ -45,6 +45,14 @@ namespace aidl {
 namespace android {
 namespace hardware {
 namespace vibrator {
+
+#define RECORD(fmt, ...) { \
+  this->mHwApiDef->recordEvent(__func__, StringPrintf(fmt, ##__VA_ARGS__)); \
+  if (this->mIsDual) { \
+      this->mHwApiDual->recordEvent(__func__, StringPrintf(fmt, ##__VA_ARGS__)); \
+    } \
+}
+
 static constexpr uint16_t FF_CUSTOM_DATA_LEN_MAX_COMP = 2044;  // (COMPOSE_SIZE_MAX + 1) * 8 + 4
 static constexpr uint16_t FF_CUSTOM_DATA_LEN_MAX_PWLE = 2302;
 
@@ -461,6 +469,7 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
     if ((mHwApiDual != nullptr) && (mHwCalDual != nullptr))
         mIsDual = true;
 
+    RECORD("mIsDual = %d", mIsDual);
     // ==================INPUT Devices== Base =================
     const char *inputEventName = std::getenv("INPUT_EVENT_NAME");
     const char *inputEventPathName = std::getenv("INPUT_EVENT_PATH");
@@ -816,6 +825,8 @@ ndk::ScopedAStatus Vibrator::off() {
     bool ret{true};
     const std::scoped_lock<std::mutex> lock(mActiveId_mutex);
 
+    RECORD("mActiveId = %d", mActiveId);
+
     if (mActiveId >= 0) {
         ALOGD("Off: Stop the active effect: %d", mActiveId);
         /* Stop the active effect. */
@@ -858,6 +869,7 @@ ndk::ScopedAStatus Vibrator::on(int32_t timeoutMs,
                                 const std::shared_ptr<IVibratorCallback> &callback) {
     ATRACE_NAME("Vibrator::on");
     ALOGD("Vibrator::on");
+    RECORD("timeoutMs = %d", timeoutMs);
 
     if (timeoutMs > MAX_TIME_MS) {
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
@@ -883,6 +895,8 @@ ndk::ScopedAStatus Vibrator::perform(Effect effect, EffectStrength strength,
                                      int32_t *_aidl_return) {
     ATRACE_NAME("Vibrator::perform");
     ALOGD("Vibrator::perform");
+    RECORD("effect = %s, strength = %s",
+                                toString(effect).c_str(), toString(strength).c_str());
     return performEffect(effect, strength, callback, _aidl_return);
 }
 
@@ -964,6 +978,8 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
                                      const std::shared_ptr<IVibratorCallback> &callback) {
     ATRACE_NAME("Vibrator::compose");
     ALOGD("Vibrator::compose");
+    RECORD("composite.size = %zu", composite.size());
+
     uint16_t size;
     uint16_t nextEffectDelay;
 
