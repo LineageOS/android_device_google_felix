@@ -203,7 +203,6 @@ enum vibe_state {
     VIBE_STATE_ASP,
 };
 
-std::mutex mActiveId_mutex;  // protects mActiveId
 
 class DspMemChunk {
   private:
