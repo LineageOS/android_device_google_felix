@@ -58,7 +58,7 @@ static constexpr int8_t MAX_PAUSE_TIMING_ERROR_MS = 1;  // ALERT Irq Handling
 static constexpr uint32_t MAX_TIME_MS = UINT16_MAX;
 
 static constexpr auto ASYNC_COMPLETION_TIMEOUT = std::chrono::milliseconds(100);
-static constexpr auto POLLING_TIMEOUT = 20;
+static constexpr auto POLLING_TIMEOUT = 50;
 static constexpr int32_t COMPOSE_DELAY_MAX_MS = 10000;
 
 /* nsections is 8 bits. Need to preserve 1 section for the first delay before the first effect. */
@@ -70,6 +70,14 @@ static constexpr int32_t COMPOSE_PWLE_SIZE_MAX_DEFAULT = 127;
 //   f0 = f0_measured / 2^Q14_BIT_SHIFT
 // See the LRA Calibration Support documentation for more details.
 static constexpr int32_t Q14_BIT_SHIFT = 14;
+
+// Measured ReDC. The LRA series resistance (ReDC), expressed as follows
+// redc(ohms) = redc_measured / 2^Q15_BIT_SHIFT.
+// This value represents the unit-specific ReDC input to the click compensation
+// algorithm. It can be overwritten at a later time by writing to the redc_stored
+// sysfs control.
+// See the LRA Calibration Support documentation for more details.
+static constexpr int32_t Q15_BIT_SHIFT = 15;
 
 // Measured Q factor, q_measured, is represented by Q8.16 fixed
 // point format on cs40l26 devices. The expression to calculate q is:
@@ -113,6 +121,10 @@ static uint16_t amplitudeToScale(float amplitude, float maximum) {
         ratio = 100;
 
     return std::round(ratio);
+}
+
+static float redcToFloat(std::string *caldata) {
+    return static_cast<float>(std::stoul(*caldata, nullptr, 16)) / (1 << Q15_BIT_SHIFT);
 }
 
 enum WaveformBankID : uint8_t {
@@ -485,8 +497,9 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
     mFfEffects.resize(WAVEFORM_MAX_INDEX);
     mEffectDurations.resize(WAVEFORM_MAX_INDEX);
     mEffectDurations = {
-            1000, 100, 12, 1000, 300, 130, 150, 500, 100, 5, 12, 1000, 1000, 1000,
+            1000, 100, 9, 1000, 300, 130, 150, 500, 100, 5, 12, 1000, 1000, 1000,
     }; /* 11+3 waveforms. The duration must < UINT16_MAX */
+    mEffectBrakingDurations.resize(WAVEFORM_MAX_INDEX);
     mEffectCustomData.reserve(WAVEFORM_MAX_INDEX);
 
     uint8_t effectIndex;
@@ -518,6 +531,11 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
             }
             if (mFfEffects[effectIndex].id != effectIndex) {
                 ALOGW("Unexpected effect index: %d -> %d", effectIndex, mFfEffects[effectIndex].id);
+            }
+
+            if (mHwApiDef->hasEffectBrakingTimeBank()) {
+                mHwApiDef->setEffectBrakingTimeIndex(effectIndex);
+                mHwApiDef->getEffectBrakingTimeMs(&mEffectBrakingDurations[effectIndex]);
             }
         } else {
             /* Initiate placeholders for OWT effects. */
@@ -592,9 +610,12 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
 
     if (mHwCalDef->getF0(&caldata)) {
         mHwApiDef->setF0(caldata);
+        mResonantFrequency =
+                static_cast<float>(std::stoul(caldata, nullptr, 16)) / (1 << Q14_BIT_SHIFT);
     }
     if (mHwCalDef->getRedc(&caldata)) {
         mHwApiDef->setRedc(caldata);
+        mRedc = redcToFloat(&caldata);
     }
     if (mHwCalDef->getQ(&caldata)) {
         mHwApiDef->setQ(caldata);
@@ -677,8 +698,21 @@ Vibrator::Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> h
         mSupportedPrimitives = defaultSupportedPrimitives;
     }
 
-    mPrimitiveMaxScale = {1.0f, 0.95f, 0.75f, 0.9f, 1.0f, 1.0f, 1.0f, 0.75f, 0.75f};
-    mPrimitiveMinScale = {0.0f, 0.01f, 0.11f, 0.23f, 0.0f, 0.25f, 0.02f, 0.03f, 0.16f};
+    mPrimitiveMaxScale.resize(WAVEFORM_MAX_INDEX, 100);
+    mPrimitiveMaxScale[WAVEFORM_CLICK_INDEX] = 95;
+    mPrimitiveMaxScale[WAVEFORM_THUD_INDEX] = 75;
+    mPrimitiveMaxScale[WAVEFORM_SPIN_INDEX] = 90;
+    mPrimitiveMaxScale[WAVEFORM_LIGHT_TICK_INDEX] = 75;
+    mPrimitiveMaxScale[WAVEFORM_LOW_TICK_INDEX] = 75;
+
+    mPrimitiveMinScale.resize(WAVEFORM_MAX_INDEX, 0);
+    mPrimitiveMinScale[WAVEFORM_CLICK_INDEX] = 1;
+    mPrimitiveMinScale[WAVEFORM_THUD_INDEX] = 11;
+    mPrimitiveMinScale[WAVEFORM_SPIN_INDEX] = 23;
+    mPrimitiveMinScale[WAVEFORM_SLOW_RISE_INDEX] = 25;
+    mPrimitiveMinScale[WAVEFORM_QUICK_FALL_INDEX] = 2;
+    mPrimitiveMinScale[WAVEFORM_LIGHT_TICK_INDEX] = 3;
+    mPrimitiveMinScale[WAVEFORM_LOW_TICK_INDEX] = 16;
 
     // ====== Get GPIO status and init it ================
     mGPIOStatus = mHwGPIO->getGPIO();
@@ -850,7 +884,7 @@ ndk::ScopedAStatus Vibrator::getPrimitiveDuration(CompositePrimitive primitive,
             return status;
         }
 
-        *durationMs = mEffectDurations[effectIndex];
+        *durationMs = mEffectDurations[effectIndex] + mEffectBrakingDurations[effectIndex];
     } else {
         *durationMs = 0;
     }
@@ -863,7 +897,6 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
     ALOGD("Vibrator::compose");
     uint16_t size;
     uint16_t nextEffectDelay;
-    uint16_t totalDuration = 0;
 
     if (composite.size() > COMPOSE_SIZE_MAX || composite.empty()) {
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
@@ -871,7 +904,6 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
 
     /* Check if there is a wait before the first effect. */
     nextEffectDelay = composite.front().delayMs;
-    totalDuration += nextEffectDelay;
     if (nextEffectDelay > COMPOSE_DELAY_MAX_MS || nextEffectDelay < 0) {
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
     } else if (nextEffectDelay > 0) {
@@ -904,16 +936,7 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
             if (!status.isOk()) {
                 return status;
             }
-            // Add a max and min threshold to prevent the device crash(overcurrent) or no
-            // feeling
-            if (effectScale > mPrimitiveMaxScale[static_cast<uint32_t>(e_curr.primitive)]) {
-                effectScale = mPrimitiveMaxScale[static_cast<uint32_t>(e_curr.primitive)];
-            }
-            if (effectScale < mPrimitiveMinScale[static_cast<uint32_t>(e_curr.primitive)]) {
-                effectScale = mPrimitiveMinScale[static_cast<uint32_t>(e_curr.primitive)];
-            }
             effectVolLevel = intensityToVolLevel(effectScale, effectIndex);
-            totalDuration += mEffectDurations[effectIndex];
         }
 
         /* Fetch the next composite effect delay and fill into the current section */
@@ -926,12 +949,13 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
                 return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
             }
             nextEffectDelay = delay;
-            totalDuration += delay;
         }
 
         if (effectIndex == 0 && nextEffectDelay == 0) {
             return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
         }
+
+        nextEffectDelay += mEffectBrakingDurations[effectIndex];
 
         ch.constructComposeSegment(effectVolLevel, effectIndex, 0 /*repeat*/, 0 /*flags*/,
                                    nextEffectDelay /*delay*/);
@@ -1129,12 +1153,7 @@ ndk::ScopedAStatus Vibrator::alwaysOnDisable(int32_t /*id*/) {
 }
 
 ndk::ScopedAStatus Vibrator::getResonantFrequency(float *resonantFreqHz) {
-    std::string caldata{8, '0'};
-    if (!mHwCalDef->getF0(&caldata)) {
-        ALOGE("Failed to get resonant frequency (%d): %s", errno, strerror(errno));
-        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
-    }
-    *resonantFreqHz = static_cast<float>(std::stoul(caldata, nullptr, 16)) / (1 << Q14_BIT_SHIFT);
+    *resonantFreqHz = mResonantFrequency;
 
     return ndk::ScopedAStatus::ok();
 }
@@ -1383,7 +1402,10 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
 
     dprintf(fd, "AIDL:\n");
 
+    dprintf(fd, "  Active Effect ID: %" PRId32 "\n", mActiveId);
+    dprintf(fd, "  F0: %.02f\n", mResonantFrequency);
     dprintf(fd, "  F0 Offset: base: %" PRIu32 " flip: %" PRIu32 "\n", mF0Offset, mF0OffsetDual);
+    dprintf(fd, "  Redc: %.02f\n", mRedc);
 
     dprintf(fd, "  Voltage Levels:\n");
     dprintf(fd, "     Tick Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mTickEffectVol[0],
@@ -1395,24 +1417,31 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
 
     dprintf(fd, "  FF effect:\n");
     dprintf(fd, "    Physical waveform:\n");
-    dprintf(fd, "==== Base ====\n\tId\tIndex\tt   ->\tt'\ttrigger button\n");
+    dprintf(fd, "==== Base ====\n\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
     uint8_t effectId;
     for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
-        dprintf(fd, "\t%d\t%d\t%d\t%d\t%X\n", mFfEffects[effectId].id,
+        dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffects[effectId].id,
                 mFfEffects[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
-                mFfEffects[effectId].replay.length, mFfEffects[effectId].trigger.button);
+                mFfEffects[effectId].replay.length, mEffectBrakingDurations[effectId],
+                mFfEffects[effectId].trigger.button);
     }
     if (mIsDual) {
-        dprintf(fd, "==== Flip ====\n\tId\tIndex\tt   ->\tt'\ttrigger button\n");
+        dprintf(fd, "==== Flip ====\n\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
         for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
-            dprintf(fd, "\t%d\t%d\t%d\t%d\t%X\n", mFfEffectsDual[effectId].id,
+            dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffectsDual[effectId].id,
                     mFfEffectsDual[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
-                    mFfEffectsDual[effectId].replay.length,
+                    mFfEffectsDual[effectId].replay.length, mEffectBrakingDurations[effectId],
                     mFfEffectsDual[effectId].trigger.button);
         }
     }
 
-    dprintf(fd, "Base: OWT waveform:\n");
+    dprintf(fd, "==== Scales ====\n\tId\tMinScale\tMaxScale\n");
+    for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
+        dprintf(fd, "\t%d\t%d\t\t%d\n", effectId, mPrimitiveMinScale[effectId],
+            mPrimitiveMaxScale[effectId]);
+    }
+
+    dprintf(fd, "\nBase: OWT waveform:\n");
     dprintf(fd, "\tId\tBytes\tData\tt\ttrigger button\n");
     for (effectId = WAVEFORM_MAX_PHYSICAL_INDEX; effectId < WAVEFORM_MAX_INDEX; effectId++) {
         uint32_t numBytes = mFfEffects[effectId].u.periodic.custom_len * 2;
@@ -1448,7 +1477,73 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
         }
     }
     dprintf(fd, "\n");
-    dprintf(fd, "\n");
+
+    dprintf(fd, "Versions:\n");
+    std::ifstream verFile;
+    const auto verBinFileMode = std::ifstream::in | std::ifstream::binary;
+    std::string ver;
+    verFile.open("/sys/module/cs40l26_core/version");
+    if (verFile.is_open()) {
+        getline(verFile, ver);
+        dprintf(fd, "  Haptics Driver: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/sys/module/cl_dsp_core/version");
+    if (verFile.is_open()) {
+        getline(verFile, ver);
+        dprintf(fd, "  DSP Driver: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26.wmfw", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(113);
+        dprintf(fd, "  cs40l26.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(), verFile.get());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-calib.wmfw", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(113);
+        dprintf(fd, "  cs40l26-calib.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(),
+                verFile.get());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        while (getline(verFile, ver)) {
+            auto pos = ver.find("Date: ");
+            if (pos != std::string::npos) {
+                ver = ver.substr(pos + 6, pos + 15);
+                dprintf(fd, "  cs40l26.bin: %s\n", ver.c_str());
+                break;
+            }
+        }
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-svc.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(36);
+        getline(verFile, ver);
+        ver = ver.substr(ver.rfind('\\') + 1);
+        dprintf(fd, "  cs40l26-svc.bin: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-calib.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(36);
+        getline(verFile, ver);
+        ver = ver.substr(ver.rfind('\\') + 1);
+        dprintf(fd, "  cs40l26-calib.bin: %s\n", ver.c_str());
+        verFile.close();
+    }
+    verFile.open("/vendor/firmware/cs40l26-dvl.bin", verBinFileMode);
+    if (verFile.is_open()) {
+        verFile.seekg(36);
+        getline(verFile, ver);
+        ver = ver.substr(0, ver.find('\0') + 1);
+        ver = ver.substr(ver.rfind('\\') + 1);
+        dprintf(fd, "  cs40l26-dvl.bin: %s\n", ver.c_str());
+        verFile.close();
+    }
 
     mHwApiDef->debug(fd);
 
@@ -1520,10 +1615,6 @@ ndk::ScopedAStatus Vibrator::getSimpleDetails(Effect effect, EffectStrength stre
         case Effect::HEAVY_CLICK:
             effectIndex = WAVEFORM_CLICK_INDEX;
             intensity *= 1.0f;
-            // WAVEFORM_CLICK_INDEX is 2, but the primitive CLICK index is 1.
-            if (intensity > mPrimitiveMaxScale[WAVEFORM_CLICK_INDEX - 1]) {
-                intensity = mPrimitiveMaxScale[WAVEFORM_CLICK_INDEX - 1];
-            }
             break;
         default:
             return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
@@ -1765,6 +1856,17 @@ uint32_t Vibrator::intensityToVolLevel(float intensity, uint32_t effectIndex) {
             volLevel = calc(intensity, mClickEffectVol);
             break;
     }
+
+    // The waveform being played must fall within the allowable scale range
+    if (effectIndex < WAVEFORM_MAX_INDEX) {
+        if (volLevel > mPrimitiveMaxScale[effectIndex]) {
+            volLevel = mPrimitiveMaxScale[effectIndex];
+        }
+        if (volLevel < mPrimitiveMinScale[effectIndex]) {
+            volLevel = mPrimitiveMinScale[effectIndex];
+        }
+    }
+
     return volLevel;
 }
 

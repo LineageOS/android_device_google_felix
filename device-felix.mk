@@ -221,12 +221,30 @@ ifdef RELEASE_SVN_FELIX
 TARGET_SVN ?= $(RELEASE_SVN_FELIX)
 else
 # Set this for older releases that don't use build flag
-TARGET_SVN ?= 54
+TARGET_SVN ?= 55
 endif
 
 PRODUCT_VENDOR_PROPERTIES += \
     ro.vendor.build.svn=$(TARGET_SVN)
 
+# Set device family property for SMR
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.device_family=F10
+
+# Set build properties for SMR builds
+ifeq ($(RELEASE_IS_SMR), true)
+    ifneq (,$(RELEASE_BASE_OS_FELIX))
+        PRODUCT_BASE_OS := $(RELEASE_BASE_OS_FELIX)
+    endif
+endif
+
+# Set build properties for EMR builds
+ifeq ($(RELEASE_IS_EMR), true)
+    ifneq (,$(RELEASE_BASE_OS_FELIX))
+        PRODUCT_PROPERTY_OVERRIDES += \
+        ro.build.version.emergency_base_os=$(RELEASE_BASE_OS_FELIX)
+    endif
+endif
 # Vibrator HAL
 $(call soong_config_set,haptics,kernel_ver,v$(subst .,_,$(TARGET_LINUX_KERNEL_VERSION)))
 PRODUCT_VENDOR_PROPERTIES +=\
@@ -235,6 +253,10 @@ PRODUCT_VENDOR_PROPERTIES +=\
     ro.vendor.vibrator.hal.gpio.shift=2 \
     persist.vendor.vibrator.hal.chirp.enabled=0
 ACTUATOR_MODEL := luxshare_ict_lt_xlra1906d
+
+# Override Output Distortion Gain
+PRODUCT_VENDOR_PROPERTIES += \
+    vendor.audio.hapticgenerator.distortion.output.gain=0.52
 
 # Fingerprint
 include device/google/gs101/fingerprint/fpc1540/sw42/fpc1540.mk
@@ -286,14 +308,26 @@ PRODUCT_COPY_FILES += \
 # Location
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_COPY_FILES += \
-        device/google/felix/location/gps.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml \
         device/google/felix/location/lhd.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
         device/google/felix/location/scd.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
+    ifneq (,$(filter 6.1, $(TARGET_LINUX_KERNEL_VERSION)))
+        PRODUCT_COPY_FILES += \
+            device/google/felix/location/gps.6.1.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
+    else
+        PRODUCT_COPY_FILES += \
+            device/google/felix/location/gps.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
+    endif
 else
     PRODUCT_COPY_FILES += \
-        device/google/felix/location/gps_user.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml \
         device/google/felix/location/lhd_user.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
         device/google/felix/location/scd_user.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
+    ifneq (,$(filter 6.1, $(TARGET_LINUX_KERNEL_VERSION)))
+        PRODUCT_COPY_FILES += \
+            device/google/felix/location/gps_user.6.1.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
+    else
+        PRODUCT_COPY_FILES += \
+            device/google/felix/location/gps_user.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
+    endif
 endif
 
 PRODUCT_PACKAGES += \
@@ -389,7 +423,7 @@ PRODUCT_COPY_FILES += \
 
 # LE Audio Unicast Allowlist
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.allow_list=SM-R510
+    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5
 
 # Bluetooth EWP test tool
 PRODUCT_PACKAGES_DEBUG += \
@@ -412,3 +446,7 @@ PRODUCT_PACKAGES += \
     NoCutoutOverlay \
     AvoidAppsInCutoutOverlay
 
+# Bluetooth device id
+# Felix: 0x410C
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.device_id.product_id=16652

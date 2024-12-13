@@ -63,7 +63,7 @@
        ReAidingOnHotStart="false"
        ReAidingIntervalSec="3600"
        RuntimeSwLteFilterEnable="true"
-       PpsDevice="/sys/class/pps/pps0/assert_elapsed"
+       PpsDevice="/sys/devices/platform/bbd_pps/pps_assert"
        SensorsMask="0x244"
        MaxThreadNum="13"
   />
@@ -101,7 +101,6 @@
   <gll_features
        EnableNicAutoSwitch="true"
        EnableNavic="true"
-       ConstellationAutoSwitchOffNavOnly="true"
   />
 
 </glgps>

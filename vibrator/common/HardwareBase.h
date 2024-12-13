@@ -20,10 +20,12 @@
 #include <sys/epoll.h>
 #include <utils/Trace.h>
 
+#include <chrono>
 #include <list>
 #include <map>
 #include <sstream>
 #include <string>
+#include <type_traits>
 
 #include "utils.h"
 
@@ -47,17 +49,19 @@ class HwApiBase {
     class Record : public RecordInterface {
       public:
         Record(const char *func, const T &value, const std::ios *stream)
-            : mFunc(func), mValue(value), mStream(stream) {}
+            : mFunc(func), mValue(value), mStream(stream),
+              mTp(std::chrono::system_clock::system_clock::now()) {}
         std::string toString(const NamesMap &names) override;
 
       private:
         const char *mFunc;
         const T mValue;
         const std::ios *mStream;
+        const std::chrono::system_clock::time_point mTp;
     };
     using Records = std::list<std::unique_ptr<RecordInterface>>;
 
-    static constexpr uint32_t RECORDS_SIZE = 32;
+    static constexpr uint32_t RECORDS_SIZE = 2048;
 
   public:
     HwApiBase();
@@ -67,7 +71,8 @@ class HwApiBase {
     void saveName(const std::string &name, const std::ios *stream);
     template <typename T>
     void open(const std::string &name, T *stream);
-    bool has(const std::ios &stream);
+    template <typename T>
+    bool has(const T &stream);
     template <typename T>
     bool get(T *value, std::istream *stream);
     template <typename T>
@@ -91,6 +96,16 @@ template <typename T>
 void HwApiBase::open(const std::string &name, T *stream) {
     saveName(name, stream);
     utils::openNoCreate(mPathPrefix + name, stream);
+}
+
+template <typename T>
+bool HwApiBase::has(const T &stream) {
+    if constexpr (std::is_same<T, std::fstream>::value || std::is_same<T, std::ofstream>::value ||
+                  std::is_same<T, std::ifstream>::value)
+        return stream.is_open() && !stream.fail();
+
+    ALOGE("File stream is not of the correct type");
+    return false;
 }
 
 template <typename T>
@@ -169,9 +184,14 @@ template <typename T>
 std::string HwApiBase::Record<T>::toString(const NamesMap &names) {
     using utils::operator<<;
     std::stringstream ret;
+    auto lTp = std::chrono::system_clock::to_time_t(mTp);
+    struct tm buf;
+    auto lTime = localtime_r(&lTp, &buf);
 
-    ret << mFunc << " '" << names.at(mStream) << "' = '" << mValue << "'";
-
+    ret << std::put_time(lTime, "%Y-%m-%d %H:%M:%S.") << std::setfill('0') << std::setw(3)
+        << (std::chrono::duration_cast<std::chrono::milliseconds>(mTp.time_since_epoch()) % 1000)
+                    .count()
+        << "    " << mFunc << " '" << names.at(mStream) << "' = '" << mValue << "'";
     return ret.str();
 }
 
