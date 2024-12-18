@@ -335,7 +335,9 @@ TEST_F(VibratorTest, Constructor) {
     EXPECT_CALL(*mMockApi, destructor()).WillOnce(DoDefault());
     EXPECT_CALL(*mMockCal, destructor()).WillOnce(DoDefault());
     EXPECT_CALL(*mMockGpio, destructor()).WillOnce(DoDefault());
-
+    // Mock calls for the VIbrator destructor.
+    EXPECT_CALL(*mMockApi, recordEvent(_, _)).WillRepeatedly(DoDefault());
+    EXPECT_CALL(*mMockApi, setFFGain(_, ON_GLOBAL_SCALE)).WillOnce(DoDefault());
     deleteVibrator(false);
 
     createMock(&mockapi, &mockcal, &mockgpio);

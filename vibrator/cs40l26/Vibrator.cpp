@@ -203,7 +203,6 @@ enum vibe_state {
     VIBE_STATE_ASP,
 };
 
-std::mutex mActiveId_mutex;  // protects mActiveId
 
 class DspMemChunk {
   private:
@@ -1333,6 +1332,17 @@ static void resetPreviousEndAmplitudeEndFrequency(float *prevEndAmplitude,
 
 static void incrementIndex(int *index) {
     *index += 1;
+}
+
+Vibrator::~Vibrator() {
+    if (isUnderExternalControl()) {
+        ALOGD("Disabling external control");
+        setExternalControl(false);
+    }
+    ALOGD("Turning off the vibrator");
+    off();
+    ALOGD("Waiting for mAsyncHandle to complete");
+    mAsyncHandle.wait();
 }
 
 ndk::ScopedAStatus Vibrator::composePwle(const std::vector<PrimitivePwle> &composite,
