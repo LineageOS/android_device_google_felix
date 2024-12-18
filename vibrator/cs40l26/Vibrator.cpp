@@ -53,6 +53,16 @@ namespace vibrator {
     } \
 }
 
+#define RECORD_COMPOSE(...) \
+    std::string effectString = ""; \
+    for (auto &effect : composite) { \
+        effectString += effect.toString() + ", "; \
+    } \
+    this->mHwApiDef->recordEvent(__func__, effectString.c_str()); \
+    if (this->mIsDual) { \
+      this->mHwApiDual->recordEvent(__func__, effectString.c_str()); \
+    } \
+
 static constexpr uint16_t FF_CUSTOM_DATA_LEN_MAX_COMP = 2044;  // (COMPOSE_SIZE_MAX + 1) * 8 + 4
 static constexpr uint16_t FF_CUSTOM_DATA_LEN_MAX_PWLE = 2302;
 
@@ -977,7 +987,7 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect> &composi
                                      const std::shared_ptr<IVibratorCallback> &callback) {
     ATRACE_NAME("Vibrator::compose");
     ALOGD("Vibrator::compose");
-    RECORD("composite.size = %zu", composite.size());
+    RECORD_COMPOSE(composite);
 
     uint16_t size;
     uint16_t nextEffectDelay;
