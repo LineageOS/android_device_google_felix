@@ -439,6 +439,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PACKAGES_DEBUG += \
     ewp_tool
 
+# Disable Bluetooth HAP by default
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.profile.hap.enabled_by_default=false
+
 # Enable DeviceAsWebcam support
 PRODUCT_VENDOR_PROPERTIES += \
     ro.usb.uvc.enabled=true
