@@ -39,6 +39,7 @@ using ::android::base::unique_fd;
 class HwApiBase {
   private:
     using NamesMap = std::map<const std::ios *, std::string>;
+    enum class RecordType { EVENT, HWAPI };
 
     class RecordInterface {
       public:
@@ -48,12 +49,16 @@ class HwApiBase {
     template <typename T>
     class Record : public RecordInterface {
       public:
-        Record(const char *func, const T &value, const std::ios *stream)
-            : mFunc(func), mValue(value), mStream(stream),
+        Record(const RecordType &type, const char *func, const T &value, const std::ios *stream)
+            : mType(type),
+              mFunc(func),
+              mValue(value),
+              mStream(stream),
               mTp(std::chrono::system_clock::system_clock::now()) {}
         std::string toString(const NamesMap &names) override;
 
       private:
+        const RecordType mType;
         const char *mFunc;
         const T mValue;
         const std::ios *mStream;
@@ -66,6 +71,7 @@ class HwApiBase {
   public:
     HwApiBase();
     void debug(int fd);
+    void recordEvent(const char *func, const std::string &value);
 
   protected:
     void saveName(const std::string &name, const std::ios *stream);
@@ -176,7 +182,7 @@ bool HwApiBase::poll(const T &value, std::istream *stream, const int32_t timeout
 template <typename T>
 void HwApiBase::record(const char *func, const T &value, const std::ios *stream) {
     std::lock_guard<std::mutex> lock(mRecordsMutex);
-    mRecords.emplace_back(std::make_unique<Record<T>>(func, value, stream));
+    mRecords.emplace_back(std::make_unique<Record<T>>(RecordType::HWAPI, func, value, stream));
     mRecords.pop_front();
 }
 
@@ -188,10 +194,18 @@ std::string HwApiBase::Record<T>::toString(const NamesMap &names) {
     struct tm buf;
     auto lTime = localtime_r(&lTp, &buf);
 
-    ret << std::put_time(lTime, "%Y-%m-%d %H:%M:%S.") << std::setfill('0') << std::setw(3)
-        << (std::chrono::duration_cast<std::chrono::milliseconds>(mTp.time_since_epoch()) % 1000)
-                    .count()
-        << "    " << mFunc << " '" << names.at(mStream) << "' = '" << mValue << "'";
+    if (mType == RecordType::EVENT) {
+        ret << std::put_time(lTime, "%Y-%m-%d %H:%M:%S.") << std::setfill('0') << std::setw(3)
+            << (std::chrono::duration_cast<std::chrono::milliseconds>(mTp.time_since_epoch()) %
+                                                                              1000).count()
+            << " | " << "IVibrator::" << mFunc << " | " << mValue;
+    } else {
+        ret << "  \t" << std::put_time(lTime, "%Y-%m-%d %H:%M:%S.") << std::setfill('0')
+            << std::setw(3)
+            << (std::chrono::duration_cast<std::chrono::milliseconds>(mTp.time_since_epoch()) %
+                                                                              1000).count()
+            << "    " << mFunc << " '" << names.at(mStream) << "' = '" << mValue << "'";
+    }
     return ret.str();
 }
 

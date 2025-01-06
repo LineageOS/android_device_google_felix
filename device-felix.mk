@@ -40,7 +40,7 @@ include device/google/gs201/device-shipping-common.mk
 $(call soong_config_set,fp_hal_feature,pixel_product, product_a)
 include device/google/felix/vibrator/cs40l26/device.mk
 include device/google/gs-common/bcmbt/bluetooth.mk
-include device/google/gs-common/display/dump_second_display.mk
+include device/google/gs-common/display/dump_exynos_second_display.mk
 include device/google/gs-common/touch/gti/predump_gti_dual.mk
 include device/google/gs-common/touch/stm/predump_stm6.mk
 ifeq ($(filter factory_felix, $(TARGET_PRODUCT)),)
@@ -116,7 +116,7 @@ PRODUCT_PACKAGES += \
 SHARED_MODEM_PLATFORM_VENDOR := lassen
 
 # Shared Modem Platform
-include device/google/gs-common/modem/shared_modem_platform/shared_modem_platform.mk
+include device/google/gs-common/modem/modem_svc_sit/shared_modem_platform.mk
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -433,11 +433,15 @@ PRODUCT_COPY_FILES += \
 
 # LE Audio Unicast Allowlist
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5
+    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5,SM-R630
 
 # Bluetooth EWP test tool
 PRODUCT_PACKAGES_DEBUG += \
     ewp_tool
+
+# Disable Bluetooth HAP by default
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.profile.hap.enabled_by_default=false
 
 # Enable DeviceAsWebcam support
 PRODUCT_VENDOR_PROPERTIES += \

@@ -295,7 +295,7 @@ class VibratorTest : public Test {
         EXPECT_CALL(*mMockApi, setMinOnOffInterval(_)).Times(times);
         EXPECT_CALL(*mMockApi, getHapticAlsaDevice(_, _)).Times(times);
         EXPECT_CALL(*mMockApi, setHapticPcmAmp(_, _, _, _)).Times(times);
-
+        EXPECT_CALL(*mMockApi, recordEvent(_, _)).Times(times);
         EXPECT_CALL(*mMockApi, debug(_)).Times(times);
 
         EXPECT_CALL(*mMockCal, destructor()).Times(times);
@@ -335,11 +335,14 @@ TEST_F(VibratorTest, Constructor) {
     EXPECT_CALL(*mMockApi, destructor()).WillOnce(DoDefault());
     EXPECT_CALL(*mMockCal, destructor()).WillOnce(DoDefault());
     EXPECT_CALL(*mMockGpio, destructor()).WillOnce(DoDefault());
-
+    // Mock calls for the VIbrator destructor.
+    EXPECT_CALL(*mMockApi, recordEvent(_, _)).WillRepeatedly(DoDefault());
+    EXPECT_CALL(*mMockApi, setFFGain(_, ON_GLOBAL_SCALE)).WillOnce(DoDefault());
     deleteVibrator(false);
 
     createMock(&mockapi, &mockcal, &mockgpio);
 
+    EXPECT_CALL(*mMockApi, recordEvent(_, _)).WillRepeatedly(DoDefault());
     EXPECT_CALL(*mMockCal, getF0(_))
             .InSequence(f0Seq)
             .WillOnce(DoAll(SetArgReferee<0>(f0Val), Return(true)));
@@ -387,6 +390,9 @@ TEST_F(VibratorTest, on) {
     Sequence s1, s2;
     uint16_t duration = std::rand() + 1;
 
+    EXPECT_CALL(*mMockApi, recordEvent(_, _))
+            .InSequence(s1)
+            .WillRepeatedly(DoDefault());
     EXPECT_CALL(*mMockApi, setFFGain(_, ON_GLOBAL_SCALE)).InSequence(s1).WillOnce(DoDefault());
     EXPECT_CALL(*mMockApi, setFFEffect(_, _, duration + MAX_COLD_START_LATENCY_MS))
             .InSequence(s2)
@@ -399,6 +405,7 @@ TEST_F(VibratorTest, on) {
 
 TEST_F(VibratorTest, off) {
     Sequence s1;
+    EXPECT_CALL(*mMockApi, recordEvent(_, _)).InSequence(s1).WillRepeatedly(DoDefault());
     EXPECT_CALL(*mMockApi, setFFGain(_, ON_GLOBAL_SCALE)).InSequence(s1).WillOnce(DoDefault());
     EXPECT_TRUE(mVibrator->off().isOk());
 }
@@ -527,6 +534,8 @@ TEST_P(EffectsTest, perform) {
 
     ExpectationSet eSetup;
     Expectation eActivate, ePollHaptics, ePollStop, eEraseDone;
+
+    eSetup += EXPECT_CALL(*mMockApi, recordEvent(_, _)).WillRepeatedly(DoDefault());
 
     if (scale != EFFECT_SCALE.end()) {
         EffectIndex index = EFFECT_INDEX.at(effect);
@@ -664,6 +673,7 @@ TEST_P(ComposeTest, compose) {
         return ndk::ScopedAStatus::ok();
     };
 
+    eSetup += EXPECT_CALL(*mMockApi, recordEvent(_, _)).WillRepeatedly(DoDefault());
     eSetup += EXPECT_CALL(*mMockApi, setFFGain(_, ON_GLOBAL_SCALE))
                       .After(eSetup)
                       .WillOnce(DoDefault());
