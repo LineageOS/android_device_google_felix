@@ -27,6 +27,3 @@ PRODUCT_DEVICE := felix
 PRODUCT_MODEL := AOSP on Felix
 PRODUCT_BRAND := Android
 PRODUCT_MANUFACTURER := Google
-
-DEVICE_MANIFEST_FILE := \
-	device/google/felix/manifest.xml
