@@ -40,6 +40,10 @@ PRODUCT_PACKAGES += \
     libacryl_hdr_plugin \
     libexynosv4l2
 
+# GNSS
+PRODUCT_PACKAGES += \
+    android.hardware.sensors-V2-ndk.vendor:64
+
 # Graphics
 PRODUCT_PACKAGES += \
     libEGL_angle \
