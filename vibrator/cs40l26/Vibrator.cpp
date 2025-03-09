@@ -19,6 +19,7 @@
 #include <glob.h>
 #include <hardware/hardware.h>
 #include <hardware/vibrator.h>
+#include <linux/version.h>
 #include <log/log.h>
 #include <stdio.h>
 #include <utils/Trace.h>
@@ -91,6 +92,30 @@ static constexpr uint32_t WT_LEN_CALCD = 0x00800000;
 static constexpr uint8_t PWLE_CHIRP_BIT = 0x8;  // Dynamic/static frequency and voltage
 static constexpr uint8_t PWLE_BRAKE_BIT = 0x4;
 static constexpr uint8_t PWLE_AMP_REG_BIT = 0x2;
+
+static constexpr uint8_t PWLE_WT_TYPE = 12;
+static constexpr uint8_t PWLE_HEADER_WORD_COUNT = 3;
+static constexpr uint8_t PWLE_HEADER_FTR_SHIFT = 8;
+static constexpr uint8_t PWLE_SVC_METADATA_WORD_COUNT = 3;
+static constexpr uint32_t PWLE_SVC_METADATA_TERMINATOR = 0xFFFFFF;
+static constexpr uint8_t PWLE_SEGMENT_WORD_COUNT = 2;
+static constexpr uint8_t PWLE_HEADER_WCOUNT_WORD_OFFSET = 2;
+static constexpr uint8_t PWLE_WORD_SIZE = sizeof(uint32_t);
+
+static constexpr uint8_t PWLE_SVC_NO_BRAKING = -1;
+static constexpr uint8_t PWLE_SVC_CAT_BRAKING = 0;
+static constexpr uint8_t PWLE_SVC_OPEN_BRAKING = 1;
+static constexpr uint8_t PWLE_SVC_CLOSED_BRAKING = 2;
+static constexpr uint8_t PWLE_SVC_MIXED_BRAKING = 3;
+
+static constexpr uint32_t PWLE_SVC_MAX_BRAKING_TIME_MS = 1000;
+
+static constexpr uint8_t PWLE_FTR_BUZZ_BIT = 0x80;
+static constexpr uint8_t PWLE_FTR_CLICK_BIT = 0x00;
+static constexpr uint8_t PWLE_FTR_DYNAMIC_F0_BIT = 0x10;
+static constexpr uint8_t PWLE_FTR_SVC_METADATA_BIT = 0x04;
+static constexpr uint8_t PWLE_FTR_DVL_BIT = 0x02;
+static constexpr uint8_t PWLE_FTR_LF0T_BIT = 0x01;
 
 static constexpr float PWLE_LEVEL_MIN = 0.0;
 static constexpr float PWLE_LEVEL_MAX = 1.0;
@@ -170,6 +195,8 @@ enum vibe_state {
     VIBE_STATE_ASP,
 };
 
+std::mutex mActiveId_mutex;  // protects mActiveId
+
 class DspMemChunk {
   private:
     std::unique_ptr<uint8_t[]> head;
@@ -245,10 +272,18 @@ class DspMemChunk {
             write(8, 0); /* nsections placeholder */
             write(8, 0); /* repeat */
         } else if (waveformType == WAVEFORM_PWLE) {
+            write(16, (PWLE_FTR_BUZZ_BIT | PWLE_FTR_DVL_BIT)
+                              << PWLE_HEADER_FTR_SHIFT); /* Feature flag */
+            write(8, PWLE_WT_TYPE);                      /* type12 */
+            write(24, PWLE_HEADER_WORD_COUNT);           /* Header word count */
+            write(24, 0);                                /* Body word count placeholder */
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
             write(24, 0); /* Waveform length placeholder */
             write(8, 0);  /* Repeat */
             write(12, 0); /* Wait time between repeats */
             write(8, 0);  /* nsections placeholder */
+#endif
         } else {
             ALOGE("%s: Invalid type: %u", __func__, waveformType);
         }
@@ -336,6 +371,9 @@ class DspMemChunk {
             ALOGE("%s: Invalid argument: %u", __func__, totalDuration);
             return -EINVAL;
         }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+        f += PWLE_HEADER_WORD_COUNT * PWLE_WORD_SIZE;
+#endif
         totalDuration *= 8; /* Unit: 0.125 ms (since wlength played @ 8kHz). */
         totalDuration |=
                 WT_LEN_CALCD; /* Bit 23 is for WT_LEN_CALCD; Bit 22 is for WT_INDEFINITE. */
@@ -364,12 +402,43 @@ class DspMemChunk {
                 ALOGE("%s: Invalid argument: %d", __func__, segmentIdx);
                 return -EINVAL;
             }
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+            f += PWLE_HEADER_WORD_COUNT * PWLE_WORD_SIZE;
+#endif
             *(f + 7) |= (0xF0 & segmentIdx) >> 4; /* Bit 4 to 7 */
             *(f + 9) |= (0x0F & segmentIdx) << 4; /* Bit 3 to 0 */
         } else {
             ALOGE("%s: Invalid type: %d", __func__, waveformType);
             return -EDOM;
         }
+
+        return 0;
+    }
+
+    int updateWCount(int segmentCount) {
+        uint8_t *f = front();
+
+        if (segmentCount > COMPOSE_SIZE_MAX + 1 /*1st effect may have a delay*/) {
+            ALOGE("%s: Invalid argument: %d", __func__, segmentCount);
+            return -EINVAL;
+        }
+        if (f == nullptr) {
+            ALOGE("%s: head does not exist!", __func__);
+            return -ENOMEM;
+        }
+        if (waveformType != WAVEFORM_PWLE) {
+            ALOGE("%s: Invalid type: %d", __func__, waveformType);
+            return -EDOM;
+        }
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0)
+        f += PWLE_HEADER_WORD_COUNT * PWLE_WORD_SIZE;
+#endif
+        uint32_t dataSize = segmentCount * PWLE_SEGMENT_WORD_COUNT + PWLE_HEADER_WORD_COUNT;
+        *(f + 0) = (dataSize >> 24) & 0xFF;
+        *(f + 1) = (dataSize >> 16) & 0xFF;
+        *(f + 2) = (dataSize >> 8) & 0xFF;
+        *(f + 3) = dataSize & 0xFF;
 
         return 0;
     }
@@ -1014,7 +1083,7 @@ ndk::ScopedAStatus Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex, const 
         if (mIsDual) {
             mHwApiDual->getOwtFreeSpace(&freeBytes);
             if (ch-> size() > freeBytes) {
-                ALOGE("Invalid OWT length in flip: Effect %d: %d > %d!", effectIndex,
+                ALOGE("Invalid OWT length in flip: Effect %d: %zu > %d!", effectIndex,
                       ch-> size(), freeBytes);
                 return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
             }
@@ -1370,6 +1439,13 @@ ndk::ScopedAStatus Vibrator::composePwle(const std::vector<PrimitivePwle> &compo
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
     }
 
+    /* Update word count */
+    if (ch.updateWCount(segmentIdx) < 0) {
+        ALOGE("%s: Failed to update the waveform word count", __func__);
+        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
+    }
+
+    /* Update waveform length */
     if (ch.updateWLength(totalDuration) < 0) {
         ALOGE("%s: Failed to update the waveform length length", __func__);
         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
@@ -1408,40 +1484,31 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
     dprintf(fd, "  Redc: %.02f\n", mRedc);
 
     dprintf(fd, "  Voltage Levels:\n");
-    dprintf(fd, "     Tick Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mTickEffectVol[0],
+    dprintf(fd, "    Tick Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mTickEffectVol[0],
             mTickEffectVol[1]);
-    dprintf(fd, "     Click Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mClickEffectVol[0],
+    dprintf(fd, "    Click Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mClickEffectVol[0],
             mClickEffectVol[1]);
-    dprintf(fd, "     Long Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mLongEffectVol[0],
+    dprintf(fd, "    Long Effect Min: %" PRIu32 " Max: %" PRIu32 "\n", mLongEffectVol[0],
             mLongEffectVol[1]);
 
-    dprintf(fd, "  FF effect:\n");
-    dprintf(fd, "    Physical waveform:\n");
-    dprintf(fd, "==== Base ====\n\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
     uint8_t effectId;
+    dprintf(fd, "  Scales\n");
+    dprintf(fd, "\tId\tMinScale\tMaxScale\n");
+    for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
+        dprintf(fd, "\t%d\t%d\t\t%d\n", effectId, mPrimitiveMinScale[effectId],
+            mPrimitiveMaxScale[effectId]);
+    }
+
+    dprintf(fd, "  Base FF effect:\n");
+    dprintf(fd, "    Physical waveform:\n");
+    dprintf(fd, "\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
     for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
         dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffects[effectId].id,
                 mFfEffects[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
                 mFfEffects[effectId].replay.length, mEffectBrakingDurations[effectId],
                 mFfEffects[effectId].trigger.button);
     }
-    if (mIsDual) {
-        dprintf(fd, "==== Flip ====\n\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
-        for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
-            dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffectsDual[effectId].id,
-                    mFfEffectsDual[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
-                    mFfEffectsDual[effectId].replay.length, mEffectBrakingDurations[effectId],
-                    mFfEffectsDual[effectId].trigger.button);
-        }
-    }
-
-    dprintf(fd, "==== Scales ====\n\tId\tMinScale\tMaxScale\n");
-    for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
-        dprintf(fd, "\t%d\t%d\t\t%d\n", effectId, mPrimitiveMinScale[effectId],
-            mPrimitiveMaxScale[effectId]);
-    }
-
-    dprintf(fd, "\nBase: OWT waveform:\n");
+    dprintf(fd, "    OWT waveform:\n");
     dprintf(fd, "\tId\tBytes\tData\tt\ttrigger button\n");
     for (effectId = WAVEFORM_MAX_PHYSICAL_INDEX; effectId < WAVEFORM_MAX_INDEX; effectId++) {
         uint32_t numBytes = mFfEffects[effectId].u.periodic.custom_len * 2;
@@ -1457,8 +1524,18 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
         dprintf(fd, "\t%d\t%d\t{%s}\t%u\t%X\n", mFfEffects[effectId].id, numBytes, ss.str().c_str(),
                 mFfEffectsDual[effectId].replay.length, mFfEffects[effectId].trigger.button);
     }
+
     if (mIsDual) {
-        dprintf(fd, "Flip: OWT waveform:\n");
+        dprintf(fd, "  Flip FF effect:\n");
+        dprintf(fd, "    Physical waveform:\n");
+        dprintf(fd, "\tId\tIndex\tt   ->\tt'\tBrake\ttrigger button\n");
+        for (effectId = 0; effectId < WAVEFORM_MAX_PHYSICAL_INDEX; effectId++) {
+            dprintf(fd, "\t%d\t%d\t%d\t%d\t%d\t%X\n", mFfEffectsDual[effectId].id,
+                    mFfEffectsDual[effectId].u.periodic.custom_data[1], mEffectDurations[effectId],
+                    mFfEffectsDual[effectId].replay.length, mEffectBrakingDurations[effectId],
+                    mFfEffectsDual[effectId].trigger.button);
+        }
+        dprintf(fd, "    OWT waveform:\n");
         dprintf(fd, "\tId\tBytes\tData\tt\ttrigger button\n");
         for (effectId = WAVEFORM_MAX_PHYSICAL_INDEX; effectId < WAVEFORM_MAX_INDEX; effectId++) {
             uint32_t numBytes = mFfEffectsDual[effectId].u.periodic.custom_len * 2;
@@ -1479,77 +1556,66 @@ binder_status_t Vibrator::dump(int fd, const char **args, uint32_t numArgs) {
     dprintf(fd, "\n");
 
     dprintf(fd, "Versions:\n");
+    const std::vector<std::pair<std::string, std::string>> moduleFolderNames = {
+        {"cs40l26_core", "Haptics"}, {"cl_dsp_core", "DSP"}};
+    const std::string firmwareFolder = "/vendor/firmware/";
+    const std::string waveformName = "cs40l26.bin";
+    const std::array<std::string, 2> firmwareFileNames = {"cs40l26.wmfw", "cs40l26-calib.wmfw"};
+    const std::array<std::string, 4> tuningFileNames = {"cs40l26-svc.bin", "cs40l26-calib.bin",
+                                                        "cs40l26-dvl.bin", "cs40l26-dbc.bin"};
     std::ifstream verFile;
     const auto verBinFileMode = std::ifstream::in | std::ifstream::binary;
     std::string ver;
-    verFile.open("/sys/module/cs40l26_core/version");
-    if (verFile.is_open()) {
-        getline(verFile, ver);
-        dprintf(fd, "  Haptics Driver: %s\n", ver.c_str());
-        verFile.close();
+    for (const auto &[folder, logTag] : moduleFolderNames) {
+        verFile.open("/sys/module/" + folder + "/version");
+        if (verFile.is_open()) {
+            getline(verFile, ver);
+            dprintf(fd, "  %s Driver: %s\n", logTag.c_str(), ver.c_str());
+            verFile.close();
+        }
     }
-    verFile.open("/sys/module/cl_dsp_core/version");
-    if (verFile.is_open()) {
-        getline(verFile, ver);
-        dprintf(fd, "  DSP Driver: %s\n", ver.c_str());
-        verFile.close();
+    for (auto &name : firmwareFileNames) {
+        verFile.open(firmwareFolder + name, verBinFileMode);
+        if (verFile.is_open()) {
+            verFile.seekg(113);
+            dprintf(fd, "  %s: %d.%d.%d\n", name.c_str(), verFile.get(), verFile.get(),
+                    verFile.get());
+            verFile.close();
+        }
     }
-    verFile.open("/vendor/firmware/cs40l26.wmfw", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(113);
-        dprintf(fd, "  cs40l26.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(), verFile.get());
-        verFile.close();
-    }
-    verFile.open("/vendor/firmware/cs40l26-calib.wmfw", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(113);
-        dprintf(fd, "  cs40l26-calib.wmfw: %d.%d.%d\n", verFile.get(), verFile.get(),
-                verFile.get());
-        verFile.close();
-    }
-    verFile.open("/vendor/firmware/cs40l26.bin", verBinFileMode);
+    verFile.open(firmwareFolder + waveformName, verBinFileMode);
     if (verFile.is_open()) {
         while (getline(verFile, ver)) {
             auto pos = ver.find("Date: ");
             if (pos != std::string::npos) {
                 ver = ver.substr(pos + 6, pos + 15);
-                dprintf(fd, "  cs40l26.bin: %s\n", ver.c_str());
+                dprintf(fd, "  %s: %s\n", waveformName.c_str(), ver.c_str());
                 break;
             }
         }
         verFile.close();
     }
-    verFile.open("/vendor/firmware/cs40l26-svc.bin", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(36);
-        getline(verFile, ver);
-        ver = ver.substr(ver.rfind('\\') + 1);
-        dprintf(fd, "  cs40l26-svc.bin: %s\n", ver.c_str());
-        verFile.close();
+    for (auto &name : tuningFileNames) {
+        verFile.open(firmwareFolder + name, verBinFileMode);
+        if (verFile.is_open()) {
+            verFile.seekg(36);
+            getline(verFile, ver);
+            ver = ver.substr(0, ver.find(".bin") + 4);
+            ver = ver.substr(ver.rfind('\\') + 1);
+            dprintf(fd, "  %s: %s\n", name.c_str(), ver.c_str());
+            verFile.close();
+        }
     }
-    verFile.open("/vendor/firmware/cs40l26-calib.bin", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(36);
-        getline(verFile, ver);
-        ver = ver.substr(ver.rfind('\\') + 1);
-        dprintf(fd, "  cs40l26-calib.bin: %s\n", ver.c_str());
-        verFile.close();
-    }
-    verFile.open("/vendor/firmware/cs40l26-dvl.bin", verBinFileMode);
-    if (verFile.is_open()) {
-        verFile.seekg(36);
-        getline(verFile, ver);
-        ver = ver.substr(0, ver.find('\0') + 1);
-        ver = ver.substr(ver.rfind('\\') + 1);
-        dprintf(fd, "  cs40l26-dvl.bin: %s\n", ver.c_str());
-        verFile.close();
-    }
+
+    dprintf(fd, "\n");
 
     mHwApiDef->debug(fd);
 
     dprintf(fd, "\n");
 
     mHwCalDef->debug(fd);
+
+    dprintf(fd, "\n");
 
     if (mIsDual) {
         mHwApiDual->debug(fd);
@@ -1856,7 +1922,6 @@ uint32_t Vibrator::intensityToVolLevel(float intensity, uint32_t effectIndex) {
             volLevel = calc(intensity, mClickEffectVol);
             break;
     }
-
     // The waveform being played must fall within the allowable scale range
     if (effectIndex < WAVEFORM_MAX_INDEX) {
         if (volLevel > mPrimitiveMaxScale[effectIndex]) {

@@ -41,8 +41,8 @@ $(call soong_config_set,fp_hal_feature,pixel_product, product_a)
 include device/google/felix/vibrator/cs40l26/device.mk
 include device/google/gs-common/bcmbt/bluetooth.mk
 include device/google/gs-common/display/dump_second_display.mk
-include device/google/gs-common/touch/gti/gti.mk
-include device/google/gs-common/touch/stm/stm6.mk
+include device/google/gs-common/touch/gti/predump_gti_dual.mk
+include device/google/gs-common/touch/stm/predump_stm6.mk
 ifeq ($(filter factory_felix, $(TARGET_PRODUCT)),)
 include device/google/felix/uwb/uwb_calibration.mk
 endif
@@ -60,9 +60,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/google/felix/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.felix.rc
 
-# insmod files
+# insmod files. Kernel 5.10 prebuilts don't provide these yet, so provide our
+# own copy if they're not in the prebuilts.
+# TODO(b/369686096): drop this when 5.10 is gone.
+ifeq ($(wildcard $(TARGET_KERNEL_DIR)/init.insmod.*.cfg),)
 PRODUCT_COPY_FILES += \
-	device/google/felix/init.insmod.felix.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.felix.cfg
+	device/google/felix/init.insmod.felix.cfg:$(TARGET_COPY_OUT_VENDOR_DLKM)/etc/init.insmod.felix.cfg
+endif
 
 # Camera
 PRODUCT_COPY_FILES += \
@@ -107,6 +111,12 @@ PRODUCT_PACKAGES += \
 	Tag \
 	android.hardware.nfc-service.st \
 	NfcOverlayFelix
+
+# Shared Modem Platform
+SHARED_MODEM_PLATFORM_VENDOR := lassen
+
+# Shared Modem Platform
+include device/google/gs-common/modem/modem_svc_sit/shared_modem_platform.mk
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -423,7 +433,7 @@ PRODUCT_COPY_FILES += \
 
 # LE Audio Unicast Allowlist
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5
+    persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5,SM-R630
 
 # Bluetooth EWP test tool
 PRODUCT_PACKAGES_ENG += \

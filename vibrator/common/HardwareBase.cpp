@@ -69,6 +69,7 @@ HwCalBase::HwCalBase() {
     std::ifstream calfile;
     std::ifstream calfile_dual;
     auto propertyPrefix = std::getenv("PROPERTY_PREFIX");
+    auto calPath = std::getenv("CALIBRATION_FILEPATH");
 
     if (propertyPrefix != NULL) {
         mPropertyPrefix = std::string(propertyPrefix);
@@ -76,6 +77,14 @@ HwCalBase::HwCalBase() {
         ALOGE("Failed get property prefix!");
     }
 
+    // Keep the cal file path for the current HwCalBase instance.
+    if (calPath != NULL) {
+        mCalPath = std::string(calPath);
+    } else {
+        ALOGE("Failed get the calibration file path!");
+    }
+
+    // Read the cal data for the current instance.
     utils::fileFromEnv("CALIBRATION_FILEPATH", &calfile);
 
     for (std::string line; std::getline(calfile, line);) {
@@ -89,6 +98,7 @@ HwCalBase::HwCalBase() {
         }
     }
 
+    // Read the cal data for the other instance.
     utils::fileFromEnv("CALIBRATION_FILEPATH_DUAL", &calfile_dual);
 
     for (std::string line; std::getline(calfile_dual, line);) {
@@ -106,7 +116,6 @@ HwCalBase::HwCalBase() {
 
 void HwCalBase::debug(int fd) {
     std::ifstream stream;
-    std::string path;
     std::string line;
     struct context {
         HwCalBase *obj;
@@ -133,9 +142,8 @@ void HwCalBase::debug(int fd) {
 
     dprintf(fd, "Persist:\n");
 
-    utils::fileFromEnv("CALIBRATION_FILEPATH", &stream, &path);
-
-    dprintf(fd, "  %s:\n", path.c_str());
+    utils::openNoCreate(mCalPath, &stream);
+    dprintf(fd, "  %s:\n", mCalPath.c_str());
     while (std::getline(stream, line)) {
         dprintf(fd, "    %s\n", line.c_str());
     }

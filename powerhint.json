@@ -880,12 +880,6 @@
       "Value": "0"
     },
     {
-      "PowerHint": "CPU_LOAD_RESET",
-      "Node": "GPUMinFreq",
-      "Duration": 50,
-      "Value": "302000"
-    },
-    {
       "PowerHint": "DISPLAY_INACTIVE",
       "Node": "MemFreq",
       "Duration": 0,
@@ -893,9 +887,21 @@
     },
     {
       "PowerHint": "CPU_LOAD_RESET",
+      "Node": "GPUMinFreq",
+      "Duration": 50,
+      "Value": "302000"
+    },
+    {
+      "PowerHint": "CPU_LOAD_RESET",
       "Node": "MemFreq",
       "Duration": 33,
       "Value": "1014000"
+    },
+    {
+      "PowerHint": "CPU_LOAD_RESET",
+      "Node": "TAPreferHighCap",
+      "Duration": 33,
+      "Value": "1"
     },
     {
       "PowerHint": "CAMERA_LAUNCH",
@@ -1103,6 +1109,18 @@
     },
     {
       "PowerHint": "CAMERA_ZOOMING_BOOST",
+      "Node": "PMU_POLL",
+      "Duration": 100,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "CAMERA_MULTICAM_BOOST",
+      "Node": "CDPreferIdle",
+      "Duration": 100,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "CAMERA_MULTICAM_BOOST",
       "Node": "PMU_POLL",
       "Duration": 100,
       "Value": "0"

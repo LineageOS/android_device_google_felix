@@ -87,7 +87,7 @@ static const std::map<Effect, EffectIndex> EFFECT_INDEX{
 static constexpr uint32_t MIN_ON_OFF_INTERVAL_US = 8500;
 static constexpr uint8_t VOLTAGE_SCALE_MAX = 100;
 static constexpr int8_t MAX_COLD_START_LATENCY_MS = 6;  // I2C Transaction + DSP Return-From-Standby
-static constexpr auto POLLING_TIMEOUT = 20;
+static constexpr auto POLLING_TIMEOUT = 50;
 enum WaveformIndex : uint16_t {
     /* Physical waveform */
     WAVEFORM_LONG_VIBRATION_EFFECT_INDEX = 0,
@@ -506,6 +506,23 @@ TEST_P(EffectsTest, perform) {
         promise.set_value();
         return ndk::ScopedAStatus::ok();
     };
+    std::vector<uint32_t> primitiveMaxScale;
+    std::vector<uint32_t> primitiveMinScale;
+    primitiveMaxScale.resize(WAVEFORM_MAX_INDEX, 100);
+    primitiveMaxScale[WAVEFORM_CLICK_INDEX] = 95;
+    primitiveMaxScale[WAVEFORM_THUD_INDEX] = 75;
+    primitiveMaxScale[WAVEFORM_SPIN_INDEX] = 90;
+    primitiveMaxScale[WAVEFORM_LIGHT_TICK_INDEX] = 75;
+    primitiveMaxScale[WAVEFORM_LOW_TICK_INDEX] = 75;
+
+    primitiveMinScale.resize(WAVEFORM_MAX_INDEX, 0);
+    primitiveMinScale[WAVEFORM_CLICK_INDEX] = 1;
+    primitiveMinScale[WAVEFORM_THUD_INDEX] = 11;
+    primitiveMinScale[WAVEFORM_SPIN_INDEX] = 23;
+    primitiveMinScale[WAVEFORM_SLOW_RISE_INDEX] = 25;
+    primitiveMinScale[WAVEFORM_QUICK_FALL_INDEX] = 2;
+    primitiveMinScale[WAVEFORM_LIGHT_TICK_INDEX] = 3;
+    primitiveMinScale[WAVEFORM_LOW_TICK_INDEX] = 16;
     bool composeEffect;
 
     ExpectationSet eSetup;
@@ -515,7 +532,18 @@ TEST_P(EffectsTest, perform) {
         EffectIndex index = EFFECT_INDEX.at(effect);
         duration = EFFECT_DURATIONS[index];
 
-        eSetup += EXPECT_CALL(*mMockApi, setFFGain(_, levelToScale(scale->second)))
+        auto updatedScale = levelToScale(scale->second);
+
+        if (index < WAVEFORM_MAX_INDEX) {
+            if (updatedScale > primitiveMaxScale[index]) {
+                updatedScale = primitiveMaxScale[index];
+            }
+            if (updatedScale < primitiveMinScale[index]) {
+                updatedScale = primitiveMinScale[index];
+            }
+        }
+
+        eSetup += EXPECT_CALL(*mMockApi, setFFGain(_, updatedScale))
                           .WillOnce(DoDefault());
         eActivate = EXPECT_CALL(*mMockApi, setFFPlay(_, index, true))
                             .After(eSetup)
