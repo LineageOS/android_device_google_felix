@@ -4,8 +4,8 @@
     "target_path": "device/google/gs201"
   },
   {
-    "repository": "device/google/felix-kernels/5.10",
-    "target_path": "device/google/felix-kernels/5.10",
+    "repository": "device/google/felix-kernels/6.1",
+    "target_path": "device/google/felix-kernels/6.1",
     "remote": "aosp-felix"
   }
 ]
