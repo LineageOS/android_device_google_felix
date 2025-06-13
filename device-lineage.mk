@@ -34,11 +34,9 @@ include device/google/gs-common/wireless_charger/wireless_charger.mk
 
 # Build necessary packages for vendor
 
-# Codec2
+# Dumpstate
 PRODUCT_PACKAGES += \
-    libacryl \
-    libacryl_hdr_plugin \
-    libexynosv4l2
+    dump_gsc.sh
 
 # GNSS
 PRODUCT_PACKAGES += \
