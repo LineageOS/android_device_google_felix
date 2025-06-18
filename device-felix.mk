@@ -174,14 +174,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
        ro.audio.spatializer_transaural_enabled_default=false \
        persist.vendor.audio.spatializer.speaker_enabled=true
 
-# Bluetooth SAR test tool
-PRODUCT_PACKAGES_ENG += \
-    sar_test
-
-# Bluetooth hci_inject test tool
-PRODUCT_PACKAGES_ENG += \
-    hci_inject
-
 # Bluetooth
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.a2dp_aac.vbr_supported=true
@@ -317,28 +309,15 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.hinge_angle.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hinge_angle.xml
 
 # Location
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_COPY_FILES += \
+    device/google/felix/location/lhd_user.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
+    device/google/felix/location/scd_user.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
+ifneq (,$(filter 6.1, $(TARGET_LINUX_KERNEL_VERSION)))
     PRODUCT_COPY_FILES += \
-        device/google/felix/location/lhd.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
-        device/google/felix/location/scd.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
-    ifneq (,$(filter 6.1, $(TARGET_LINUX_KERNEL_VERSION)))
-        PRODUCT_COPY_FILES += \
-            device/google/felix/location/gps.6.1.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
-    else
-        PRODUCT_COPY_FILES += \
-            device/google/felix/location/gps.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
-    endif
+        device/google/felix/location/gps_user.6.1.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
 else
     PRODUCT_COPY_FILES += \
-        device/google/felix/location/lhd_user.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
-        device/google/felix/location/scd_user.conf.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
-    ifneq (,$(filter 6.1, $(TARGET_LINUX_KERNEL_VERSION)))
-        PRODUCT_COPY_FILES += \
-            device/google/felix/location/gps_user.6.1.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
-    else
-        PRODUCT_COPY_FILES += \
-            device/google/felix/location/gps_user.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
-    endif
+        device/google/felix/location/gps_user.xml.f10:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
 endif
 
 PRODUCT_PACKAGES += \
@@ -391,12 +370,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.opus.enabled=true
 
-# WLC eng specific
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
-    PRODUCT_COPY_FILES += \
-        device/google/gs201/init.hardware.wlc.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.wlc.rc
-endif
-
 # Bluetooth LE Audio
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.bluetooth.leaudio_offload.supported=true \
@@ -410,19 +383,11 @@ PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.profile.vcp.controller.enabled=true \
 
 # Override BQR mask to enable LE Audio Choppy report
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.bqr.event_mask=295006 \
-    persist.bluetooth.bqr.vnd_quality_mask=29 \
-    persist.bluetooth.bqr.vnd_trace_mask=0 \
-    persist.bluetooth.vendor.btsnoop=true
-else
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.bqr.event_mask=295006 \
     persist.bluetooth.bqr.vnd_quality_mask=16 \
     persist.bluetooth.bqr.vnd_trace_mask=0 \
     persist.bluetooth.vendor.btsnoop=false
-endif
 
 # Bluetooth LE Audio CIS handover to SCO
 # Set the property only if the controller doesn't support CIS and SCO
@@ -441,10 +406,6 @@ PRODUCT_COPY_FILES += \
 # LE Audio Unicast Allowlist
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5,SM-R630
-
-# Bluetooth EWP test tool
-PRODUCT_PACKAGES_ENG += \
-    ewp_tool
 
 # Disable Bluetooth HAP by default
 PRODUCT_PRODUCT_PROPERTIES += \
