@@ -38,9 +38,7 @@ BOARD_KERNEL_CMDLINE += s2mpg12-regulator.load_sequential=1
 USES_IDISPLAY_INTF_SEC := true
 
 include device/google/gs201/BoardConfig-common.mk
--include vendor/google_devices/gs201/prebuilts/BoardConfigVendor.mk
 include device/google/gs-common/check_current_prebuilt/check_current_prebuilt.mk
--include vendor/google_devices/felix/proprietary/BoardConfigVendor.mk
 include device/google/felix/sepolicy/felix-sepolicy.mk
 include device/google/felix/wifi/BoardConfig-wifi.mk
 
