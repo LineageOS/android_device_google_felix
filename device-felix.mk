@@ -43,9 +43,8 @@ include device/google/gs-common/bcmbt/bluetooth.mk
 include device/google/gs-common/display/dump_exynos_second_display.mk
 include device/google/gs-common/touch/gti/predump_gti_dual.mk
 include device/google/gs-common/touch/stm/predump_stm6.mk
-ifeq ($(filter factory_felix, $(TARGET_PRODUCT)),)
+
 include device/google/felix/uwb/uwb_calibration.mk
-endif
 
 # go/lyric-soong-variables
 $(call soong_config_set,lyric,camera_hardware,felix)
