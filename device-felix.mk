@@ -269,7 +269,9 @@ PRODUCT_VENDOR_PROPERTIES += \
     vendor.audio.hapticgenerator.distortion.output.gain=0.52
 
 # Fingerprint
-include device/google/gs101/fingerprint/fpc1540/sw42/fpc1540.mk
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+
 FPC_MODULE_TYPE=1542_C
 # Fingerprint config
 include device/google/felix/fingerprint_config.mk
