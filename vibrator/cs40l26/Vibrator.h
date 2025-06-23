@@ -16,6 +16,7 @@
 #pragma once
 
 #include <aidl/android/hardware/vibrator/BnVibrator.h>
+#include <android-base/stringprintf.h>
 #include <android-base/unique_fd.h>
 #include <linux/input.h>
 #include <tinyalsa/asoundlib.h>
@@ -28,6 +29,8 @@ namespace aidl {
 namespace android {
 namespace hardware {
 namespace vibrator {
+
+using ::android::base::StringPrintf;
 
 class Vibrator : public BnVibrator {
   public:
@@ -103,6 +106,8 @@ class Vibrator : public BnVibrator {
                                      int *status) = 0;
         // Erase OWT waveform
         virtual bool eraseOwtEffect(int fd, int8_t effectIndex, std::vector<ff_effect> *effect) = 0;
+        // Records IVibrator Event.
+        virtual void recordEvent(const char *func, const std::string &value) = 0;
         // Emit diagnostic information to the given file.
         virtual void debug(int fd) = 0;
     };
@@ -148,6 +153,7 @@ class Vibrator : public BnVibrator {
     Vibrator(std::unique_ptr<HwApi> hwApiDefault, std::unique_ptr<HwCal> hwCalDefault,
              std::unique_ptr<HwApi> hwApiDual, std::unique_ptr<HwCal> hwCalDual,
              std::unique_ptr<HwGPIO> hwgpio);
+    virtual ~Vibrator();
 
     // BnVibrator APIs
     ndk::ScopedAStatus getCapabilities(int32_t *_aidl_return) override;
@@ -250,6 +256,7 @@ class Vibrator : public BnVibrator {
     bool mConfigHapticAlsaDeviceDone{false};
     bool mGPIOStatus;
     bool mIsDual{false};
+    std::mutex mActiveId_mutex;  // protects mActiveId
 };
 
 }  // namespace vibrator

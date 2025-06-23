@@ -40,7 +40,7 @@ include device/google/gs201/device-shipping-common.mk
 $(call soong_config_set,fp_hal_feature,pixel_product, product_a)
 include device/google/felix/vibrator/cs40l26/device.mk
 include device/google/gs-common/bcmbt/bluetooth.mk
-include device/google/gs-common/display/dump_second_display.mk
+include device/google/gs-common/display/dump_exynos_second_display.mk
 include device/google/gs-common/touch/gti/predump_gti_dual.mk
 include device/google/gs-common/touch/stm/predump_stm6.mk
 ifeq ($(filter factory_felix, $(TARGET_PRODUCT)),)
@@ -411,10 +411,16 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Override BQR mask to enable LE Audio Choppy report
 ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.bqr.event_mask=262238
+    persist.bluetooth.bqr.event_mask=295006 \
+    persist.bluetooth.bqr.vnd_quality_mask=29 \
+    persist.bluetooth.bqr.vnd_trace_mask=0 \
+    persist.bluetooth.vendor.btsnoop=true
 else
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.bqr.event_mask=94
+    persist.bluetooth.bqr.event_mask=295006 \
+    persist.bluetooth.bqr.vnd_quality_mask=16 \
+    persist.bluetooth.bqr.vnd_trace_mask=0 \
+    persist.bluetooth.vendor.btsnoop=false
 endif
 
 # Bluetooth LE Audio CIS handover to SCO
@@ -438,6 +444,14 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Bluetooth EWP test tool
 PRODUCT_PACKAGES_ENG += \
     ewp_tool
+
+# Disable Bluetooth HAP by default
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.profile.hap.enabled_by_default=false
+
+# Disable Bluetooth LE Audio toggle for ASHA device
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.leaudio.toggle_visible_for_asha=false
 
 # Enable DeviceAsWebcam support
 PRODUCT_VENDOR_PROPERTIES += \
