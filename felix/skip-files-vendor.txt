@@ -1268,6 +1268,7 @@ lib64/android.hardware.bluetooth.ranging-V1-ndk.so
 lib64/hardware.google.bluetooth.bt_channel_avoidance@1.0.so
 
 # Camera
+etc/sysconfig/vendor-apex-allowlist-lyric.xml
 lib/libdrm.so
 lib/pixel-power-ext-V1-ndk.so
 
@@ -1325,6 +1326,7 @@ lib64/libstagefright_xmlparser.so
 
 # Contexthub
 lib/android.hardware.contexthub-V3-ndk.so
+lib/android.hardware.contexthub-V4-ndk.so
 lib64/android.hardware.contexthub-V3-ndk.so
 lib64/android.hardware.contexthub-V4-ndk.so
 lib64/chre_atoms_log.so
@@ -1406,7 +1408,7 @@ lib/android.hardware.graphics.allocator@3.0.so
 lib/android.hardware.graphics.allocator@4.0.so
 lib/android.hardware.graphics.bufferqueue@1.0.so
 lib/android.hardware.graphics.bufferqueue@2.0.so
-lib/android.hardware.graphics.common-V6-ndk.so
+lib/android.hardware.graphics.common-V7-ndk.so
 lib/android.hardware.graphics.common@1.0.so
 lib/android.hardware.graphics.common@1.1.so
 lib/android.hardware.graphics.common@1.2.so
@@ -1438,6 +1440,7 @@ lib/android.hardware.thermal@2.0.so
 lib/android.hidl.token@1.0-utils.so
 lib/android.hidl.token@1.0.so
 lib/com.google.hardware.pixel.display-V9-ndk.so
+lib/com.google.hardware.pixel.display-V15-ndk.so
 lib64/android.frameworks.stats-V1-cpp.so
 lib64/android.hardware.authsecret-V1-ndk.so
 lib64/android.hardware.biometrics.common-V3-ndk.so
@@ -1448,7 +1451,7 @@ lib64/android.hardware.graphics.allocator@3.0.so
 lib64/android.hardware.graphics.allocator@4.0.so
 lib64/android.hardware.graphics.bufferqueue@1.0.so
 lib64/android.hardware.graphics.bufferqueue@2.0.so
-lib64/android.hardware.graphics.common-V6-ndk.so
+lib64/android.hardware.graphics.common-V7-ndk.so
 lib64/android.hardware.graphics.common@1.0.so
 lib64/android.hardware.graphics.common@1.1.so
 lib64/android.hardware.graphics.common@1.2.so
@@ -1497,6 +1500,7 @@ lib64/android.hidl.token@1.0-utils.so
 lib64/android.hidl.token@1.0.so
 lib64/com.google.hardware.pixel.display-V9-ndk.so
 lib64/com.google.hardware.pixel.display-V15-ndk.so
+lib64/com.google.hardware.pixel.display-V16-ndk.so
 
 # Misc
 bin/dump/dump_gsc.sh
@@ -1518,6 +1522,9 @@ framework/oat/arm/com.google.android.camera.experimental2022.odex
 framework/oat/arm/com.google.android.camera.experimental2022.vdex
 framework/oat/arm64/com.google.android.camera.experimental2022.odex
 framework/oat/arm64/com.google.android.camera.experimental2022.vdex
+
+# Rust
+lib64/libregex_automata.dylib.so
 
 # Completely skip files that are not required
 
