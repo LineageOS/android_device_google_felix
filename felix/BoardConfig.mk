@@ -13,11 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 TARGET_BOARD_INFO_FILE := device/google/felix/board-info.txt
 TARGET_BOOTLOADER_BOARD_NAME := felix
 TARGET_SCREEN_DENSITY := 420
-BOARD_USES_GENERIC_AUDIO := true
-USES_DEVICE_GOOGLE_FELIX := true
+
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 
 # Enable load module in parallel
@@ -29,11 +29,7 @@ BOARD_KERNEL_CMDLINE += exynos_drm.load_sequential=1
 BOARD_KERNEL_CMDLINE += panel-samsung-ana6707-f10.load_sequential=1
 BOARD_KERNEL_CMDLINE += s2mpg12-regulator.load_sequential=1
 
-#Display
-USES_IDISPLAY_INTF_SEC := true
-
 include device/google/gs201/BoardConfig-common.mk
-include device/google/gs-common/check_current_prebuilt/check_current_prebuilt.mk
 include device/google/felix/sepolicy/felix-sepolicy.mk
 include device/google/felix/wifi/BoardConfig-wifi.mk
 

@@ -27,7 +27,6 @@ DEVICE_PACKAGE_OVERLAYS += device/google/felix/felix/overlay
 
 include device/google/felix/audio/felix/audio-tables.mk
 include device/google/gs201/device-shipping-common.mk
-$(call soong_config_set,fp_hal_feature,pixel_product, product_a)
 include device/google/felix/vibrator/cs40l26/device.mk
 include device/google/gs-common/bcmbt/bluetooth.mk
 include device/google/gs-common/display/dump_exynos_second_display.mk
@@ -35,11 +34,6 @@ include device/google/gs-common/touch/gti/predump_gti_dual.mk
 include device/google/gs-common/touch/stm/predump_stm6.mk
 
 include device/google/felix/uwb/uwb_calibration.mk
-
-# go/lyric-soong-variables
-$(call soong_config_set,lyric,camera_hardware,felix)
-$(call soong_config_set,lyric,tuning_product,felix)
-$(call soong_config_set,google3a_config,target_device,felix)
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -91,9 +85,6 @@ PRODUCT_PACKAGES += \
 	Tag \
 	android.hardware.nfc-service.st \
 	NfcOverlayFelix
-
-# Shared Modem Platform
-SHARED_MODEM_PLATFORM_VENDOR := lassen
 
 # Shared Modem Platform
 include device/google/gs-common/modem/modem_svc_sit/shared_modem_platform.mk
@@ -163,36 +154,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vendor.bluetooth.evb_bdaddr="22:22:22:33:44:55"
 
-# Keymaster HAL
-#LOCAL_KEYMASTER_PRODUCT_PACKAGE ?= android.hardware.keymaster@4.1-service
-
-# Gatekeeper HAL
-#LOCAL_GATEKEEPER_PRODUCT_PACKAGE ?= android.hardware.gatekeeper@1.0-service.software
-
-
-# Gatekeeper
-# PRODUCT_PACKAGES += \
-# 	android.hardware.gatekeeper@1.0-service.software
-
-# Keymint replaces Keymaster
-# PRODUCT_PACKAGES += \
-# 	android.hardware.security.keymint-service
-
-# Keymaster
-#PRODUCT_PACKAGES += \
-#	android.hardware.keymaster@4.0-impl \
-#	android.hardware.keymaster@4.0-service
-
-#PRODUCT_PACKAGES += android.hardware.keymaster@4.0-service.remote
-#PRODUCT_PACKAGES += android.hardware.keymaster@4.1-service.remote
-#LOCAL_KEYMASTER_PRODUCT_PACKAGE := android.hardware.keymaster@4.1-service
-#LOCAL_KEYMASTER_PRODUCT_PACKAGE ?= android.hardware.keymaster@4.1-service
-
-# PRODUCT_PROPERTY_OVERRIDES += \
-# 	ro.hardware.keystore_desede=true \
-# 	ro.hardware.keystore=software \
-# 	ro.hardware.gatekeeper=software
-
 # PowerStats HAL
 PRODUCT_SOONG_NAMESPACES += \
     device/google/felix/powerstats/felix \
@@ -207,13 +168,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.device_family=F10
 
 # Vibrator HAL
-$(call soong_config_set,haptics,kernel_ver,v$(subst .,_,$(TARGET_LINUX_KERNEL_VERSION)))
 PRODUCT_VENDOR_PROPERTIES +=\
     ro.vendor.vibrator.hal.long.frequency.shift=0 \
     ro.vendor.vibrator.hal.gpio.num=44 \
     ro.vendor.vibrator.hal.gpio.shift=2 \
     persist.vendor.vibrator.hal.chirp.enabled=0
-ACTUATOR_MODEL := luxshare_ict_lt_xlra1906d
 
 # Override Output Distortion Gain
 PRODUCT_VENDOR_PROPERTIES += \
@@ -222,10 +181,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 # Fingerprint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
-
-FPC_MODULE_TYPE=1542_C
-# Fingerprint config
-include device/google/felix/fingerprint_config.mk
 
 # The default value of this variable is false and should only be set to true when
 # the device allows users to enable the seamless transfer feature.
@@ -285,8 +240,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/google/felix/felix/radio/felix_camera_front_inner_mipi_coex_table.csv:$(TARGET_COPY_OUT_VENDOR)/etc/modem/camera_front_inner_mipi_coex_table.csv \
     device/google/felix/felix/radio/felix_display_secondary_mipi_coex_table.csv:$(TARGET_COPY_OUT_VENDOR)/etc/modem/display_secondary_mipi_coex_table.csv
-
-PRODUCT_SOONG_NAMESPACES += device/google/felix
 
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/felix/device_framework_matrix_product_felix.xml
 
