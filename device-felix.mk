@@ -16,7 +16,7 @@
 
 TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
 
-TARGET_LINUX_KERNEL_VERSION := $(RELEASE_KERNEL_FELIX_VERSION)
+TARGET_LINUX_KERNEL_VERSION := 6.1
 TARGET_KERNEL_DEVICE := felix
 TARGET_KERNEL_DIR := device/google/$(TARGET_KERNEL_DEVICE)-kernels/$(TARGET_LINUX_KERNEL_VERSION)
 TARGET_KERNEL_PLATFORM_SOURCE := google/gs-$(TARGET_LINUX_KERNEL_VERSION)
@@ -88,7 +88,6 @@ PRODUCT_COPY_FILES += \
 	device/google/felix/nfc/libnfc-nci-felix.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
 
 PRODUCT_PACKAGES += \
-	$(RELEASE_PACKAGE_NFC_STACK) \
 	Tag \
 	android.hardware.nfc-service.st \
 	NfcOverlayFelix
@@ -200,34 +199,13 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/felix
 
 # Increment the SVN for any official public releases
-ifdef RELEASE_SVN_FELIX
-TARGET_SVN ?= $(RELEASE_SVN_FELIX)
-else
-# Set this for older releases that don't use build flag
-TARGET_SVN ?= 55
-endif
-
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=$(TARGET_SVN)
+    ro.vendor.build.svn=78
 
 # Set device family property for SMR
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.device_family=F10
 
-# Set build properties for SMR builds
-ifeq ($(RELEASE_IS_SMR), true)
-    ifneq (,$(RELEASE_BASE_OS_FELIX))
-        PRODUCT_BASE_OS := $(RELEASE_BASE_OS_FELIX)
-    endif
-endif
-
-# Set build properties for EMR builds
-ifeq ($(RELEASE_IS_EMR), true)
-    ifneq (,$(RELEASE_BASE_OS_FELIX))
-        PRODUCT_PROPERTY_OVERRIDES += \
-        ro.build.version.emergency_base_os=$(RELEASE_BASE_OS_FELIX)
-    endif
-endif
 # Vibrator HAL
 $(call soong_config_set,haptics,kernel_ver,v$(subst .,_,$(TARGET_LINUX_KERNEL_VERSION)))
 PRODUCT_VENDOR_PROPERTIES +=\
