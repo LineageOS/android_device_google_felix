@@ -47,7 +47,7 @@ PRODUCT_COPY_FILES += \
 
 # Recovery files
 PRODUCT_COPY_FILES += \
-	device/google/felix/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.felix.rc
+    device/google/felix/recovery/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.felix.rc
 
 # Media Performance Class 13
 PRODUCT_PROPERTY_OVERRIDES += ro.odm.build.media_performance_class=33
