@@ -1,5 +1,7 @@
 #
 # SPDX-FileCopyrightText: 2021 The Android Open-Source Project
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-FileCopyrightText: The Calyx Institute
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -11,6 +13,7 @@ TARGET_KERNEL_DIR := device/google/$(TARGET_KERNEL_DEVICE)-kernels/$(TARGET_LINU
 TARGET_KERNEL_PLATFORM_SOURCE := google/gs-$(TARGET_LINUX_KERNEL_VERSION)
 
 DEVICE_PACKAGE_OVERLAYS += device/google/felix/felix/overlay
+DEVICE_PACKAGE_OVERLAYS += device/google/felix/overlay-lineage
 
 include device/google/gs201/device-shipping-common.mk
 include device/google/felix/vibrator/cs40l26/device.mk
@@ -270,3 +273,47 @@ PRODUCT_PACKAGES += \
 # Felix: 0x410C
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.device_id.product_id=16652
+
+# ANGLE - Almost Native Graphics Layer Engine
+PRODUCT_PACKAGES += \
+    ANGLE \
+    libEGL_angle \
+    libGLESv1_CM_angle \
+    libGLESv2_angle
+
+# Dumpstate
+PRODUCT_PACKAGES += \
+    dump_gsc.sh
+
+# EUICC
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
+
+PRODUCT_PACKAGES += \
+    EuiccSupportPixelOverlay
+
+# Fold extensions
+PRODUCT_SYSTEM_SERVER_JARS += \
+    system_ext:felix-services
+
+# GNSS
+PRODUCT_PACKAGES += \
+    android.hardware.sensors-V2-ndk.vendor:64
+
+# HBM
+PRODUCT_PACKAGES += \
+    HbmSVManagerOverlayFelix
+
+# Init
+PRODUCT_PACKAGES += \
+    init.recovery.felix.touch.rc
+
+# Properties
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/vendor.prop
+
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.dynamic_sensor_hal
+
+# Wireless charging
+include device/google/gs-common/wireless_charger/wireless_charger.mk
