@@ -17,10 +17,29 @@ DEVICE_PACKAGE_OVERLAYS += device/google/felix/overlay-lineage
 
 include device/google/gs201/device-shipping-common.mk
 include device/google/felix/vibrator/cs40l26/device.mk
-include device/google/gs-common/bcmbt/bluetooth.mk
-include device/google/gs-common/display/dump_exynos_second_display.mk
-include device/google/gs-common/touch/gti/predump_gti_dual.mk
-include device/google/gs-common/touch/stm/predump_stm6.mk
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth.prebuilt.xml \
+    android.hardware.bluetooth_le.prebuilt.xml
+
+DEVICE_MANIFEST_FILE += device/google/gs-common/bcmbt/manifest_bluetooth.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/bcmbt/compatibility_matrix.xml
+
+# Display
+PRODUCT_PACKAGES += \
+    dump_exynos_second_display
+
+# Touch
+PRODUCT_PACKAGES += \
+    dump_touch.sh \
+    predump_gti0.sh \
+    predump_gti1.sh \
+    predump_stm.sh \
+    predump_touch.sh
+
+PRODUCT_VENDOR_PROPERTIES += ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
+PRODUCT_VENDOR_PROPERTIES += ro.vendor.touch.dump.proc=/proc/fts_ext/driver_test
 
 # UWB
 PRODUCT_COPY_FILES += \
@@ -60,7 +79,7 @@ PRODUCT_PACKAGES += \
 	NfcOverlayFelix
 
 # Shared Modem Platform
-include device/google/gs-common/modem/modem_svc_sit/shared_modem_platform.mk
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/modem/modem_svc_sit/compatibility_matrix.xml
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -316,4 +335,4 @@ PRODUCT_PACKAGES += \
     sensors.dynamic_sensor_hal
 
 # Wireless charging
-include device/google/gs-common/wireless_charger/wireless_charger.mk
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/wireless_charger/compatibility_matrix.xml
