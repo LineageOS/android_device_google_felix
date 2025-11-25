@@ -64,7 +64,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
 
 PRODUCT_PACKAGES += \
-	Tag \
 	android.hardware.nfc-service.st \
 	NfcOverlayFelix
 
@@ -92,10 +91,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable Bluetooth AutoOn feature
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.server.automatic_turn_on=true
-
-# Spatial Audio
-PRODUCT_PACKAGES += \
-	libspatialaudio
 
 # optimize spatializer effect
 PRODUCT_PROPERTY_OVERRIDES += \

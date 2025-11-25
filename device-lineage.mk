@@ -25,10 +25,6 @@ PRODUCT_SYSTEM_SERVER_JARS += \
 PRODUCT_PACKAGES += \
     HbmSVManagerOverlayFelix
 
-# IWLAN
-PRODUCT_PACKAGES += \
-    Iwlan
-
 # wireless_charger HAL service
 include device/google/gs-common/wireless_charger/wireless_charger.mk
 
