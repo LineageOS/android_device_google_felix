@@ -16,7 +16,6 @@ DEVICE_PACKAGE_OVERLAYS += device/google/felix/felix/overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/felix/overlay-lineage
 
 include device/google/gs201/device-shipping-common.mk
-include device/google/felix/vibrator/cs40l26/device.mk
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -26,18 +25,7 @@ PRODUCT_PACKAGES += \
 DEVICE_MANIFEST_FILE += device/google/gs-common/bcmbt/manifest_bluetooth.xml
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs-common/bcmbt/compatibility_matrix.xml
 
-# Display
-PRODUCT_PACKAGES += \
-    dump_exynos_second_display
-
 # Touch
-PRODUCT_PACKAGES += \
-    dump_touch.sh \
-    predump_gti0.sh \
-    predump_gti1.sh \
-    predump_stm.sh \
-    predump_touch.sh
-
 PRODUCT_VENDOR_PROPERTIES += ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
 PRODUCT_VENDOR_PROPERTIES += ro.vendor.touch.dump.proc=/proc/fts_ext/driver_test
 
@@ -121,9 +109,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vendor.bluetooth.evb_bdaddr="22:22:22:33:44:55"
 
-# PowerStats HAL
 PRODUCT_SOONG_NAMESPACES += \
-    device/google/felix/powerstats/felix \
     device/google/felix
 
 # Increment the SVN for any official public releases
@@ -299,10 +285,6 @@ PRODUCT_PACKAGES += \
     libEGL_angle \
     libGLESv1_CM_angle \
     libGLESv2_angle
-
-# Dumpstate
-PRODUCT_PACKAGES += \
-    dump_gsc.sh
 
 # EUICC
 PRODUCT_COPY_FILES += \
