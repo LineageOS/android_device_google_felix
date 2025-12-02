@@ -1,0 +1,6 @@
+com.fingerprints42.extension::IFingerprintEngineering u:object_r:hal_fingerprint_capacitance_ext_hwservice:s0
+com.fingerprints42.extension::IFingerprintSensorTest u:object_r:hal_fingerprint_capacitance_ext_hwservice:s0
+com.google.face.debug::IDebugHost u:object_r:hal_face_debug_hwservice:s0
+hardware.google.bluetooth.ccc::IBluetoothCcc u:object_r:hal_bluetooth_coexistence_hwservice:s0
+hardware.google.bluetooth.ewp::IBluetoothEwp u:object_r:hal_bluetooth_coexistence_hwservice:s0
+hardware.google.bluetooth.ext::IBluetoothExt u:object_r:hal_bluetooth_coexistence_hwservice:s0
