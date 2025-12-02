@@ -21,7 +21,6 @@ BOARD_KERNEL_CMDLINE += panel-samsung-ana6707-f10.load_sequential=1
 BOARD_KERNEL_CMDLINE += s2mpg12-regulator.load_sequential=1
 
 include device/google/gs201/BoardConfig-common.mk
-include device/google/felix/sepolicy/felix-sepolicy.mk
 include device/google/felix/wifi/BoardConfig-wifi.mk
 
 # Kernel modules
@@ -29,5 +28,11 @@ BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/reco
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_RAW := $(strip $(shell cat $(DEVICE_PATH)/recovery/modules.load.vendor_kernel_boot))
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD += $(BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_RAW)
 BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES += $(addprefix $(KERNEL_MODULE_DIR)/, $(notdir $(BOARD_VENDOR_KERNEL_RAMDISK_KERNEL_MODULES_LOAD_RAW)))
+
+# SEPolicy
+BOARD_VENDOR_SEPOLICY_DIRS += \
+    device/google/felix/sepolicy/vendor \
+    hardware/google/pixel-sepolicy/vibrator/common \
+    hardware/google/pixel-sepolicy/vibrator/cs40l26
 
 include $(VENDOR_PATH)/BoardConfigVendor.mk

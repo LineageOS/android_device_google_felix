@@ -1,1 +1,2 @@
 binder_call(servicemanager, hal_fingerprint_capacitance)
+binder_call(servicemanager, hal_wlcservice)
