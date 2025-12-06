@@ -1,6 +1,57 @@
+# Audio
+audio.spatializer.effect.util_clamp_min=300
+persist.vendor.audio.cca.enabled=false
+persist.vendor.audio.spatializer.speaker_enabled=true
+ro.audio.spatializer_enabled=true
+ro.audio.spatializer_transaural_enabled_default=false
+
+# Bluetooth
+persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac-opus
+persist.bluetooth.a2dp_offload.disabled=false
+ro.bluetooth.a2dp_offload.supported=true
+ro.vendor.bluetooth.evb_bdaddr=22:22:22:33:44:55
+
+# Camera
+camera.enable_landscape_to_portrait=true
+persist.vendor.camera.adjust_backend_min_freq_for_1p_front_video_1080p_30fps=1
+persist.vendor.camera.debug.bypass_csi_link_error=true
+persist.vendor.camera.exif_reveal_make_model=true
+persist.vendor.camera.extended_launch_boost=1
+persist.vendor.camera.front_720P_always_binning=true
+persist.vendor.camera.increase_thread_priority_nodes_stop=true
+persist.vendor.camera.multicam_streaming_boost=1
+persist.vendor.camera.optimized_tnr_freq=1
+persist.vendor.camera.raise_buf_allocation_priority=1
+persist.vendor.camera.start_cpu_throttling_at_moderate_thermal=1
+vendor.camera.allow_sensor_binning_aspect_ratio_to_override_itp_output=false
+vendor.camera.support_specific_stream_aspect_ratio=0.75
+
+# DCK
+ro.gms.dck.eligible_wcc=3
+ro.gms.dck.se_capability=1
+
+# Device family
+ro.build.device_family=F10
+
+# Display
+debug.sf.set_idle_timer_ms_4619827677550801152=80
+debug.sf.set_idle_timer_ms_4619827677550801153=1000
+debug.sf.support_kernel_idle_timer_4619827677550801152=true
+debug.sf.support_kernel_idle_timer_4619827677550801153=false
+ro.surface_flinger.enable_frame_rate_override=true
+ro.surface_flinger.ignore_hdr_camera_layers=true
+vendor.display.0.brightness.dimming.usage=1
+vendor.display.1.brightness.dimming.usage=2
+vendor.display.async_off.supported=true
+vendor.display.lbe.supported=1
+vendor.display.secondary_early_wakeup_node=/sys/devices/platform/1c241000.drmdecon/early_wakeup
+
 # DRM
 drm.service.enabled=true
 media.mediadrmservice.enable=true
+
+# Media
+ro.odm.build.media_performance_class=33
 
 # Radio
 persist.vendor.ril.ecc.use.xml=1
@@ -9,5 +60,25 @@ persist.vendor.ril.use_radio_hal=2.0
 ro.vendor.config.build_carrier=europen
 vendor.rild.libpath=libsitril.so
 
+# Touch
+ro.vendor.touch.dump.proc=/proc/fts_ext/driver_test
+ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
+
+# SVN
+ro.vendor.build.svn=78
+
+# USB
+ro.usb.uvc.enabled=true
+
 # UWB
 ro.vendor.uwb.calibration.calibrationpaths=/vendor/etc/uwb/calib_paths
+
+# Vibrator
+persist.vendor.vibrator.hal.chirp.enabled=0
+ro.vendor.vibrator.hal.gpio.num=44
+ro.vendor.vibrator.hal.gpio.shift=2
+ro.vendor.vibrator.hal.long.frequency.shift=0
+vendor.audio.hapticgenerator.distortion.output.gain=0.52
+
+# ZRAM
+vendor.zram.size=3g
