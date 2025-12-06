@@ -22,10 +22,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.prebuilt.xml \
     android.hardware.bluetooth_le.prebuilt.xml
 
-# Touch
-PRODUCT_VENDOR_PROPERTIES += ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
-PRODUCT_VENDOR_PROPERTIES += ro.vendor.touch.dump.proc=/proc/fts_ext/driver_test
-
 # UWB
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
@@ -33,23 +29,6 @@ PRODUCT_COPY_FILES += \
 # Recovery files
 PRODUCT_COPY_FILES += \
     device/google/felix/recovery/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.felix.rc
-
-# Media Performance Class 13
-PRODUCT_PROPERTY_OVERRIDES += ro.odm.build.media_performance_class=33
-
-# Display
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	vendor.display.lbe.supported=1 \
-	vendor.display.async_off.supported=true \
-	ro.surface_flinger.ignore_hdr_camera_layers=true
-
-#config of display brightness dimming
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.0.brightness.dimming.usage=1
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += vendor.display.1.brightness.dimming.usage=2
-
-# Early wake up sysfs path for the secondary display
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	vendor.display.secondary_early_wakeup_node=/sys/devices/platform/1c241000.drmdecon/early_wakeup
 
 # NFC
 PRODUCT_COPY_FILES += \
@@ -72,55 +51,16 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
 	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
 
-# Bluetooth HAL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bluetooth.a2dp_offload.supported=true \
-    persist.bluetooth.a2dp_offload.disabled=false \
-    persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac-opus
-
 # Enable Bluetooth AutoOn feature
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.server.automatic_turn_on=true
-
-# optimize spatializer effect
-PRODUCT_PROPERTY_OVERRIDES += \
-       audio.spatializer.effect.util_clamp_min=300
-
-# declare use of spatial audio
-PRODUCT_PROPERTY_OVERRIDES += \
-       ro.audio.spatializer_enabled=true \
-       ro.audio.spatializer_transaural_enabled_default=false \
-       persist.vendor.audio.spatializer.speaker_enabled=true
 
 # Bluetooth
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.bluetooth.a2dp_aac.vbr_supported=true
 
-# default BDADDR for EVB only
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vendor.bluetooth.evb_bdaddr="22:22:22:33:44:55"
-
 PRODUCT_SOONG_NAMESPACES += \
     device/google/felix
-
-# Increment the SVN for any official public releases
-PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=78
-
-# Set device family property for SMR
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.device_family=F10
-
-# Vibrator HAL
-PRODUCT_VENDOR_PROPERTIES +=\
-    ro.vendor.vibrator.hal.long.frequency.shift=0 \
-    ro.vendor.vibrator.hal.gpio.num=44 \
-    ro.vendor.vibrator.hal.gpio.shift=2 \
-    persist.vendor.vibrator.hal.chirp.enabled=0
-
-# Override Output Distortion Gain
-PRODUCT_VENDOR_PROPERTIES += \
-    vendor.audio.hapticgenerator.distortion.output.gain=0.52
 
 # Fingerprint
 PRODUCT_COPY_FILES += \
@@ -131,30 +71,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PRODUCT_PROPERTIES += \
    euicc.seamless_transfer_enabled_in_non_qs=true
 
-# DCK properties based on target
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.gms.dck.eligible_wcc=3 \
-    ro.gms.dck.se_capability=1
-
-# Graphics
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.enable_frame_rate_override=true
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.set_idle_timer_ms_4619827677550801152=80
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.support_kernel_idle_timer_4619827677550801152=true
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.set_idle_timer_ms_4619827677550801153=1000
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.sf.support_kernel_idle_timer_4619827677550801153=false
-
-# Set zram size
-PRODUCT_VENDOR_PROPERTIES += \
-    vendor.zram.size=3g
-
 # SKU specific RROs
 PRODUCT_PACKAGES += \
     SettingsOverlayG0B96 \
     SettingsOverlayG9FPL
-
-# Set zram size
-PRODUCT_VENDOR_PROPERTIES += \
-       vendor.zram.size=3g
 
 # Set support one-handed mode
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -171,35 +91,6 @@ PRODUCT_PACKAGES += \
 # Device features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
-
-# Increase thread priority for nodes stop
-PRODUCT_VENDOR_PROPERTIES += \
-    persist.vendor.camera.increase_thread_priority_nodes_stop=true
-
-##Audio Vendor property
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.audio.cca.enabled=false
-
-# Camera
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.camera.adjust_backend_min_freq_for_1p_front_video_1080p_30fps=1 \
-    persist.vendor.camera.extended_launch_boost=1 \
-    persist.vendor.camera.multicam_streaming_boost=1 \
-    persist.vendor.camera.optimized_tnr_freq=1 \
-    persist.vendor.camera.raise_buf_allocation_priority=1 \
-    persist.vendor.camera.start_cpu_throttling_at_moderate_thermal=1 \
-    camera.enable_landscape_to_portrait=true \
-    persist.vendor.camera.debug.bypass_csi_link_error=true \
-    vendor.camera.allow_sensor_binning_aspect_ratio_to_override_itp_output=false \
-    vendor.camera.support_specific_stream_aspect_ratio=0.75
-
-# Enable camera exif model/make reporting
-PRODUCT_VENDOR_PROPERTIES += \
-    persist.vendor.camera.exif_reveal_make_model=true
-
-# Enable front camera always binning for 720P or smaller resolution
-PRODUCT_VENDOR_PROPERTIES += \
-    persist.vendor.camera.front_720P_always_binning=true
 
 # Bluetooth OPUS codec
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -245,10 +136,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Disable Bluetooth LE Audio toggle for ASHA device
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.leaudio.toggle_visible_for_asha=false
-
-# Enable DeviceAsWebcam support
-PRODUCT_VENDOR_PROPERTIES += \
-    ro.usb.uvc.enabled=true
 
 # Quick Start device-specific settings
 PRODUCT_PRODUCT_PROPERTIES += \
