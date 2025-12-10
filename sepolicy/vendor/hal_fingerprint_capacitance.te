@@ -1,11 +1,11 @@
 type hal_fingerprint_capacitance, domain;
 type hal_fingerprint_capacitance_exec, exec_type, file_type, vendor_file_type;
 
-add_hwservice(hal_fingerprint_capacitance, hal_fingerprint_capacitance_ext_hwservice)
-
 hal_client_domain(hal_fingerprint_capacitance, hal_power)
 
 hal_server_domain(hal_fingerprint_capacitance, hal_fingerprint)
+
+add_hwservice(hal_fingerprint_capacitance, hal_fingerprint_capacitance_ext_hwservice)
 
 hwbinder_use(hal_fingerprint_capacitance)
 
