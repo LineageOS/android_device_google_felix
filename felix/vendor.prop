@@ -65,7 +65,7 @@ ro.vendor.touch.dump.proc=/proc/fts_ext/driver_test
 ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
 
 # SVN
-ro.vendor.build.svn=78
+ro.vendor.build.svn=79
 
 # USB
 ro.usb.uvc.enabled=true
