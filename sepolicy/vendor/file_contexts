@@ -8,6 +8,8 @@
 /dev/bbd_control u:object_r:vendor_gnss_device:s0
 /dev/gpiochip44 u:object_r:vibrator_device:s0
 /dev/logbuffer_btlpm u:object_r:logbuffer_device:s0
+/dev/logbuffer_btwakelock0 u:object_r:logbuffer_device:s0
+/dev/logbuffer_btwakelock1 u:object_r:logbuffer_device:s0
 /dev/logbuffer_dual_batt u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_secondary u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_secondary_monitor u:object_r:logbuffer_device:s0
