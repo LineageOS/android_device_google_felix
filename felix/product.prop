@@ -21,6 +21,9 @@ ro.bluetooth.leaudio_switcher.supported=true
 # Cutout
 ro.support_hide_display_cutout=true
 
+# Device family
+ro.build.device_family=F10
+
 # EUICC
 euicc.seamless_transfer_enabled_in_non_qs=true
 
