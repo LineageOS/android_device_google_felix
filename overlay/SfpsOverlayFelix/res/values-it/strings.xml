@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Quando utilizzi lo Sblocco con l\'Impronta, le immagini vengono usate per aggiornare il modello dell\'impronta. Le immagini usate per creare il modello dell\'impronta non vengono mai archiviate, ma il modello viene memorizzato in modo sicuro sul tuo smartphone e non viene mai trasferito dal dispositivo. L\'intera elaborazione avviene in modo sicuro sul tuo smartphone.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Quando utilizza lo Sblocco con l\'Impronta, le immagini vengono usate per aggiornare il modello dell\'impronta. Le immagini usate per creare il modello dell\'impronta di tuo figlio non vengono mai archiviate, ma il modello viene memorizzato in modo sicuro sul telefono e non viene mai spostato. L\'intera elaborazione avviene in modo sicuro sul telefono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Puoi eliminare il modello dell\'impronta o disattivare lo Sblocco con l\'Impronta in qualsiasi momento nelle Impostazioni. I modelli delle impronte rimangono memorizzati sullo smartphone finché non li elimini.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Tu e tuo figlio potete eliminare il modello dell\'impronta o disattivare lo Sblocco con l\'Impronta in qualsiasi momento nelle Impostazioni. I modelli delle impronte rimangono memorizzati sul telefono finché non vengono eliminati.</string>
+</resources>

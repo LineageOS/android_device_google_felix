@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kapag ginamit mo ang Pag-unlock Gamit ang Fingerprint, gagamitin ang mga larawan para i-update ang modelo ng iyong fingerprint. Hindi kailanman sino-store ang mga larawang ginamit para gawin ang modelo ng iyong fingerprint, pero secure na naka-store ang modelo ng fingerprint sa telepono mo at hindi ito kailanman lalabas sa telepono. Sa iyong telepono secure na nangyayari ang lahat ng pagpoproseso.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kapag ginamit niya ang Pag-unlock Gamit ang Fingerprint, gagamitin ang mga larawan para i-update ang modelo ng kanyang fingerprint. Hindi kailanman sino-store ang mga larawang ginamit para gawin ang modelo ng fingerprint ng iyong anak, pero secure na naka-store ang modelo ng fingerprint sa telepono at hindi ito kailanman lalabas sa telepono. Sa telepono secure na nangyayari ang lahat ng pagpoproseso.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Puwede mong i-delete ang modelo ng iyong fingerprint, o i-off ang Pag-unlock Gamit ang Fingerprint anumang oras sa Mga Setting. Naka-store sa telepono ang mga modelo ng fingerprint hanggang sa i-delete mo ang mga ito.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Magagawa mo at ng iyong anak na i-delete ang mga modelo ng kanyang fingerprint, o i-off ang Pag-unlock Gamit ang Fingerprint anumang oras sa Mga Setting. Naka-store sa telepono ang mga modelo ng fingerprint hanggang sa i-delete ang mga ito.</string>
+</resources>

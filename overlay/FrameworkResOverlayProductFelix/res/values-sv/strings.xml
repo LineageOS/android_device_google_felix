@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown during fingerprint acquisision when the fingerprint cannot be recognized -->
+    <string name="fingerprint_acquired_partial">Se till att fingret täcker sensorn</string>
+
+    <!-- Message shown during fingerprint acquisision when the user removes their finger from the sensor too quickly -->
+    <string name="fingerprint_acquired_too_fast">Håll kvar fingret på sensorn lite längre</string>
+
+    <!-- Message shown during fingerprint acquisition when a Power press has been detected.[CHAR LIMIT=50] -->
+    <string name="fingerprint_acquired_power_press">Nudda sensorn för att fortsätta konfigureringen</string>
+
+    <!-- Generic error message shown when the power button has been pressed. [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_power_pressed">Verifieringen avslutades. Testa att nudda nästa gång.</string>
+
+    <!-- Content of concurrent display thermal notification. [CHAR LIMIT=NONE] -->
+    <string name="concurrent_display_notification_thermal_content">Dual Screen kan inte användas eftersom Pixel-telefonen börjar bli för varm</string>
+</resources>

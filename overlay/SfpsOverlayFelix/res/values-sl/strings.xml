@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Ko uporabljate odklepanje s prstnim odtisom, se model prstnega odtisa posodablja s slikami iz teh interakcij. Slike, iz katerih je ustvarjen model prstnega odtisa, se nikoli ne shranijo, model prstnega odtisa pa se varno shrani v telefon in ga nikoli ne zapusti. Celotna obdelava je izvedena varno v telefonu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Ko otrok uporablja odklepanje s prstnim odtisom, se model prstnega odtisa posodablja s slikami iz teh interakcij. Slike, iz katerih je ustvarjen model otrokovega prstnega odtisa, se nikoli ne shranijo, model prstnega odtisa pa se varno shrani v telefon in ga nikoli ne zapusti. Celotna obdelava je izvedena varno v telefonu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">V nastavitvah lahko kadar koli izbrišete model prstnega odtisa ali izklopite odklepanje s prstnim odtisom. Modeli prstnih odtisov so shranjeni v telefonu, dokler jih ne izbrišete.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Vi in otrok lahko v nastavitvah kadar koli izbrišete model prstnega odtisa ali izklopite odklepanje s prstnim odtisom. Modeli prstnih odtisov so shranjeni v telefonu, dokler niso izbrisani.</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Als je Ontgrendelen met vingerafdruk gebruikt, worden de afbeeldingen gebruikt om je vingerafdrukmodel te updaten. De afbeeldingen die worden gebruikt om je vingerafdrukmodel te maken, worden nooit opgeslagen, maar het vingerafdrukmodel zelf wordt beveiligd opgeslagen op je telefoon en verlaat deze nooit. Alle verwerking vindt beveiligd plaats op je telefoon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Als je kind ontgrendelen met vingerafdruk gebruikt, worden foto\'s gebruikt om het vingerafdrukmodel van je kind te updaten. De foto\'s die worden gebruikt om het vingerafdrukmodel van je kind te maken, worden nooit opgeslagen. Het vingerafdrukmodel zelf wordt beveiligd opgeslagen op de telefoon en verlaat deze nooit. Alle verwerking vindt beveiligd plaats op de telefoon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Je kunt altijd je vingerafdrukmodel verwijderen of Ontgrendelen met vingerafdruk uitzetten in Instellingen. Vingerafdrukmodellen worden opgeslagen op de telefoon totdat je ze verwijdert.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Jij en je kind kunnen op elk moment het vingerafdrukmodel van het kind verwijderen of ontgrendelen met vingerafdruk uitzetten in Instellingen. Vingerafdrukmodellen worden opgeslagen op de telefoon totdat ze worden verwijderd.</string>
+</resources>

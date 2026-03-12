@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Doze: whether the single tap sensor uses the proximity sensor in the given posture.
+        See doze_single_tap_uses_prox for usage. -->
+    <integer-array name="doze_single_tap_uses_prox_posture_mapping">
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+
+    <!-- Type of a sensor that provides a low-power estimate of the desired display
+         brightness, suitable to listen to while the device is asleep (e.g. during
+         always-on display) -->
+    <string name="doze_brightness_sensor_type">com.google.sensor.binned_brightness</string>
+
+    <!-- Name of a sensor per posture state that provides a low-power estimate of the desired
+         display brightness, suitable to listen to while the device is asleep (e.g. during
+         always-on display) -->
+    <string-array name="doze_brightness_sensor_name_posture_mapping">
+        <item/>
+        <item>Binned Brightness 1 (wake-up)</item>
+        <item>Binned Brightness 0 (wake-up)</item>
+        <item>Binned Brightness 0 (wake-up)</item>
+    </string-array>
+
+    <!-- Sensor type per posture state to use for proximity sensor -->
+    <string-array name="proximity_sensor_posture_mapping">
+        <item/>
+        <item>android.sensor.light</item>
+        <item/>
+        <item/>
+    </string-array>
+
+    <!-- If using proximity_sensor_type, specifies a threshold value to distinguish near and
+         far break points. A sensor value less than this is considered "near". -->
+    <item name="proximity_sensor_threshold" format="float" type="dimen">12.0</item>
+
+    <!-- If using proximity_sensor_type, specifies a threshold value to distinguish near and
+         far break points. A sensor value more than this is considered "far". If not set,
+         proximity_sensor_threshold is used. This allows one to implement a latching mechanism for
+         noisy sensors. -->
+    <item name="proximity_sensor_threshold_latch" format="float" type="dimen">24.0</item>
+
+    <!-- Sensor type per posture state to use for proximity sensor as a confirmation for
+        proximity_sensor_type. -->
+    <string-array name="proximity_sensor_secondary_posture_mapping">
+        <item/>
+        <item>android.sensor.proximity</item>
+        <item/>
+        <item/>
+    </string-array>
+
+    <!-- If using proximity_sensor_secondary_type, specifies a threshold value to distinguish
+         near and far break points. A sensor value less than this is considered "near". -->
+    <item name="proximity_sensor_secondary_threshold" format="float" type="dimen">5.0</item>
+
+    <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
+               to brightness values in the integer scale [1, 255]; -1 means keeping the current
+               brightness. -->
+    <integer-array name="config_doze_brightness_sensor_to_brightness">
+        <item>-1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>13</item>
+        <item>13</item>
+    </integer-array>
+
+    <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
+               to an opacity value for a black scrim that is overlayed in AOD1.
+               Valid range is from 0 (transparent) to 255 (opaque).
+               -1 means keeping the current opacity. -->
+    <integer-array name="config_doze_brightness_sensor_to_scrim_opacity">
+        <item>-1</item>
+        <item>133</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+
+    <!-- Doze: whether the double tap sensor reports 2D touch coordinates -->
+    <bool name="doze_double_tap_reports_touch_coordinates">true</bool>
+
+    <!-- Default rounded corner curve (a Bezier). Must match (the curved path in) rounded.xml.
+         Note that while rounded.xml includes the entire path (including the horizontal and vertical
+         corner edges), this pulls out just the curve.
+     -->
+    <string name="config_rounded_mask">M 71,0 C 33,0 22,-1 10,10 -1,22 0,33 0,71</string>
+
+    <!-- A path similar to frameworks/base/core/res/res/values/config.xml
+      config_mainBuiltInDisplayCutout that describes a path larger than the exact path of a outer
+      display cutout. If present as well as config_enableDisplayCutoutProtection is set to true,
+      then SystemUI will draw this "protection path" instead of the display cutout path that is
+      normally used for anti-aliasing.
+
+      This path will only be drawn when the front-facing camera turns on, otherwise the main
+      DisplayCutout path will be rendered
+       -->
+    <string name="config_frontBuiltInDisplayCutoutProtection">m 589.2,66.53 a 49.5,49.5 0 0 1 -49.5,49.5 49.5,49.5 0 0 1 -49.5,-49.5 49.5,49.5 0 0 1 49.5,-49.5 49.5,49.5 0 0 1 49.5,49.5 z</string>
+
+    <!-- ID for the camera of outer display that needs extra protection -->
+    <string name="config_protectedCameraId">1</string>
+
+    <!-- Physical ID for the camera of outer display that needs extra protection -->
+    <string name="config_protectedPhysicalCameraId">5</string>
+
+    <!-- Comma-separated list of packages to exclude from camera protection e.g.
+    "com.android.systemui,com.android.xyz" -->
+    <string name="config_cameraProtectionExcludedPackages">com.google.android.as</string>
+
+    <!--  Flag to turn on the rendering of the above path or not  -->
+    <bool name="config_enableDisplayCutoutProtection">true</bool>
+
+    <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
+         means systemui will try listening on all postures.
+         0 : DEVICE_POSTURE_UNKNOWN
+         1 : DEVICE_POSTURE_CLOSED
+         2 : DEVICE_POSTURE_HALF_OPENED
+         3 : DEVICE_POSTURE_OPENED
+         4 : DEVICE_POSTURE_FLIPPED
+    -->
+    <integer name="config_face_auth_supported_posture">1</integer>
+
+    <!--  Whether to use a machine learning model for back gesture falsing. -->
+    <bool name="config_useBackGestureML">false</bool>
+</resources>

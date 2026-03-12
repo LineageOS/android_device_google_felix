@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Ձեր մատնահետքի նմուշը թարմացվում է մատնահետքով ապակողպման ընթացքում ստացված պատկերների հիման վրա։ Նմուշը պահվում է միայն ձեր հեռախոսում, իսկ այն ստեղծելու ժամանակ արված լուսանկարները չեն պահվում։ Բոլոր մշակումները կատարվում են անմիջապես ձեր հեռախոսում։</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Ձեր երեխայի մատնահետքի նմուշը թարմացվում է մատնահետքով ապակողպման ընթացքում ստացված պատկերների հիման վրա։ Նմուշը պահվում է միայն հեռախոսում, իսկ այն ստեղծելու ժամանակ արված լուսանկարները չեն պահվում։ Բոլոր մշակումները կատարվում են անմիջապես հեռախոսում։</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Դուք ցանկացած պահի կարող եք ջնջել ձեր մատնահետքի նմուշը կամ անջատել մատնահետքով ապակողպումը կարգավորումներում։ Մատնահետքի նմուշները կպահվեն հեռախոսում, մինչև որ ջնջեք դրանք։</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Դուք և ձեր երեխան ցանկացած պահի կարող եք ջնջել նրա մատնահետքի նմուշը կամ անջատել մատնահետքով ապակողպումը սարքի կարգավորումներում։ Մատնահետքի նմուշները կպահվեն հեռախոսում, մինչև որ ջնջեք դրանք։</string>
+</resources>

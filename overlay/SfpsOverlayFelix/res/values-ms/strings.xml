@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Apabila anda menggunakan Buka Kunci Cap Jari, imej digunakan untuk mengemaskinikan model cap jari anda. Imej yang digunakan untuk menghasilkan model cap jari tidak akan disimpan, tetapi model cap jari disimpan dengan selamat pada telefon dan tidak akan keluar daripada telefon. Semua pemprosesan berlaku dengan selamat pada telefon anda.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Apabila anak anda menggunakan Buka Kunci Cap Jari, imej digunakan untuk mengemas kini model cap jari anak anda. Imej yang digunakan untuk menghasilkan model cap jari anak anda tidak akan disimpan, tetapi model cap jari disimpan dengan selamat pada telefon dan tidak akan keluar daripada telefon. Semua pemprosesan berlaku dengan selamat pada telefon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Anda boleh memadamkan model cap jari anda atau mematikan Buka Kunci Cap Jari pada bila-bila masa dalam Tetapan. Model cap jari disimpan dalam telefon sehingga anda memadamkan model itu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Anda dan anak anda boleh memadamkan model cap jari anak anda atau mematikan Buka Kunci Cap Jari pada bila-bila masa dalam Tetapan. Model cap jari disimpan dalam telefon sehingga model itu dipadamkan.</string>
+</resources>

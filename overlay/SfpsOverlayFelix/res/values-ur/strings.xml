@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">جب آپ فنگر پرنٹ اَن لاک کا استعمال کرتے ہیں تو تصاویر آپ کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل آپ کے فون پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی فون سے باہر نہیں جاتا ہے۔ آپ کے فون پر سبھی کاروائیاں محفوظ طریقے سے ہوتی ہیں۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">جب وہ فنگر پرنٹ اَن لاک کا استعمال کرتے ہیں تو تصاویر ان کے فنگر پرنٹ ماڈل کو اپ ڈیٹ کرنے کے لیے استعمال کی جاتی ہیں۔ آپ کے بچے کے فنگر پرنٹ کا ماڈل تخلیق کرنے کے لیے استعمال کی جانے والی تصاویر کو کبھی بھی اسٹور نہیں کیا جاتا ہے لیکن فنگر پرنٹ ماڈل کو فون پر محفوظ طریقے سے اسٹور کیا جاتا ہے اور یہ کبھی بھی فون سے باہر نہیں جاتا ہے۔ فون پر سبھی کارروائیاں محفوظ طریقے سے ہوتی ہیں۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">آپ اپنے فنگر پرنٹ ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کی خصوصیت کو آف کر سکتے ہیں۔ فنگر پرنٹ کے ماڈلز فون پر تب تک اسٹور ہوتے ہیں جب تک آپ انہیں حذف نہیں کرتے ہیں۔</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">آپ اور آپ کا بچہ اپنے فنگر پرنٹ ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کو آف کر سکتے ہیں۔ فنگر پرنٹ کے ماڈلز کو فون پر تب تک اسٹور کیا جاتا ہے جب تک انہیں حذف نہیں کیا جاتا ہے۔</string>
+</resources>

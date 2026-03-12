@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- ComponentName to launch a vendor-specific posture guidance activity if available -->
+    <string name="config_face_enroll_guidance_page">com.android.settings/com.google.android.settings.biometrics.face.FaceEnrollFoldPage</string>
+
+    <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
+     means setting will try listening on device posture changes.
+     0 : DEVICE_POSTURE_UNKNOWN
+     1 : DEVICE_POSTURE_CLOSED
+     2 : DEVICE_POSTURE_HALF_OPENED
+     3 : DEVICE_POSTURE_OPENED
+     4 : DEVICE_POSTURE_FLIPPED
+     -->
+    <integer name="config_face_enroll_supported_posture">1</integer>
+
+    <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
+         length and order as config_userAspectRatioOverrideValues below.
+
+         If changed, also update the Backup & Restore logic for choosing the closest value in
+         com/android/settings/applications/appcompat/UserAspectRatioBackupManager.java -->
+    <string-array name="config_userAspectRatioOverrideEntries">
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </string-array>
+
+    <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
+         length and order as config_userAspectRatioOverrideEntries above. The values must
+         correspond to PackageManager.UserMinAspectRatio.
+
+         If changed, also update the Backup & Restore logic for choosing the closest value in
+         com/android/settings/applications/appcompat/UserAspectRatioBackupManager.java -->
+    <integer-array name="config_userAspectRatioOverrideValues">
+        <item>0</item>
+        <item>6</item>
+        <item>1</item>
+    </integer-array>
+
+    <!-- The smallest value of current width of the window when the split should be used. -->
+    <integer name="config_activity_embed_split_min_cur_dp">600</integer>
+
+    <!-- Whether the toggle for Auto-rotate with Face Detection should be shown. -->
+    <bool name="config_auto_rotate_face_detection_available">false</bool>
+</resources>

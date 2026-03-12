@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Unapotumia kipengele cha Kufungua kwa alama ya kidole, picha zinatumiwa kusasisha muundo wa alama ya kidole chako. Picha zinazotumiwa kuunda muundo wa alama ya kidole chako hazihifadhiwi, ila muundo wa alama ya kidole unahifadhiwa kwa njia salama kwenye simu yako na husalia kwenye simu. Mchakato wote hufanyika kwenye simu yako kwa njia salama.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Anapotumia kipengele cha Kufungua kwa alama ya kidole, picha zinatumiwa ili kusasisha muundo wa alama ya kidole chake. Picha zinazotumiwa kuunda muundo wa alama ya kidole cha mtoto wako hazihifadhiwi, ila muundo wa alama ya kidole unahifadhiwa kwenye simu kwa njia salama na husalia mle. Mchakato wote hufanyika kwenye simu kwa njia salama.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Unaweza kufuta muundo wa alama ya kidole chako au uzime kipengele cha Kufungua kwa Alama ya Kidole wakati wowote katika Mipangilio. Miundo ya alama ya kidole inahifadhiwa kwenye simu hadi utakapoifuta.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Wewe na mtoto wako mnaweza kufuta miundo ya alama ya vidole vyenu, au kuzima kipengele cha Kufungua kwa Alama ya Kidole wakati wowote katika Mipangilio. Miundo ya alama ya kidole inahifadhiwa kwenye simu hadi utakapoifuta.</string>
+</resources>

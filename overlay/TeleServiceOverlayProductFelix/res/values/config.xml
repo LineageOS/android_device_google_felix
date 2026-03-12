@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Whether or not to support device to device communication using RTP and DTMF communication
+         transports. -->
+    <bool name="config_use_device_to_device_communication">true</bool>
+</resources>

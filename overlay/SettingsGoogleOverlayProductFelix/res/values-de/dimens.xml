@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Fingerprint -->
+    <dimen name="sfps_enrollment_finished_icon_max_size">228dp</dimen>
+    <dimen name="sfps_enroll_finish_icon_margin_top">-50dp</dimen>
+</resources>

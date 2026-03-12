@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">በጣት አሻራ መክፈቻን ሲጠቀሙ ምስሎች የእርስዎን የጣት አሻራ ሞዴል ለማዘመን ሥራ ላይ ይውላሉ። የእርስዎን የጣት አሻራ ሞዴል ለመፍጠር ሥራ ላይ የዋሉ ምስሎች በጭራሽ አይከማቹም፣ ነገር ግን የጣት አሻራ ሞዴሉ በስልክዎ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከማቻል እና በጭራሽ ከስልኩ አይወጣም። ሁሉም ማሰናዳት በስልክዎ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከናወናል።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">በጣት አሻራ መክፈቻን ሲጠቀሙ የጣት አሻራቸውን ሞዴል ለማዘመን ምስሎች ሥራ ላይ ይውላሉ። የልጅዎን የጣት አሻራ ሞዴል ለመፍጠር ሥራ ላይ የዋሉ ምስሎች በጭራሽ አይከማቹም ነገር ግን የጣት አሻራ ሞዴሉ በስልኩ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከማቻል እና በጭራሽ ከስልኩ አይወጣም። ሁሉም ማሰናዳት በስልኩ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከናወናል።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">የጣት አሻራዎን ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መክፈቻን ማጥፋት ይችላሉ። የጣት አሻራ ሞዴሎች እስኪሰርዟቸው ድረስ በስልኩ ላይ ይከማቻሉ።</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">እርስዎ እና ልጅዎ የጣት አሻራቸውን ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መክፈቻን ማጥፋት ትችላላችሁ። የጣት አሻራ ሞዴሎች እስኪሰረዙ ድረስ በስልኩ ላይ ይከማቻሉ።</string>
+</resources>

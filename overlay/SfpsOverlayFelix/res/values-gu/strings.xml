@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">જ્યારે તમે ફિંગરપ્રિન્ટ અનલૉક કરવાની સુવિધાનો ઉપયોગ કરો, ત્યારે તમારી ફિંગરપ્રિન્ટના મૉડલને અપડેટ કરવા માટે છબીઓનો ઉપયોગ કરવામાં આવે છે. તમારી ફિંગરપ્રિન્ટનું મૉડલ બનાવવા માટે ઉપયોગમાં લેવાયેલી છબીઓને ક્યારેય પણ સ્ટોર કરવામાં આવતી નથી, પણ ફિંગરપ્રિન્ટના મૉડલને તમારા ફોન પર સુરક્ષિત રીતે સ્ટોર કરવામાં આવે છે અને તે હંમેશાં તમારા ફોનમાં જ રહે છે. બધી પ્રક્રિયાઓ સુરક્ષિત રીતે તમારા ફોનમાં જ કરવામાં આવે છે.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">જ્યારે તેઓ ફિંગરપ્રિન્ટ અનલૉક કરવાની સુવિધાનો ઉપયોગ કરે, ત્યારે તેમની ફિંગરપ્રિન્ટના મૉડલને અપડેટ કરવા માટે છબીઓનો ઉપયોગ કરવામાં આવે છે. તમારા બાળકની ફિંગરપ્રિન્ટનું મૉડલ બનાવવા માટે ઉપયોગમાં લેવાયેલી છબીઓને ક્યારેય પણ સ્ટોર કરવામાં આવતી નથી, પણ ફિંગરપ્રિન્ટના મૉડલને તમારા ફોન પર સુરક્ષિત રીતે સ્ટોર કરવામાં આવે છે અને તે હંમેશાં તમારા ફોનમાં જ રહે છે. બધી પ્રક્રિયાઓ સુરક્ષિત રીતે ફોનમાં જ કરવામાં આવે છે.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">તમે તમારી ફિંગરપ્રિન્ટનું મૉડલ ડિલીટ કરી શકો છો અથવા કોઈપણ સમયે સેટિંગમાં ફિંગરપ્રિન્ટ વડે અનલૉક કરવાની સુવિધાને બંધ કરી શકો છો. જ્યાં સુધી તમે ફિંગરપ્રિન્ટના મૉડલ ડિલીટ ન કરો, ત્યાં સુધી તેમને તમારા ફોન પર સ્ટોર કરવામાં આવે છે.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">સેટિંગમાં જઈને તમે અને તમારું બાળક કોઈપણ સમયે તેમની ફિંગરપ્રિન્ટનનું મૉડલ ડિલીટ કરી શકશો અથવા ફિંગરપ્રિન્ટ અનલૉક સુવિધા બંધ કરી શકશો. જ્યાં સુધી ફિંગરપ્રિન્ટના મૉડલ ડિલીટ ન કરવામાં આવે, ત્યાં સુધી તેને ફોન પર સ્ટોર કરવામાં આવે છે.</string>
+</resources>

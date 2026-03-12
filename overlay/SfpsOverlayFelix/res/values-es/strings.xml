@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Cuando usas Desbloqueo con huella digital, se usan imágenes para actualizar el modelo de tu huella digital. Las imágenes usadas para crear el modelo de tu huella digital nunca se guardan, pero el modelo en sí se almacena de manera segura en tu teléfono y nunca sale de él. Todos los procesos se llevan a cabo de forma segura en tu teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Cuando usa Desbloqueo con Huella Digital, se utilizan imágenes para actualizar el modelo de su huella digital. Las imágenes usadas para crear el modelo de huella digital de tu hijo/a nunca se guardan, pero el modelo en sí se almacena de manera segura en el teléfono y nunca sale de él. Todos los procesos se llevan a cabo de forma segura en el teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Puedes eliminar el modelo de tu huella digital o desactivar Desbloqueo con huella digital cuando quieras desde Ajustes. Los modelos de huella digital quedan almacenados en el teléfono hasta que los eliminas.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Tú y tu hijo/a podéis eliminar el modelo de su huella digital, así como desactivar Desbloqueo con huella digital en cualquier momento desde Ajustes. Los modelos de huella digital se almacenan en el teléfono hasta que se eliminan.</string>
+</resources>

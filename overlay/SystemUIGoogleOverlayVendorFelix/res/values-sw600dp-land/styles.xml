@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <style name="AuthNonBioCredentialPatternContainerStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:maxWidth">@dimen/biometric_auth_pattern_view_max_size</item>
+        <item name="android:maxHeight">@dimen/biometric_auth_pattern_view_max_size</item>
+        <item name="android:minWidth">@dimen/biometric_auth_pattern_view_size</item>
+        <item name="android:minHeight">@dimen/biometric_auth_pattern_view_size</item>
+        <item name="android:paddingVertical">40.0dip</item>
+    </style>
+</resources>

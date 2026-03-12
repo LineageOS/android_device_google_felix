@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Када користите откључавање отиском прста, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Када дете користи откључавање отиском прста, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење дететовог модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Можете да избришете модел отиска прста или да искључите откључавање отиском прста у било ком тренутку у Подешавањима. Модели отисака прстију се чувају на телефону док их не избришете.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Ви и дете можете да избришете његов модел отиска прста или да искључите откључавање отиском прста у било ком тренутку у Подешавањима. Модели отисака прстију се чувају на телефону док се не избришу.</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kiedy używasz funkcji odblokowywania odciskiem palca, obrazy są wykorzystywane do aktualizowania modelu odcisku palca. Obrazy użyte do utworzenia modelu odcisku palca nie są zapisywane, a sam model jest bezpiecznie przechowywany tylko na telefonie i nigdy nie jest nigdzie przekazywany. Przetwarzanie danych odbywa się w całości na telefonie w bezpieczny sposób.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kiedy Twoje dziecko używa funkcji odblokowywania odciskiem palca, obrazy są wykorzystywane do aktualizowania modelu odcisku palca. Obrazy użyte do utworzenia modelu odcisku palca nigdy nie są zapisywane, a sam model jest bezpiecznie przechowywany na telefonie i nigdy go nie opuszcza. Przetwarzanie danych odbywa się w całości na telefonie w bezpieczny sposób.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">W dowolnej chwili możesz usunąć model odcisku palca i wyłączyć odblokowywanie odciskiem palca w Ustawieniach. Modele odcisków palców są zapisane na telefonie, dopóki ich nie usuniesz.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Ty i Twoje dziecko w dowolnej chwili możecie usunąć model odcisku palca i wyłączyć odblokowywanie odciskiem palca w Ustawieniach. Modele odcisku palca są przechowywane na telefonie, dopóki nie zostaną usunięte.</string>
+</resources>

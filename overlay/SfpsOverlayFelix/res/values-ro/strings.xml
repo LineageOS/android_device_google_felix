@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Când folosești Deblocarea cu amprenta, imaginile sunt folosite pentru a-ți actualiza modelul de amprentă. Imaginile folosite pentru a-ți crea modelul de amprentă nu sunt stocate niciodată, dar modelul este stocat în siguranță pe telefon și nu-l părăsește niciodată. Toată procesarea are loc în siguranță pe telefonul tău.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Când folosește Deblocarea cu amprenta, imaginile sunt folosite pentru a-i actualiza modelul de amprentă. Imaginile folosite pentru a crea modelul de amprentă al copilului nu se stochează niciodată, dar modelul de amprentă este stocat în siguranță pe telefon și nu părăsește niciodată dispozitivul. Toată procesarea are loc în siguranță pe telefon.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Poți să ștergi modelul de amprentă sau să dezactivezi Deblocarea cu amprenta oricând din Setări. Modelele de amprentă sunt stocate pe telefon până când le ștergi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Tu și copilul tău puteți să ștergeți modelul de amprentă sau să dezactivați Deblocarea cu amprenta oricând din Setări. Modelele de amprentă sunt stocate pe telefon până când le ștergi.</string>
+</resources>

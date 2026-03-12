@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown during fingerprint acquisision when the fingerprint cannot be recognized -->
+    <string name="fingerprint_acquired_partial">Пераканайцеся, што палец закрывае сабой датчык</string>
+
+    <!-- Message shown during fingerprint acquisision when the user removes their finger from the sensor too quickly -->
+    <string name="fingerprint_acquired_too_fast">Утрымлівайце палец на датчыку крыху даўжэй</string>
+
+    <!-- Message shown during fingerprint acquisition when a Power press has been detected.[CHAR LIMIT=50] -->
+    <string name="fingerprint_acquired_power_press">Каб працягнуць наладку, злёгку націсніце датчык</string>
+
+    <!-- Generic error message shown when the power button has been pressed. [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_power_pressed">Спраўджанне выканана. У наступны раз злёгку дакраніцеся.</string>
+
+    <!-- Content of concurrent display thermal notification. [CHAR LIMIT=NONE] -->
+    <string name="concurrent_display_notification_thermal_content">Функцыя Dual Screen недаступная, бо тэлефон Pixel моцна награваецца</string>
+</resources>

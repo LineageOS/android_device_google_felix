@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">ඔබ ඇඟිලි සලකුණු අගුළු හැරීම භාවිතා කරන විට, ඔබේ ඇඟිලි සලකුණු ආකෘතිය යාවත්කාලීන කිරීමට රූප භාවිතා වේ. ඔබේ ඇඟිලි සලකුණු ආකෘතිය තැනීමට භාවිතා කරන රූප කිසි විටක ගබඩා නොකරනු ඇති නමුත්, ඇඟිලි සලකුණු ආකෘතිය ඔබේ දුරකථනයෙහි සුරක්ෂිතව ගබඩා කර ඇති අතර කිසි විටක දුරකථනය හැර නොයයි. සියලු සැකසීම් ඔබේ දුරකථනයෙහි සුරක්ෂිතව සිදු වේ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">ඔවුන් ඇඟිලි සලකුණු අගුළු හැරීම භාවිතා කරන විට, ඔවුන්ගේ ඇඟිලි සලකුණු ආකෘතිය යාවත්කාලීන කිරීමට රූප භාවිතා වේ. ඔබගේ දරුවාගේ ඇඟිලි සලකුණු ආකෘතිය තැනීමට භාවිත කරන රූප කිසි විටක ගබඩා නොකරනු ඇත, නමුත් ඇඟිලි සලකුණු ආකෘතිය දුරකථනයේ ආරක්ෂිතව ගබඩා කර ඇති අතර කිසි විටක දුරකථනය හැර නොයයි. සියලු සැකසීම් දුරකථනයේ ආරක්ෂිතව සිදු වේ.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">ඔබට සැකසීම් තුළ ඕනෑම වේලාවක ඔබගේ ඇඟිලි සලකුණු ආකෘතිය මැකීමට හෝ ඇඟිලි සලකුණු අගුළු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු ආකෘති ඔබ මකන තෙක් දුරකථනයේ ගබඩා කර ඇත.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">ඔබට සහ ඔබගේ දරුවාට සැකසීම් තුළ ඕනෑම වේලාවක සිය ඇඟිලි සලකුණු ආකෘතිය මැකීමට හෝ ඇඟිලි සලකුණු අගුලු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු ආකෘති ඒ්වා මකන තෙක් දුරකථනයේ ගබඩා කර ඇත.</string>
+</resources>

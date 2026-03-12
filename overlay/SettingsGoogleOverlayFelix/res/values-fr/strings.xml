@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
+    <string name="edge_to_edge_navigation_summary">Pour revenir à l\'accueil, balayez rapidement vers le haut depuis le bas de l\'écran. Pour accéder à la barre des tâches, balayez lentement vers le haut depuis le bas de l\'écran. Pour changer d\'appli, balayez vers le haut depuis le bas de l\'écran, maintenez l\'appui et relâchez. Pour revenir en arrière, balayez depuis le bord gauche ou depuis le bord droit.</string>
+
+    <string name="setting_auto_rotate_folded">Rotation automatique en mode plié</string>
+
+    <string name="setting_auto_rotate_unfolded">Rotation automatique en mode déplié</string>
+</resources>

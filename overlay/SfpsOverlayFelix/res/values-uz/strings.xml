@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Barmoq izi bilan ochish funksiyasidan foydalanganingizda rasmlar barmoq izingiz modelini yangilash uchun ishlatiladi. Barmoq izi modelini yaratishda ishlatiladigan rasmlar hech qachon saqlanmaydi, lekin barmoq izi modeli telefoningizda xavfsiz saqlanadi va hech qachon tashqariga yuklanmaydi. Barcha ishlar telefoningizda xavfsiz amalga oshiriladi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Barmoq izi bilan ochish funksiyasi ishlatilganida uning barmoq izi modeli rasmlar yordamida yangilanadi. Farzandingiz barmoq izi modelini yaratishda ishlatiladigan rasmlar hech qachon saqlanmaydi, lekin barmoq izi modeli telefonda xavfsiz saqlanadi va hech qachon tashqariga yuklanmaydi. Barcha ishlar telefonda xavfsiz amalga oshiriladi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Istalgan vaqt Sozlamalar orqali barmoq izi modelini oʻchirib tashlashingiz yoki barmoq izi bilan ochishni faolsizlantirishingiz mumkin. Barmoq izi modellari telefonda oʻchirilmaguncha saqlanadi.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Siz va farzandingiz istalgan vaqt Sozlamalar orqali barmoq izi modelini oʻchirib tashlashingiz yoki barmoq izi bilan ochishni faolsizlantirishingiz mumkin. Barmoq izi modellari telefonda oʻchirilmaguncha saqlanadi.</string>
+</resources>

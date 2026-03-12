@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">கைரேகை அன்லாக் அம்சத்தைப் பயன்படுத்தும்போது உங்கள் கைரேகைப் பதிவைச் சேர்க்க படங்கள் பயன்படுத்தப்படும். கைரேகைப் பதிவை உருவாக்கப் பயன்படுத்தப்படும் படங்கள் ஒருபோதும் சேமிக்கப்படாது. ஆனால் கைரேகைப் பதிவு உங்கள் மொபைலில் பாதுகாப்பாகச் சேமிக்கப்படும், அது ஒருபோதும் பகிரப்படாது. செயலாக்கம் முழுவதும் உங்கள் மொபைலிலேயே பாதுகாப்பாக நடைபெறும்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">கைரேகை அன்லாக் அம்சத்தை உங்கள் பிள்ளை பயன்படுத்தும்போது அவரது கைரேகைப் பதிவைச் சேர்க்க படங்கள் பயன்படுத்தப்படும். உங்கள் பிள்ளையின் கைரேகைப் பதிவை உருவாக்குவதற்குப் பயன்படுத்தப்படும் படங்கள் ஒருபோதும் சேமிக்கப்படாது. ஆனால் கைரேகைப் பதிவு பாதுகாப்பாக மொபைலில் சேமிக்கப்படும், அது ஒருபோதும் பகிரப்படாது. செயலாக்கம் முழுவதும் மொபைலிலேயே பாதுகாப்பாக நடைபெறும்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">உங்கள் கைரேகைப் பதிவை நீக்கலாம் அல்லது அமைப்புகளில் எப்போது வேண்டுமானாலும் \'கைரேகை அன்லாக்\' அம்சத்தை ஆஃப் செய்யலாம். கைரேகைப் பதிவுகளை நீங்கள் நீக்கும் வரை அவை மொபைலிலேயே சேமிக்கப்பட்டிருக்கும்.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">அமைப்புகளில் எப்போது வேண்டுமானாலும் நீங்களும் உங்கள் பிள்ளையும் அவர்களின் கைரேகைப் பதிவை நீக்கலாம், கைரேகை அன்லாக் அம்சத்தை ஆஃப் செய்யலாம். நீக்கப்படும் வரை கைரேகைப் பதிவுகள் மொபைலிலேயே சேமிக்கப்பட்டிருக்கும்.</string>
+</resources>

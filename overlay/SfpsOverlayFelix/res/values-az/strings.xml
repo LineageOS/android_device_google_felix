@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Barmaq izi ilə kiliddən çıxarmadan istifadə etdikdə, barmaq izi modelinizi güncəlləmək üçün şəkillərdən istifadə olunur. Barmaq izi modelinizi yaratmaq üçün istifadə edilən şəkillər heç vaxt saxlanılmır, lakin barmaq izi modeli telefonunuzda təhlükəsiz qaydada saxlanılır və heç vaxt telefondan başqa yerə göndərilmir. Bütün emal prosesi telefonunuzda təhlükəsiz qaydada baş verir.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Barmaq izi ilə kiliddən çıxarmadan istifadə etdikdə, onun barmaq izi modelini güncəlləmək üçün şəkillərdən istifadə olunur. Övladınızın barmaq izi modelini yaratmaq üçün istifadə edilən şəkillər heç vaxt saxlanılmır, lakin barmaq izi modeli telefonda təhlükəsiz qaydada saxlanılır və heç vaxt telefondan başqa yerə göndərilmir. Bütün emal prosesi telefonda təhlükəsiz qaydada baş verir.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Ayarlarda istənilən vaxt barmaq izi modelinizi silə, yaxud Barmaq izi ilə kiliddən çıxarmanı deaktiv edə bilərsiniz. Barmaq izi modelləri siz onları silənə qədər telefonunuzda saxlanılır.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Siz və övladınız ayarlarda istənilən vaxt barmaq izi modelinizi silə, yaxud Barmaq izi ilə kiliddən çıxarmanı deaktiv edə bilərsiniz. Barmaq izi modelləri silinənə qədər telefonda saxlanılır.</string>
+</resources>

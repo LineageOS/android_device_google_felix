@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Hatz-marka bidez desblokeatzea erabiltzen duzunean, zure hatz-markaren eredua eguneratzeko erabiltzen dira irudiak. Hatz-markaren eredua sortzeko erabilitako irudiak ez dira inoiz gordetzen, baina hatz-markaren eredua telefonoan gordetzen da segurtasun osoz, eta ez da inoiz ateratzen bertatik. Guztia telefonoan prozesatzen da, modu seguruan.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Hatz-marka bidez desblokeatzeko eginbidea erabiltzen duenean, haren hatz-markaren eredua eguneratzeko erabiltzen dira irudiak. Haurraren hatz-markaren eredua sortzeko erabilitako irudiak ez dira inoiz biltegiratzen, baina hatz-markaren eredua telefonoan gordetzen da, modu seguruan, eta ez da inoiz ateratzen telefonotik. Guztia telefonoan prozesatzen da, modu seguruan.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Hatz-markaren eredua ezabatzeko edo hatz-marka bidez desblokeatzeko eginbidea desaktibatzeko, joan Ezarpenak atalera. Ezabatzen dituzun arte, telefonoan gordeko dira hatz-markaren ereduak.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Haurrak eta zuk haren hatz-markaren eredua ezabatu nahi baduzue edo hatz-marka bidez desblokeatzeko eginbidea desaktibatu nahi baduzue, joan Ezarpenak atalera. Ezabatzen dituzuen arte, telefonoan gordeko dira hatz-markaren ereduak.</string>
+</resources>

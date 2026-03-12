@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown during fingerprint acquisision when the fingerprint cannot be recognized -->
+    <string name="fingerprint_acquired_partial">Assurez-vous que votre doigt recouvre le lecteur</string>
+
+    <!-- Message shown during fingerprint acquisision when the user removes their finger from the sensor too quickly -->
+    <string name="fingerprint_acquired_too_fast">Maintenez votre doigt sur le lecteur un peu plus longtemps</string>
+
+    <!-- Message shown during fingerprint acquisition when a Power press has been detected.[CHAR LIMIT=50] -->
+    <string name="fingerprint_acquired_power_press">Pour continuer, touchez légèrement le lecteur</string>
+
+    <!-- Generic error message shown when the power button has been pressed. [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_power_pressed">Validation arrêtée. Essayez vraiment d\'effleurer le capteur la prochaine fois.</string>
+
+    <!-- Content of concurrent display thermal notification. [CHAR LIMIT=NONE] -->
+    <string name="concurrent_display_notification_thermal_content">Dual Screen n\'est pas disponible, car votre téléphone Pixel surchauffe</string>
+</resources>

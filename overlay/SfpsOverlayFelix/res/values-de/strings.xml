@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Wenn du die Funktion „Entsperrung per Fingerabdruck“ nutzt, werden Bilder zum Aktualisieren deines Fingerabdruckmodells verwendet. Diese Bilder werden niemals gespeichert. Das Fingerabdruckmodell selbst wird sicher auf deinem Smartphone abgelegt und verbleibt dort. Die entsprechenden Daten werden unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Smartphone verarbeitet.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Wenn dein Kind die Funktion „Entsperrung per Fingerabdruck“ nutzt, werden Bilder zum Aktualisieren seines Fingerabdruckmodells verwendet. Diese Bilder werden niemals gespeichert. Das Fingerabdruckmodell selbst wird sicher auf dem Smartphone abgelegt und verbleibt dort. Die entsprechenden Daten werden unter Einhaltung aller Sicherheitsvorgaben ausschließlich auf dem Smartphone verarbeitet.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Du kannst jederzeit dein Fingerabdruckmodell löschen oder die Entsperrung per Fingerabdruck in den Einstellungen deaktivieren. Fingerabdruckmodelle bleiben auf deinem Smartphone gespeichert, bis du sie löschst.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Du und dein Kind können jederzeit das Fingerabdruckmodell löschen oder die Funktion „Entsperrung per Fingerabdruck“ in den Einstellungen deaktivieren. Fingerabdruckmodelle bleiben auf dem Smartphone gespeichert, bis sie gelöscht werden.</string>
+</resources>

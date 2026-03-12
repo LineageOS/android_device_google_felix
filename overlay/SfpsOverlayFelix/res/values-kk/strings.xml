@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Саусақ ізімен ашу функциясын қолданған кезде, кескіндер саусақ ізінің үлгісін жаңарту үшін пайдаланылады. Саусақ ізінің үлгісін жасау үшін қолданылған суреттер ешқашан сақталмайды, бірақ саусақ ізі үлгісі телефонда қауіпсіз түрде сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмысы телефонда ғана орындалады.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Саусақ ізімен ашу функциясын қолданған кезде, кескіндер саусақ ізінің үлгісін жаңарту үшін қолданылады. Балаңыздың саусақ ізінің үлгісін жасау үшін қолданылған кескіндер ешқашан сақталмайды, бірақ саусақ ізінің үлгісі телефонда қауіпсіз түрде сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмысы қауіпсіз түрде телефонда орындалады.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Кез келген уақытта \"Параметрлер\" бөлімінен саусақ ізінің үлгісін жоюға немесе құлыпты саусақ ізі арқылы ашу функциясын өшіріп қоюға болады. Үлгілер өзіңіз жойғанша телефонда сақталады.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Балаңыз екеуіңіз кез келген уақытта \"Параметрлер\" бөлімінен саусақ ізінің үлгісін жоя аласыздар, сондай-ақ Саусақ ізімен ашу функциясын өшіріп қоюға болады. Саусақ ізінің үлгілері жойылмайынша, телефонда сақталады.</string>
+</resources>

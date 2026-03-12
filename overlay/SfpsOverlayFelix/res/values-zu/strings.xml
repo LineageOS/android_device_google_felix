@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Lapho usebenzisa Ukuvula Ngesigxivizo Somunwe, imifanekiso isetshenziselwa ukuvuselela imodeli yakho yesigxivizo somunwe. Imifanekiso esetshenziselwe ukusungula imodeli yesigxivizo somunwe wakho ayilokothi igcinwe, kodwa imodeli yesigxivizo somunwe igcinwa ngokuphephile kufoni yakho futhi ayilokothi ishiye ifoni. Konke ukucubungula kwenzeka ngokuphepha kufoni yakho.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Uma isebenzisa Ukuvula Kwesigxivizo Somunwe, imifanekiso isetshenziselwa ukubuyekeza imodeli yayo yesigxivizo somunwe. Izithombe ezisetshenziselwe ukusungula imodeli yesigxivizo somunwe yengane yakho azilokothi zigcinwe, kodwa imodeli yesigxivizo seminwe igcinwa ngokuphephile kwifoni futhi ayilokothi ishiye ifoni. Konke ukucubungula kwenzeka ngokuphepha kwifoni.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Ungasula imodeli yakho yesigxivizo somunwe, noma uvale Ukuvula Isigxivizo Somunwe noma kunini Kumasethingi. Amamodeli wesigxivizo somunwe namamodeli kugcinwa kwifoni kuze kube yilapho uzisula.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Wena nengane yakho ningasula imodeli yesigxivizo somunwe wayo, noma uvale Ukuvula Ngesigxivizo Somunwe noma kunini Kumasethingi. Amamodeli esigxivizo sominwe agcinwa efonini aze asulwe.</string>
+</resources>

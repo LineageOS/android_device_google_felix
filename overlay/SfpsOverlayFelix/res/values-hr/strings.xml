@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kad koristite otključavanje otiskom prsta, za ažuriranje modela vašeg otiska prsta koriste se slike. Slike koje se koriste za izradu modela vašeg otiska prsta nikad se ne pohranjuju, ali se model otiska prsta sigurno pohranjuje na vašem telefonu i nikad se ne šalje s telefona. Sva se obrada vrši sigurno na vašem uređaju.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kad koristi otključavanje otiskom prsta, slike se upotrebljavaju za ažuriranje modela njegovog otiska prsta. Slike koje se koriste za izradu modela djetetovog otiska prsta nikad se ne pohranjuju, ali se model otiska prsta sigurno pohranjuje na telefonu i nikad se ne šalje s telefona. Sva se obrada vrši sigurno na telefonu.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">U postavkama uvijek možete izbrisati model otiska prsta ili isključiti otključavanje otiskom prsta. Modeli otiska prsta pohranjuju se na telefonu dok ih ne izbrišete.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Dijete i vi uvijek možete izbrisati model otiska prsta ili isključiti otključavanje otiskom prsta u postavkama. Modeli otiska prsta pohranjuju se na telefonu dok se ne izbrišu.</string>
+</resources>

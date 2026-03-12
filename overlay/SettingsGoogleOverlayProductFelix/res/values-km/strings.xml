@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message">សកម្មភាពនេះ​លុបគំរូស្នាមម្រាមដៃ​ដែលបានភ្ជាប់ជាមួយ \'%1$s\' ដែលត្រូវបានរក្សាទុក​នៅលើទូរសព្ទរបស់អ្នក</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown during fingerprint acquisision when the fingerprint cannot be recognized -->
+    <string name="fingerprint_acquired_partial">โปรดวางนิ้วไว้บนเซ็นเซอร์</string>
+
+    <!-- Message shown during fingerprint acquisision when the user removes their finger from the sensor too quickly -->
+    <string name="fingerprint_acquired_too_fast">วางนิ้วบนเซ็นเซอร์ให้นานขึ้นเล็กน้อย</string>
+
+    <!-- Message shown during fingerprint acquisition when a Power press has been detected.[CHAR LIMIT=50] -->
+    <string name="fingerprint_acquired_power_press">แตะเซ็นเซอร์เบาๆ เพื่อตั้งค่าต่อ</string>
+
+    <!-- Generic error message shown when the power button has been pressed. [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_power_pressed">การยืนยันไม่สมบูรณ์ ครั้งต่อไปให้ลองแตะเบาๆ</string>
+
+    <!-- Content of concurrent display thermal notification. [CHAR LIMIT=NONE] -->
+    <string name="concurrent_display_notification_thermal_content">Dual Screen ไม่พร้อมให้ใช้งานเนื่องจากโทรศัพท์ Pixel ของคุณร้อนเกินไป</string>
+</resources>

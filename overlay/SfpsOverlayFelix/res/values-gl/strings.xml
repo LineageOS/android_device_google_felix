@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Cando usas o desbloqueo dactilar, utilízanse imaxes para actualizar o modelo da túa impresión dixital. As imaxes que se utilizan para crear o modelo de impresión dixital non se almacenan en ningún caso, pero este gárdase de maneira segura no teu teléfono e nunca sae del. Todo o procesamento ten lugar de maneira fiable no teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Cando usa o desbloqueo dactilar, utilízanse imaxes para actualizar o modelo da súa impresión dixital. As imaxes que se utilizan para crear o modelo da impresión dixital do teu fillo ou filla non se almacenan en ningún caso, pero este gárdase de maneira segura no teléfono e nunca sae del. Todo o procesamento ten lugar de maneira fiable no teléfono.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Podes eliminar o teu modelo de impresión dixital ou desactivar o desbloqueo dactilar en calquera momento desde Configuración. Os modelos de impresión dixital almacénanse no teléfono ata que os elimines.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">O teu fillo ou filla e mais ti podedes eliminar o modelo da súa impresión dixital ou desactivar o desbloqueo dactilar cando queirades en Configuración. Os modelos de impresión dixital almacenaranse no teléfono ata que se eliminen.</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Naudojant atrakinimą piršto atspaudu vaizdai naudojami piršto atspaudo modeliui atnaujinti. Vaizdai, kurie naudojami jūsų piršto atspaudo modeliui kurti, niekada nesaugomi, bet piršto atspaudo modelis saugiai saugomas telefone ir visada lieka jame. Visas apdorojimo procesas saugiai vykdomas telefone.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Naudojant atrakinimą piršto atspaudu, vaizdai naudojami piršto atspaudo modeliui atnaujinti. Vaizdai, kurie naudojami vaiko piršto atspaudo modeliui kurti, niekada nesaugomi, bet piršto atspaudo modelis saugiai saugomas telefone ir visada lieka jame. Visas apdorojimo procesas saugiai vykdomas telefone.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Galite bet kada ištrinti piršto atspaudo modelį arba išjungti atrakinimo piršto atspaudu funkciją „Nustatymų“ skiltyje. Piršto atspaudo modeliai saugomi telefone, kol juos ištrinate.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Jūs ir jūsų vaikas galite bet kada ištrinti kontrolinio kodo modelį arba išjungti atrakinimą kontroliniu kodu „Nustatymų“ skiltyje. Kontrolinio kodo modeliai saugomi telefone, kol ištrinami.</string>
+</resources>

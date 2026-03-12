@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">使用指紋解鎖功能時產生的圖像會做為系統更新指紋模型的依據。系統不會儲存建立指紋模型時使用的圖像，只會將指紋模型安全儲存在手機上，而且絕對不會傳送至他處。整個處理過程都是在手機上進行，安全有保障。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">孩子使用指紋解鎖功能時產生的圖像會做為系統更新指紋模型的依據。系統絕不會儲存建立孩子指紋模型時使用的圖像，只會將指紋模型安全儲存在手機上，而且絕對不會傳送至他處。整個處理過程都是在手機上進行，安全有保障。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">你隨時可以前往「設定」刪除指紋模型或停用指紋解鎖功能。指紋模型會儲存在手機上，直到你刪除為止。</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">你和孩子隨時可以前往「設定」刪除指紋模型或停用指紋解鎖功能。指紋模型會儲存在手機上，直到你或孩子刪除為止。</string>
+</resources>

@@ -12,9 +12,6 @@ TARGET_KERNEL_DEVICE := felix
 TARGET_KERNEL_DIR := device/google/$(TARGET_KERNEL_DEVICE)-kernels/$(TARGET_LINUX_KERNEL_VERSION)
 TARGET_KERNEL_PLATFORM_SOURCE := google/gs-$(TARGET_LINUX_KERNEL_VERSION)
 
-DEVICE_PACKAGE_OVERLAYS += device/google/felix/felix/overlay
-DEVICE_PACKAGE_OVERLAYS += device/google/felix/overlay-lineage
-
 include device/google/gs201/device-shipping-common.mk
 
 # Bluetooth
@@ -39,8 +36,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
 
 PRODUCT_PACKAGES += \
-	android.hardware.nfc-service.st \
-	NfcOverlayFelix
+	android.hardware.nfc-service.st
 
 # SecureElement
 PRODUCT_PACKAGES += \
@@ -55,26 +51,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
-# SKU specific RROs
-PRODUCT_PACKAGES += \
-    SettingsOverlayG0B96 \
-    SettingsOverlayG9FPL
-
 # Hinge angle sensor
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.hinge_angle.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hinge_angle.xml
 
-PRODUCT_PACKAGES += \
-        UwbOverlayF10 \
-        WifiOverlay2023Mid_F10
-
 # Device features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
-
-PRODUCT_PACKAGES += \
-    NoCutoutOverlay \
-    AvoidAppsInCutoutOverlay
 
 # ANGLE - Almost Native Graphics Layer Engine
 PRODUCT_PACKAGES += \
@@ -84,9 +67,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
-PRODUCT_PACKAGES += \
-    EuiccSupportPixelOverlay
-
 # Fold extensions
 PRODUCT_SYSTEM_SERVER_JARS += \
     system_ext:felix-services
@@ -95,13 +75,36 @@ PRODUCT_SYSTEM_SERVER_JARS += \
 PRODUCT_PACKAGES += \
     android.hardware.sensors-V2-ndk.vendor:64
 
-# HBM
-PRODUCT_PACKAGES += \
-    HbmSVManagerOverlayFelix
-
 # Init
 PRODUCT_PACKAGES += \
     init.recovery.felix.touch.rc
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    device/google/felix/overlay-lineage
+
+PRODUCT_PACKAGES += \
+    BiometricGs201Overlay \
+    DMServiceOverlayProductGs201 \
+    DMServiceOverlayVendorFelix \
+    FrameworkResOverlayProductFelix \
+    FrameworkResOverlayVendorFelix \
+    HbmSVManagerOverlayProductFelix \
+    LargeScreenConfigOverlay \
+    LargeScreenSettingsProviderOverlay \
+    PixelNfcOverlayFelix \
+    PixelWifiOverlay2023_midyear_F10 \
+    SafetyRegulatoryInfoOverlayProductFelix \
+    SettingsGoogleOverlayFelix \
+    SettingsGoogleOverlayProductFelix \
+    SettingsGoogleOverlayVendorFelix \
+    SettingsOverlayG0B96 \
+    SettingsOverlayG9FPL \
+    SfpsOverlayFelix \
+    SfpsOverlayGs201 \
+    SystemUIGoogleOverlayProductFelix \
+    SystemUIGoogleOverlayVendorFelix \
+    TeleServiceOverlayProductFelix
 
 # Properties
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/product.prop

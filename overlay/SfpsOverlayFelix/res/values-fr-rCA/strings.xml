@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Lorsque vous utilisez le Déverrouillage par empreinte digitale, les images sont utilisées pour mettre à jour votre modèle d\'empreinte digitale. Les images utilisées pour créer votre modèle d\'empreinte digitale ne sont jamais stockées, contrairement au modèle, qui est stocké de façon sécuritaire sur votre téléphone et ne le quitte jamais. Tous les traitements sont sécurisés sur votre téléphone.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Lorsque votre enfant utilise le déverrouillage par empreinte digitale, les images sont utilisées pour mettre à jour son modèle d\'empreinte digitale. Les images utilisées pour créer le modèle d\'empreinte digitale de votre enfant ne sont jamais stockées, contrairement au modèle, qui est stocké de façon sécuritaire sur le téléphone et ne le quitte jamais. Tous les traitements sont sécurisés sur le téléphone.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Vous pouvez supprimer votre modèle d\'empreinte digitale ou désactiver le Déverrouillage par empreinte digitale en tout temps dans les paramètres. Les modèles d\'empreinte digitale sont stockés sur le téléphone jusqu\'à ce que vous les supprimiez.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Vous et votre enfant pouvez supprimer le modèle de son empreinte digitale ou désactiver le Déverrouillage par empreinte digitale en tout temps dans les paramètres. Les modèles d\'empreinte digitale sont stockés sur le téléphone jusqu\'à ce qu\'ils soient supprimés.</string>
+</resources>

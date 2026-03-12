@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Калі вы ўжываеце разблакіроўку адбіткам пальца, відарысы выкарыстоўваюцца для абнаўлення мадэлі адбітка пальца. Відарысы, якія выкарыстоўваліся для стварэння мадэлі адбітка пальца, ніколі не захоўваюцца. На вашым тэлефоне бяспечна захоўваецца толькі сама мадэль, і яна нікуды не адпраўляецца. Уся апрацоўка выконваецца толькі на вашым тэлефоне.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Калі дзіця ўжывае разблакіроўку адбіткам пальца, відарысы выкарыстоўваюцца для абнаўлення мадэлі адбітка пальца. Відарысы, якія выкарыстоўваліся для стварэння мадэлі адбітка пальца дзіцяці, ніколі не захоўваюцца. На тэлефоне бяспечна захоўваецца толькі сама мадэль, і яна нікуды не адпраўляецца. Уся апрацоўка выконваецца толькі на тэлефоне.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Вы можаце ў любы час выдаліць мадэль адбітка пальца ці выключыць разблакіроўку адбіткам пальца ў Наладах. Мадэлі адбітка пальца будуць захоўвацца на тэлефоне, пакуль вы іх не выдаліце.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Вы і ваша дзіця можаце ў любы час выдаліць мадэль адбітка пальца ці выключыць разблакіроўку адбіткам пальца ў Наладах. Мадэлі адбітка пальца будуць захоўвацца на тэлефоне, пакуль іх не выдаляць.</string>
+</resources>

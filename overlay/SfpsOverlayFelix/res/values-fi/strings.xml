@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kun käytät sormenjälkiavausta, kuvia käytetään sormenjälkimallin päivittämiseen. Sormenjälkimallin luontiin käytettäviä kuvia ei koskaan säilytetä, mutta itse sormenjälkimalli säilytetään suojatusti puhelimellasi, eikä se poistu puhelimelta. Kaikki käsittely tapahtuu turvallisesti puhelimella.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kun lapsi käyttää sormenjälkiavausta, kuvia käytetään sormenjälkimallin päivittämiseen. Lapsen sormenjälkimallin luontiin käytettäviä kuvia ei koskaan säilytetä, mutta itse sormenjälkimalli säilytetään suojatusti puhelimella, eikä se poistu puhelimelta. Kaikki käsittely tapahtuu turvallisesti puhelimella.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Voit poistaa sormenjälkimallin tai laittaa sormenjälkiavauksen pois päältä milloin tahansa asetuksista. Sormenjälkimallit säilytetään puhelimellasi, kunnes poistat ne.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Sinä ja lapsesi voitte poistaa sormenjälkimallit tai laittaa sormenjälkiavauksen pois päältä milloin tahansa asetuksista. Sormenjälkimallit säilytetään puhelimellasi, kunnes ne poistetaan.</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">وقتی از «قفل‌گشایی با اثر انگشت» استفاده می‌کنید، مدل اثر انگشتتان به‌کمک تصاویر به‌روز می‌شود. تصاویر استفاده‌شده برای ایجاد مدل اثر انگشت هرگز ذخیره نمی‌شوند، اما مدل اثر انگشت به‌طور ایمن در تلفنتان ذخیره می‌شود و هرگز از آن خارج نمی‌شود. همه پردازش‌ها به‌طور ایمن در تلفنتان انجام می‌شود.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">وقتی فرزندتان از «قفل‌گشایی با اثر انگشت» استفاده می‌کند، مدل اثر انگشت او به‌کمک تصاویر به‌روز می‌شود. تصاویر استفاده‌شده برای ایجاد مدل اثر انگشت فرزندتان هرگز ذخیره نمی‌شوند، اما مدل اثر انگشت به‌طور ایمن در تلفن ذخیره می‌شود و هرگز از آن خارج نمی‌شود. همه پردازش‌ها به‌طور ایمن در تلفن انجام می‌شود.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">هرزمان خواستید می‌توانید در «تنظیمات»، مدل اثر انگشت را حذف کنید یا «قفل‌گشایی با اثر انگشت» را خاموش کنید. تا زمانی‌که مدل‌های اثر انگشت را حذف نکنید، در تلفنتان باقی می‌مانند.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">شما و فرزندتان هر زمان‌که بخواهید می‌توانید مدل اثر انگشت را حذف کنید، یا «قفل‌گشایی با اثر انگشت» را در «تنظیمات» خاموش کنید. تا وقتی مدل‌های اثر انگشت را حذف نکنید، در تلفن ذخیره می‌مانند.</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
+    <string name="edge_to_edge_navigation_summary">Ana ekrana gitmek için alt kısımdan hızlıca yukarı kaydırın. Görev çubuğuna erişmek için alt kısımdan yavaşça yukarı kaydırın. Uygulamalar arasında geçiş yapmak için ekranın altından yukarı kaydırın, tutun ve sonra bırakın. Geri gitmek için ekranın sol veya sağ kenarından kaydırın.</string>
+
+    <string name="setting_auto_rotate_folded">Katlandığında otomatik döndür</string>
+
+    <string name="setting_auto_rotate_unfolded">Açıldığında otomatik döndür</string>
+</resources>

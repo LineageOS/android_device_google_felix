@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Izmantojot autorizāciju ar pirksta nospiedumu, pirksta nospieduma modeļa atjaunināšanai tiek izmantoti attēli. Pirksta nospieduma modeļa izveidei izmantotie attēli nekad netiek saglabāti, savukārt pirksta nospieduma modelis tiek droši glabāts jūsu tālrunī un vienmēr atrodas tikai tālrunī. Apstrāde tiek veikta drošā veidā un tikai jūsu tālrunī.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Izmantojot autorizāciju ar pirksta nospiedumu, pirksta nospieduma modeļa atjaunināšanai tiek izmantoti attēli. Jūsu bērna pirksta nospieduma modeļa izveidei izmantotie attēli nekad netiek saglabāti, savukārt pirksta nospieduma modelis tiek droši glabāts bērna tālrunī un vienmēr atrodas tikai tālrunī. Apstrāde tiek veikta drošā veidā un tikai bērna tālrunī.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Iestatījumos varat jebkurā laikā dzēst pirksta nospieduma modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirkstu nospiedumu modeļi tiek glabāti tālrunī, līdz jūs tos dzēšat.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Iestatījumos jūs un jūsu bērns varat jebkurā laikā dzēst bērna pirksta nospieduma modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirkstu nospiedumu modeļi tiek glabāti tālrunī, līdz tie tiek dzēsti.</string>
+</resources>

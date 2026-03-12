@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Wanneer jy Vingerafdrukslot gebruik, word prente gebruik om jou vingerafdrukmodel op te dateer. Prente wat gebruik word om jou vingerafdrukmodel te skep, word nooit geberg nie. Die vingerafdrukmodel word egter veilig op jou foon geberg en verlaat nooit die foon nie. Alle verwerking vind veilig op jou foon plaas.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Wanneer hulle Vingerafdrukslot gebruik, word prente gebruik om hul vingerafdrukmodel op te dateer. Prente wat gebruik word om jou kind se vingerafdrukmodel te skep, word nooit geberg nie. Die vingerafdrukmodel word egter veilig op die foon geberg en verlaat nooit die foon nie. Alle verwerking vind veilig op die foon plaas.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Jy kan enige tyd in Instellings jou vingerafdrukmodel uitvee of Vingerafdrukslot afskakel. Vingerafdrukmodelle word op die foon geberg totdat jy hulle uitvee.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Jy en jou kind kan enige tyd in Instellings sy of haar vingerafdrukmodel uitvee of Vingerafdrukslot afskakel. Vingerafdrukmodelle word op die foon geberg totdat hulle uitgevee word.</string>
+</resources>

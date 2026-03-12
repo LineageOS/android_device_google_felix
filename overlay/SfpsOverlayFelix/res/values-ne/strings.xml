@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">तपाईंले फिंगरप्रिन्ट अनलक प्रयोग गर्दा तपाईंको फिंगरप्रिन्ट मोडेल अपडेट गर्न ती फोटोहरू प्रयोग गरिन्छन्। तपाईंको फिंगरप्रिन्ट मोडेल बनाउन प्रयोग गरिने फोटोहरू कहिल्यै पनि भण्डारण गरिँदैन तर यो फिंगरप्रिन्ट मोडेल तपाईंको फोनमा सुरक्षित तरिकाले भण्डारण गरिन्छ र कहिल्यै पनि यो फोनबाहेक अन्यत्र पठाइँदैन। यी सबै कारबाही तपाईंको फोनमा सुरक्षित तरिकाले गरिन्छ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">तपाईंका बच्चाले फिंगरप्रिन्ट अनलक प्रयोग गर्दा उहाँको फिंगरप्रिन्ट मोडेल अपडेट गर्न ती फोटोहरू प्रयोग गरिन्छन्। तपाईंका बच्चाको फिंगरप्रिन्ट मोडेल बनाउन प्रयोग गरिने फोटोहरू कहिल्यै पनि भण्डारण गरिँदैन तर यो फिंगरप्रिन्ट मोडेल यो फोनमा सुरक्षित तरिकाले भण्डारण गरिन्छ र कहिल्यै पनि यो फोनबाहेक अन्यत्र पठाइँदैन। यी सबै कारबाही यो फोनमा सुरक्षित तरिकाले गरिन्छ।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">तपाईं सेटिङमा गई जुनसुकै बेला आफ्नो फिंगरप्रिन्ट मोडेल मेटाउन वा फिंगरप्रिन्ट अनलक अफ गर्न सक्नुहुन्छ। तपाईंले फिंगरप्रिन्ट मोडेलहरू नमेटाउन्जेल ती मोडेल फोनमा नै भण्डारण गरिन्छन्।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">तपाईं र तपाईंका बच्चा सेटिङमा गई जुनसुकै बेला उनको फिंगरप्रिन्ट मोडेल मेटाउन वा फिंगरप्रिन्ट अनलक अफ गर्न सक्नुहुन्छ। फिंगरप्रिन्ट मोडेल नमेटाइन्जेल ती मोडेल फोनमा भण्डारण गरिन्छन्।</string>
+</resources>

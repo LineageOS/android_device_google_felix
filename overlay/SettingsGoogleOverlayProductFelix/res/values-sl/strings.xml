@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message">S tem boste izbrisali v telefonu shranjeni model prstnega odtisa, povezanega z odtisom »%1$s«.</string>
+</resources>

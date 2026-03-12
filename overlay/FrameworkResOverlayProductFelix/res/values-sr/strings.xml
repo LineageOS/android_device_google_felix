@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown during fingerprint acquisision when the fingerprint cannot be recognized -->
+    <string name="fingerprint_acquired_partial">Уверите се да прстом покривате сензор</string>
+
+    <!-- Message shown during fingerprint acquisision when the user removes their finger from the sensor too quickly -->
+    <string name="fingerprint_acquired_too_fast">Држите прст на сензору мало дуже</string>
+
+    <!-- Message shown during fingerprint acquisition when a Power press has been detected.[CHAR LIMIT=50] -->
+    <string name="fingerprint_acquired_power_press">Лагано додирните сензор да наставите подешавање</string>
+
+    <!-- Generic error message shown when the power button has been pressed. [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_power_pressed">Верификација је завршена. Следећи пут пробајте да лагано додирнете.</string>
+
+    <!-- Content of concurrent display thermal notification. [CHAR LIMIT=NONE] -->
+    <string name="concurrent_display_notification_thermal_content">Dual Screen је недоступан јер је Pixel телефон превише загрејан</string>
+</resources>

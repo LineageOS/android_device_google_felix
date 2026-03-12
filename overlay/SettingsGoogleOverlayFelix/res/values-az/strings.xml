@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
+    <string name="edge_to_edge_navigation_summary">Ana səhifəyə keçmək üçün aşağıdan sürətlə yuxarı sürüşdürün. İşləmə panelinə daxil olmaq üçün aşağıdan astaca yuxarı sürüşdürün. Tətbiqləri dəyişmək üçün aşağıdan yuxarı sürüşdürüb saxlayın və buraxın. Geri qayıtmaq üçün sol və ya sağ kənardan sürüşdürün.</string>
+
+    <string name="setting_auto_rotate_folded">Qatlandıqda avtomatik fırlansın</string>
+
+    <string name="setting_auto_rotate_unfolded">Açıldıqda avtomatik fırlansın</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message">ఇది మీ ఫోన్‌లో స్టోర్ చేయబడిన \'%1$s\'తో అనుబంధించబడిన వేలిముద్ర మోడల్‌ను తొలగిస్తుంది</string>
+</resources>

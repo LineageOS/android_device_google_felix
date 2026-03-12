@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">আপুনি ফিংগাৰপ্ৰিণ্টৰ দ্বাৰা আনলক কৰাৰ সুবিধাটো ব্যৱহাৰ কৰাৰ সময়ত, আপোনাৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো আপডে’ট কৰিবলৈ প্ৰতিচ্ছবিসমূহ ব্যৱহাৰ কৰা হয়। আপোনাৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো সৃষ্টি কৰিবলৈ ব্যৱহাৰ কৰা প্ৰতিচ্ছবি কেতিয়াও ষ্ট’ৰ কৰা নহয়, কিন্তু ফিংগাৰপ্ৰিণ্টৰ মডেলটো আপোনাৰ ফ’নত সুৰক্ষিতভাৱে ষ্ট’ৰ কৰা হয় আৰু সেইয়া কেতিয়াও ফ’নটোৰ পৰা আঁতৰি নাযায়। আটাইবোৰ প্ৰক্ৰিয়া আপোনাৰ ফ’নত সুৰক্ষিতভাৱে সম্পাদন কৰা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">তেওঁ ফিংগাৰপ্ৰিণ্টৰ দ্বাৰা আনলক কৰাৰ সুবিধাটো ব্যৱহাৰ কৰাৰ সময়ত, তেওঁৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো আপডে’ট কৰিবলৈ প্ৰতিচ্ছবিসমূহ ব্যৱহাৰ কৰা হয়। আপোনাৰ শিশুৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো সৃষ্টি কৰিবলৈ ব্যৱহাৰ কৰা প্ৰতিচ্ছবি কেতিয়াও ষ্ট’ৰ কৰা নহয়, কিন্তু ফিংগাৰপ্ৰিণ্টৰ মডেলটো ফ’নটোত সুৰক্ষিতভাৱে ষ্ট’ৰ কৰা হয় আৰু সেইয়া কেতিয়াও ফ’নটোৰ পৰা আঁতৰি নাযায়। আটাইবোৰ প্ৰক্ৰিয়া আপোনাৰ ফ’নটোত সুৰক্ষিতভাৱে সম্পাদন কৰা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">আপুনি যিকোনো সময়তে ছেটিঙলৈ গৈ আপোনাৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো মচিব পাৰে অথবা ফিংগাৰপ্ৰিণ্টেৰে আনলক কৰাৰ সুবিধাটো অফ কৰিব পাৰে। আপুনি নমচা পৰ্যন্ত ফিংগাৰপ্ৰিণ্টৰ মডেলসমূহ ফ’নটোত ষ্ট’ৰ কৰি ৰখা হয়।</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">আপুনি আৰু আপোনাৰ শিশুৱে যিকোনো সময়তে ছেটিঙলৈ গৈ তেওঁৰ ফিংগাৰপ্ৰিণ্টৰ মডেলটো মচিব পাৰে অথবা ফিংগাৰপ্ৰিণ্ট আনলক সুবিধাটো অফ কৰিব পাৰে। ফিংগাৰপ্ৰিণ্টৰ মডেলসমূহ মচি নেপেলোৱালৈকে ফ’নটোত ষ্ট’ৰ হৈ থাকে।</string>
+</resources>

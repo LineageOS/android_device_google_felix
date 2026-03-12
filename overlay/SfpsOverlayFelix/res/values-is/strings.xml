@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Þegar þú notar fingrafarskenni eru myndir notaðar til að uppfæra fingrafarslíkanið. Myndir sem eru notaðar til að búa fingrafarslíkanið til eru aldrei geymdar en líkanið er geymt á öruggan hátt í símanum og fer aldrei þaðan. Öll úrvinnsla fer fram í tækinu á öruggan hátt.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Þegar barnið notar fingrafarskenni eru myndir notaðar til að uppfæra fingrafarslíkan þess. Myndir sem eru notaðar til að búa fingrafarslíkan barnsins til eru aldrei geymdar en líkanið er geymt á öruggan hátt í símanum og fer aldrei þaðan. Öll úrvinnsla fer fram í símanum á öruggan hátt.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Þú getur eytt fingrafarslíkaninu eða slökkt á fingrafarskenni hvenær sem er í stillingunum. Fingrafarslíkön eru geymd í símanum þar til þú eyðir þeim.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Þú og barnið þitt getið eytt fingrafarslíkaninu eða slökkt á fingrafarskenni hvenær sem er í stillingunum. Fingrafarslíkön eru geymd í símanum þar til þeim er eytt.</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
+    <string name="edge_to_edge_navigation_summary">Για μετάβαση στην αρχική σελίδα, σύρετε γρήγορα από κάτω προς τα επάνω. Για πρόσβαση στη Γραμμή εργαλείων, σύρετε αργά από κάτω προς τα επάνω. Για εναλλαγή εφαρμογών, σύρετε από κάτω προς τα επάνω, περιμένετε και έπειτα απομακρύνετε το δάχτυλο. Για επιστροφή, σύρετε είτε από το αριστερό είτε από το δεξί άκρο.</string>
+
+    <string name="setting_auto_rotate_folded">Αυτόματη περιστροφή κατά το δίπλωμα</string>
+
+    <string name="setting_auto_rotate_unfolded">Αυτόματη περιστροφή κατά το ξεδίπλωμα</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Når du bruker opplåsing med fingeravtrykk, bruker systemet bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage fingeravtrykkmodellen, lagres aldri, men fingeravtrykkmodellen lagres trygt på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Når hen bruker opplåsing med fingeravtrykk, bruker systemet bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage barnets fingeravtrykkmodell, lagres aldri, men fingeravtrykkmodellen lagres trygt på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Du kan når som helst slette fingeravtrykkmodellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkmodellene lagres på telefonen til du sletter dem.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Du og barnet ditt kan når som helst slette fingeravtrykkmodellen til barnet eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkmodellene lagres på telefonen til de slettes.</string>
+</resources>

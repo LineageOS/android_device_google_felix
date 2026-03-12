@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Usamos imagens da sua digital para o recurso desbloqueio por impressão digital. Elas nunca são armazenadas, mas o modelo fica salvo em segurança no smartphone. Todo o processamento acontece de forma segura no dispositivo.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Quando a criança utiliza o recurso desbloqueio por impressão digital, as imagens são usadas para atualizar o modelo de impressão digital dela. As imagens usadas para criar o modelo da criança nunca são armazenadas, mas ele fica salvo em segurança no smartphone, sem deixar o dispositivo. Todo o processamento ocorre de forma segura no smartphone.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Você pode excluir o modelo ou desativar o desbloqueio por impressão digital a qualquer momento nas Configurações. Os modelos de impressão digital são armazenados no smartphone até serem excluídos.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Você e a criança podem excluir o modelo dela ou desativar o desbloqueio por impressão digital a qualquer momento nas Configurações. Os modelos de impressão digital são armazenados no smartphone até serem excluídos.</string>
+</resources>

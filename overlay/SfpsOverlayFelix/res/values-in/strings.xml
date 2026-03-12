@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Saat Anda menggunakan Buka dengan Sidik Jari, gambar digunakan untuk memperbarui model sidik jari Anda. Gambar yang digunakan untuk membuat model sidik jari tidak pernah disimpan, tetapi model sidik jari disimpan secara aman di ponsel dan tidak pernah dikirim ke luar ponsel. Semua pemrosesan dilakukan secara aman di ponsel Anda.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Saat dia menggunakan Buka dengan Sidik Jari, gambar digunakan untuk memperbarui model sidik jarinya. Gambar yang digunakan untuk membuat model sidik jari anak Anda tidak pernah disimpan, tetapi model sidik jarinya disimpan secara aman di ponsel dan tidak pernah dikirim ke luar ponsel. Semua pemrosesan dilakukan secara aman di ponsel.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">Anda dapat menghapus model sidik jari atau menonaktifkan Buka dengan Sidik Jari kapan saja di Setelan. Model sidik jari akan disimpan di ponsel hingga Anda menghapusnya.</string>
+
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">Anda dan anak Anda dapat menghapus model sidik jarinya atau menonaktifkan Buka dengan Sidik Jari kapan saja di Setelan. Model sidik jari akan disimpan di ponsel hingga dihapus.</string>
+</resources>
