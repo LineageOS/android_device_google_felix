@@ -5,79 +5,22 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
-
+# Kernel
 TARGET_LINUX_KERNEL_VERSION := 6.1
 TARGET_KERNEL_DEVICE := felix
 TARGET_KERNEL_DIR := device/google/$(TARGET_KERNEL_DEVICE)-kernels/$(TARGET_LINUX_KERNEL_VERSION)
 TARGET_KERNEL_PLATFORM_SOURCE := google/gs-$(TARGET_LINUX_KERNEL_VERSION)
 
+# Inherit from gs201
 include device/google/gs201/device-shipping-common.mk
-
-# Bluetooth
-PRODUCT_PACKAGES += \
-    android.hardware.bluetooth.prebuilt.xml \
-    android.hardware.bluetooth_le.prebuilt.xml
-
-# UWB
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
-
-# Recovery files
-PRODUCT_COPY_FILES += \
-    device/google/felix/recovery/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.felix.rc
-
-# NFC
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
-	frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
-	frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
-	frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml \
-	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
-
-PRODUCT_PACKAGES += \
-	android.hardware.nfc-service.st
-
-# SecureElement
-PRODUCT_PACKAGES += \
-	android.hardware.secure_element@1.2-service-gto \
-	android.hardware.secure_element@1.2-service-gto-ese2
-
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
-	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
-
-# Fingerprint
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
-
-# Hinge angle sensor
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.sensor.hinge_angle.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hinge_angle.xml
-
-# Device features
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
-
-# ANGLE - Almost Native Graphics Layer Engine
-PRODUCT_PACKAGES += \
-    ANGLE
-
-# EUICC
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
 # Fold extensions
 PRODUCT_SYSTEM_SERVER_JARS += \
     system_ext:felix-services
 
-# GNSS
-PRODUCT_PACKAGES += \
-    android.hardware.sensors-V2-ndk.vendor:64
-
-# Init
-PRODUCT_PACKAGES += \
-    init.recovery.felix.touch.rc
+# Hinge angle sensor
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.hinge_angle.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hinge_angle.xml
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -110,16 +53,25 @@ PRODUCT_PACKAGES += \
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/product.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/$(DEVICE_CODENAME)/vendor.prop
 
-# Sensors
+# Recovery
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/recovery/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.felix.rc
+
 PRODUCT_PACKAGES += \
-    sensors.dynamic_sensor_hal
+    init.recovery.felix.touch.rc
+
+TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(DEVICE_PATH)
 
+# UWB
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
+
 # VINTF
 DEVICE_MANIFEST_FILE += \
-    device/google/felix/vintf/manifest.xml
+    $(DEVICE_PATH)/vintf/manifest.xml
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
-    device/google/felix/vintf/device_framework_matrix_product.xml
+    $(DEVICE_PATH)/vintf/device_framework_matrix_product.xml
