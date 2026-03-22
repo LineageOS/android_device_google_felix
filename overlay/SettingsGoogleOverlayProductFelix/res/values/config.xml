@@ -4,19 +4,6 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <!-- ComponentName to launch a vendor-specific posture guidance activity if available -->
-    <string name="config_face_enroll_guidance_page">com.android.settings/com.google.android.settings.biometrics.face.FaceEnrollFoldPage</string>
-
-    <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
-     means setting will try listening on device posture changes.
-     0 : DEVICE_POSTURE_UNKNOWN
-     1 : DEVICE_POSTURE_CLOSED
-     2 : DEVICE_POSTURE_HALF_OPENED
-     3 : DEVICE_POSTURE_OPENED
-     4 : DEVICE_POSTURE_FLIPPED
-     -->
-    <integer name="config_face_enroll_supported_posture">1</integer>
-
     <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
          length and order as config_userAspectRatioOverrideValues below.
 

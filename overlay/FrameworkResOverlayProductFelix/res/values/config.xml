@@ -97,18 +97,6 @@
     <!-- The time in milliseconds after which a press on power button is considered "long". -->
     <integer name="config_longPressOnPowerDurationMs">750</integer>
 
-    <!-- Default wallpaper component per device color map, each item is a comma separated key-value
-         pair with key being a device color and value being the corresponding wallpaper component.
-         The component with its key matching the device color will be the default wallpaper, the
-         default wallpaper component will be the default if this config is not specified.
-
-         E.g. for SLV color, and com.android.example/com.android.example.SlVDefaultWallpaper
-         <item>SLV,com.android.example/com.android.example.SlVDefaultWallpaper</item> -->
-    <string-array name="default_wallpaper_component_per_device_color">
-        <item>BLK,com.google.pixel.wallpapers23/com.google.pixel.wallpapers23.liveBirds.licorice.LicoriceWallpaperService</item>
-        <item>SLV,com.google.pixel.wallpapers23/com.google.pixel.wallpapers23.liveBirds.porcelain.PorcelainWallpaperService</item>
-    </string-array>
-
     <!-- Amount of time in ms the user needs to press the relevant key to bring up the
          global actions dialog -->
     <integer name="config_globalActionsKeyTimeout">750</integer>
