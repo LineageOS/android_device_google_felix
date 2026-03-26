@@ -9,7 +9,6 @@ bluetooth.profile.hap.client.enabled=true
 bluetooth.profile.hap.enabled_by_default=false
 bluetooth.profile.mcp.server.enabled=true
 bluetooth.profile.vcp.controller.enabled=true
-persist.bluetooth.a2dp_aac.vbr_supported=true
 persist.bluetooth.bqr.event_mask=94
 persist.bluetooth.leaudio.allow_list=SM-R510,WF-1000XM5,SM-R630,WH-1000XM6,880066-0100
 persist.bluetooth.leaudio.notify.idle.during.call=true
@@ -18,18 +17,11 @@ persist.bluetooth.opus.enabled=true
 ro.bluetooth.leaudio_offload.supported=true
 ro.bluetooth.leaudio_switcher.supported=true
 
-# Cutout
-ro.support_hide_display_cutout=true
-
 # Device family
 ro.build.device_family=F10
-
-# EUICC
-euicc.seamless_transfer_enabled_in_non_qs=true
 
 # One-handed mode
 ro.support_one_handed_mode=false
 
 # Quick start
 ro.quick_start.device_id=felix
-ro.quick_start.oem_id=00e0
