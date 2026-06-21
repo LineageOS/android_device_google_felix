@@ -1,5 +1,8 @@
 type predump_touch, domain;
 type predump_touch_exec, exec_type, file_type, vendor_file_type;
+type proc_touch, fs_type, proc_type;
+type proc_touch_gti, fs_type, proc_type;
+type sysfs_touch, fs_type, sysfs_type;
 
 get_prop(predump_touch, vendor_touch_dump_path_prop)
 
