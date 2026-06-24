@@ -8,6 +8,6 @@ $(call inherit-product, device/google/felix/device-felix.mk)
 
 PRODUCT_NAME := aosp_felix
 PRODUCT_DEVICE := felix
-PRODUCT_MODEL := AOSP on Felix
-PRODUCT_BRAND := Android
+PRODUCT_MODEL := Pixel Fold
+PRODUCT_BRAND := google
 PRODUCT_MANUFACTURER := Google

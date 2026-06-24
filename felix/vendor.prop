@@ -26,9 +26,6 @@ vendor.camera.support_specific_stream_aspect_ratio=0.75
 # DCK
 ro.gms.dck.eligible_wcc=3
 
-# Device family
-ro.build.device_family=F10
-
 # Display
 debug.sf.set_idle_timer_ms_4619827677550801152=80
 debug.sf.set_idle_timer_ms_4619827677550801153=1000
@@ -45,7 +42,7 @@ ro.vendor.touch.dump.proc=/proc/fts_ext/driver_test
 ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
 
 # SVN
-ro.vendor.build.svn=83
+ro.vendor.build.svn=91
 
 # UWB
 ro.vendor.uwb.calibration.calibrationpaths=/vendor/etc/uwb/calib_paths
