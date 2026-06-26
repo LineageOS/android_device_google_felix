@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">మీరు వేలిముద్ర అన్‌లాక్‌ను ఉపయోగించినప్పుడు, మీ వేలిముద్ర మోడల్‌ను అప్‌డేట్ చేయడానికి ఇమేజ్‌లు ఉపయోగించబడతాయి. మీ వేలిముద్ర మోడల్‌ను క్రియేట్ చేయడానికి ఉపయోగించే ఇమేజ్‌లు ఎప్పుడూ స్టోర్ చేయబడవు, కానీ వేలిముద్ర మోడల్ మీ ఫోన్‌లో సురక్షితంగా స్టోర్ చేయబడుతుంది అలాగే ఫోన్ నుండి బయటకు పంపబడదు. మొత్తం ప్రాసెస్ విధానం మీ ఫోన్‌లో సురక్షితంగా జరుగుతుంది.</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">మీరు వేలిముద్ర అన్‌లాక్‌ను ఉపయోగించినప్పుడు జెనరేట్ అయ్యే ఇమేజ్‌లు, మీ వేలిముద్ర మోడల్‌ను అప్‌డేట్ చేయడానికి ఉపయోగపడతాయి. ఈ మోడల్ కోసం వాడే ఇమేజ్‌లు ఎప్పుడూ స్టోర్ కావు. అయితే వేలిముద్ర మోడల్ మీ ఫోన్‌లో సురక్షితంగా స్టోర్ అవుతుంది. ఇది మీ ఫోన్ నుండి ఎప్పుడూ బయటకు వెళ్లదు. మొత్తం ప్రాసెస్, మీ ఫోన్‌లో సురక్షితంగా జరుగుతుంది.</string>
 
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">వారు వేలిముద్ర అన్‌లాక్‌ను ఉపయోగించినప్పుడు, వారి వేలిముద్ర మోడల్‌ను అప్‌డేట్ చేయడానికి ఇమేజ్‌లు ఉపయోగించబడతాయి. మీ చిన్నారి వేలిముద్ర మోడల్‌ను క్రియేట్ చేయడానికి ఉపయోగించే ఇమేజ్‌లు ఎప్పుడూ స్టోర్ చేయబడవు, కానీ వేలిముద్ర మోడల్ ఫోన్‌లో సురక్షితంగా స్టోర్ చేయబడుతుంది, ఫోన్ నుండి బయటకు పంపబడదు. మొత్తం ప్రాసెస్ విధానం ఫోన్‌లో సురక్షితంగా జరుగుతుంది.</string>

@@ -107,24 +107,20 @@
 
     <!-- Class name of the device specific implementation of DeviceStatePolicy.Provider
         or empty if the default should be used. -->
-    <string name="config_deviceSpecificDeviceStatePolicyProvider">com.google.android.server.policy.FelixDeviceStatePolicyProvider</string>
+    <string name="config_deviceSpecificDeviceStatePolicyProvider" translatable="false">com.google.android.server.policy.FelixDeviceStatePolicyProvider</string>
 
     <!-- Indicates whether device has a power button fingerprint sensor. -->
     <bool name="config_is_powerbutton_fps">true</bool>
-
-    <!-- Set to true to offset the wallpaper when using multiple displays so that it's centered
-         at the same position as in the largest display.-->
-    <bool name="config_offsetWallpaperToCenterOfLargestDisplay">true</bool>
 
     <!-- If true, show multiuser switcher by default unless the user specifically disables it. -->
     <bool name="config_showUserSwitcherByDefault">false</bool>
 
     <!-- WindowsManager JetPack display features -->
-    <string name="config_display_features">fold-[1104,0,1104,1848]</string>
+    <string name="config_display_features" translatable="false">fold-[1104,0,1104,1848]</string>
 
     <!-- Map of System DeviceState supplied by DeviceStateManager to WM Jetpack posture. Must be in
          the format [System DeviceState]:[WM Jetpack Posture], for example: "0:1". -->
-    <string-array name="config_device_state_postures">
+    <string-array name="config_device_state_postures" translatable="false">
         <item>0:1</item>
         <item>1:2</item>
         <item>2:3</item>
@@ -145,7 +141,7 @@
     <bool name="config_letterboxIsDisplayAspectRatioForFixedOrientationLetterboxEnabled">true</bool>
 
     <!-- Whether should use split screen aspect ratio for the activity when camera compat treatment
-        is enabled and activity is connected to the camera in fullscreen. -->
+         is enabled and activity is connected to the camera in fullscreen. -->
     <bool name="config_isWindowManagerCameraCompatSplitScreenAspectRatioEnabled">true</bool>
 
     <!-- List of the labels of requestable device state config values -->
@@ -170,5 +166,5 @@
     <!-- Physical display address that corresponds to the rear display in rear display mode
          and concurrent display mode. Used to get information about the display before
          entering the corresponding modes -->
-    <string name="config_rearDisplayPhysicalAddress">4619827677550801153</string>
+    <string name="config_rearDisplayPhysicalAddress" translatable="false">4619827677550801153</string>
 </resources>

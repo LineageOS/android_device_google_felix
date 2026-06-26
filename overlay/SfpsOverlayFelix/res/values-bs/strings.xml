@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kada koristite otključavanje otiskom prsta, slike se koriste da se ažurira model otiska prsta. Slike koje se koriste za kreiranje modela vašeg otiska prsta se nikada ne pohranjuju, ali model otiska prsta se sigurno pohranjuje na vašem telefonu i nikada ga ne napušta. Cjelokupna obrada se vrši sigurno na vašem telefonu.</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Kada koristite otključavanje otiskom prsta, za ažuriranje modela otiska prsta se koriste slike. Slike koje se koriste za kreiranje modela vašeg otiska prsta se nikada ne pohranjuju, ali model otiska prsta se sigurno pohranjuje na vašem telefonu i nikada ga ne napušta. Cjelokupna obrada se vrši sigurno na vašem telefonu.</string>
 
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Kada dijete koristi otključavanje otiskom prsta, slike se koriste da se ažurira njegov model otiska prsta. Slike koje se koriste da se kreira model otiska prsta djeteta se nikada ne pohranjuju, ali model otiska prsta se sigurno pohranjuje na telefonu i nikada ga ne napušta. Sva obrada se sigurno vrši na telefonu.</string>

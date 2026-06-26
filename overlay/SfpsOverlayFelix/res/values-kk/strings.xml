@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Саусақ ізімен ашу функциясын қолданған кезде, кескіндер саусақ ізінің үлгісін жаңарту үшін пайдаланылады. Саусақ ізінің үлгісін жасау үшін қолданылған суреттер ешқашан сақталмайды, бірақ саусақ ізі үлгісі телефонда қауіпсіз түрде сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмысы телефонда ғана орындалады.</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">Саусақ ізімен ашу функциясын қолданған кезде, суреттер саусақ ізінің үлгісін жаңарту үшін пайдаланылады. Үлгіні жасау үшін қолданылған суреттер ешқашан сақталмайды, бірақ үлгінің өзі телефонда қауіпсіз түрде сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмысы телефонда ғана орындалады.</string>
 
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">Саусақ ізімен ашу функциясын қолданған кезде, кескіндер саусақ ізінің үлгісін жаңарту үшін қолданылады. Балаңыздың саусақ ізінің үлгісін жасау үшін қолданылған кескіндер ешқашан сақталмайды, бірақ саусақ ізінің үлгісі телефонда қауіпсіз түрде сақталады және басқа ешқайда жіберілмейді. Барлық өңдеу жұмысы қауіпсіз түрде телефонда орындалады.</string>
