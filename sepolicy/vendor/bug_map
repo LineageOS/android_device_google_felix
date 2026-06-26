@@ -1,2 +1,7 @@
+init debugfs_bootreceiver_tracing dir b/450135489
+insmod-sh vendor_usb_debugfs dir b/450135008
 kernel vendor_votable_debugfs dir b/305600372
+system_server sysfs file b/450135149
 system_server sysfs_batteryinfo file b/306344097
+system_suspend sysfs_batteryinfo file b/450134671
+vendor_init debugfs_tracing_instances file b/450135408
