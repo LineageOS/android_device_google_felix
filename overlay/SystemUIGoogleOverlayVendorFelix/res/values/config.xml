@@ -16,12 +16,12 @@
     <!-- Type of a sensor that provides a low-power estimate of the desired display
          brightness, suitable to listen to while the device is asleep (e.g. during
          always-on display) -->
-    <string name="doze_brightness_sensor_type">com.google.sensor.binned_brightness</string>
+    <string name="doze_brightness_sensor_type" translatable="false">com.google.sensor.binned_brightness</string>
 
     <!-- Name of a sensor per posture state that provides a low-power estimate of the desired
          display brightness, suitable to listen to while the device is asleep (e.g. during
          always-on display) -->
-    <string-array name="doze_brightness_sensor_name_posture_mapping">
+    <string-array name="doze_brightness_sensor_name_posture_mapping" translatable="false">
         <item/>
         <item>Binned Brightness 1 (wake-up)</item>
         <item>Binned Brightness 0 (wake-up)</item>
@@ -29,7 +29,7 @@
     </string-array>
 
     <!-- Sensor type per posture state to use for proximity sensor -->
-    <string-array name="proximity_sensor_posture_mapping">
+    <string-array name="proximity_sensor_posture_mapping" translatable="false">
         <item/>
         <item>android.sensor.light</item>
         <item/>
@@ -48,7 +48,7 @@
 
     <!-- Sensor type per posture state to use for proximity sensor as a confirmation for
         proximity_sensor_type. -->
-    <string-array name="proximity_sensor_secondary_posture_mapping">
+    <string-array name="proximity_sensor_secondary_posture_mapping" translatable="false">
         <item/>
         <item>android.sensor.proximity</item>
         <item/>
@@ -89,7 +89,7 @@
          Note that while rounded.xml includes the entire path (including the horizontal and vertical
          corner edges), this pulls out just the curve.
      -->
-    <string name="config_rounded_mask">M 71,0 C 33,0 22,-1 10,10 -1,22 0,33 0,71</string>
+    <string name="config_rounded_mask" translatable="false">M 71,0 C 33,0 22,-1 10,10 -1,22 0,33 0,71</string>
 
     <!-- A path similar to frameworks/base/core/res/res/values/config.xml
       config_mainBuiltInDisplayCutout that describes a path larger than the exact path of a outer
@@ -100,17 +100,17 @@
       This path will only be drawn when the front-facing camera turns on, otherwise the main
       DisplayCutout path will be rendered
        -->
-    <string name="config_frontBuiltInDisplayCutoutProtection">m 589.2,66.53 a 49.5,49.5 0 0 1 -49.5,49.5 49.5,49.5 0 0 1 -49.5,-49.5 49.5,49.5 0 0 1 49.5,-49.5 49.5,49.5 0 0 1 49.5,49.5 z</string>
+    <string name="config_frontBuiltInDisplayCutoutProtection" translatable="false">m 589.2,66.53 a 49.5,49.5 0 0 1 -49.5,49.5 49.5,49.5 0 0 1 -49.5,-49.5 49.5,49.5 0 0 1 49.5,-49.5 49.5,49.5 0 0 1 49.5,49.5 z</string>
 
     <!-- ID for the camera of outer display that needs extra protection -->
-    <string name="config_protectedCameraId">1</string>
+    <string name="config_protectedCameraId" translatable="false">1</string>
 
     <!-- Physical ID for the camera of outer display that needs extra protection -->
-    <string name="config_protectedPhysicalCameraId">5</string>
+    <string name="config_protectedPhysicalCameraId" translatable="false">5</string>
 
     <!-- Comma-separated list of packages to exclude from camera protection e.g.
     "com.android.systemui,com.android.xyz" -->
-    <string name="config_cameraProtectionExcludedPackages">com.google.android.as</string>
+    <string name="config_cameraProtectionExcludedPackages" translatable="false">com.google.android.as</string>
 
     <!--  Flag to turn on the rendering of the above path or not  -->
     <bool name="config_enableDisplayCutoutProtection">true</bool>

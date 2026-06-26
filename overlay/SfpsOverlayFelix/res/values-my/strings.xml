@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ သုံးသောအခါ သင်၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင်၏လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို သင့်ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး သင့်ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ သုံးသောအခါ သင်၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင်၏လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို သင့်ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ ဒေတာလုပ်ဆောင်မှုအားလုံးကို သင့်ဖုန်းထဲတွင်သာ လုံခြုံစွာ ဆောင်ရွက်ပါသည်။</string>
 
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">သူက ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ သုံးသောအခါ သူ၏လက်ဗွေနမူနာ အပ်ဒိတ်လုပ်ရန် ပုံများကို သုံးသည်။ သင့်ကလေး၏ လက်ဗွေနမူနာပြုလုပ်ရန် သုံးထားသောပုံများကို မည်သည့်အခါမှ မသိမ်းပါ။ သို့သော် လက်ဗွေနမူနာကို ဖုန်းတွင် လုံခြုံစွာသိမ်းပြီး ဖုန်းအတွင်း၌သာ ထားပါသည်။ လုပ်ဆောင်ချက်အားလုံး ဖုန်းတွင် လုံခြုံစွာ ဖြစ်ပေါ်သည်။</string>

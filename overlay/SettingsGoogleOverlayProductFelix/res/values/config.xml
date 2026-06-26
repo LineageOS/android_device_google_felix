@@ -9,7 +9,7 @@
 
          If changed, also update the Backup & Restore logic for choosing the closest value in
          com/android/settings/applications/appcompat/UserAspectRatioBackupManager.java -->
-    <string-array name="config_userAspectRatioOverrideEntries">
+    <string-array name="config_userAspectRatioOverrideEntries" translatable="false">
         <item>@null</item>
         <item>@null</item>
         <item>@null</item>
