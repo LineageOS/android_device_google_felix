@@ -44,6 +44,9 @@ ro.vendor.touch.dump.sys=/sys/class/spi_master/spi6/spi6.0
 # SVN
 ro.vendor.build.svn=92
 
+# USB
+vendor.usb.device=11210000.usb
+
 # UWB
 ro.vendor.uwb.calibration.calibrationpaths=/vendor/etc/uwb/calib_paths
 
