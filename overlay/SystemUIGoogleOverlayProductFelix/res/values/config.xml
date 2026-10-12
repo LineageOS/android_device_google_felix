@@ -10,6 +10,13 @@
     <!-- Whether the additional education about reachability is enabled -->
     <bool name="config_letterboxIsReachabilityEducationEnabled">true</bool>
 
+    <!-- The properties of the face auth front camera for outer display in pixels -->
+    <integer-array name="config_face_auth_props">
+        <item>538</item>
+        <item>66</item>
+        <item>34</item>
+    </integer-array>
+
     <!-- Flag to activate notification to contents feature -->
     <bool name="config_notificationToContents">true</bool>
 </resources>
