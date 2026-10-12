@@ -35,6 +35,8 @@ PRODUCT_PACKAGES += \
     PixelNfcOverlayFelix \
     PixelWifiOverlay2023_midyear_F10 \
     SafetyRegulatoryInfoOverlayProductFelix \
+    SettingsGoogleFutureFelixOverlay \
+    SettingsGoogleFutureGs201Overlay \
     SettingsGoogleOverlayFelix \
     SettingsGoogleOverlayProductFelix \
     SettingsGoogleOverlayVendorFelix \
