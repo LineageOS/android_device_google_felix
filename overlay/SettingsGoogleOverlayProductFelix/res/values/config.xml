@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- ComponentName to launch a vendor-specific posture guidance activity if available -->
-    <string name="config_face_enroll_guidance_page" translatable="false">com.android.settings/com.google.android.settings.biometrics.face.FaceEnrollFoldPage</string>
+    <string name="config_face_enroll_guidance_page" translatable="false">com.android.settings/com.android.settings.biometrics.face.FaceEnrollFoldPage</string>
 
     <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
      means setting will try listening on device posture changes.
